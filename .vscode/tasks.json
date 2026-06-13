@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "git-check-status",
+			"type": "shell",
+			"command": "git status --short --branch && git branch --show-current && git log --oneline --decorate -1",
+			"problemMatcher": []
+		},
+		{
+			"label": "git-workflow-push",
+			"type": "shell",
+			"command": "git status --short --branch && git branch --show-current && git add --all && git commit -m \"Portfolio homepage v1 implementation\" && git rev-parse HEAD && git push origin develop && git log --oneline origin/develop -1",
+			"problemMatcher": []
+		}
+	]
+}
