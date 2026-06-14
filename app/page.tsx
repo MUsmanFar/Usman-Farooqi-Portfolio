@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { CustomSelect } from "@/components/CustomSelect";
 import { AnimatePresence, motion, useScroll, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import {
   Brain,
@@ -934,11 +936,15 @@ function HeroVisual() {
             transform: "translateZ(30px)",
           }}
         >
-          <div className="h-full w-full rounded-[26px] overflow-hidden bg-[#04050f]">
-            <img
+          <div className="relative h-full w-full rounded-[26px] overflow-hidden bg-[#04050f]">
+            <Image
               src="/usman-portrait.jpg"
               alt="Usman Farooqi"
-              className="h-full w-full object-cover object-center hover:scale-105 transition-transform duration-700"
+              fill
+              priority
+              quality={95}
+              sizes="220px"
+              className="object-cover object-center hover:scale-105 transition-transform duration-700"
             />
           </div>
           {/* Portrait inner glow overlay */}
@@ -1056,9 +1062,26 @@ export default function Home() {
     setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email) return;
+
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "YOUR_ACCESS_KEY_HERE", // Replace with your Web3Forms access key
+          name: formState.name,
+          email: formState.email,
+          projectType: formState.projectType,
+          message: formState.details
+        })
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
@@ -1446,7 +1469,7 @@ export default function Home() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className={`relative rounded-3xl border border-white/5 bg-gradient-to-br ${stat.color} p-6 shadow-xl text-center backdrop-blur-md transition-all duration-300 ${stat.border}`}
+                  className={`relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br ${stat.color} p-6 shadow-xl text-center backdrop-blur-md transition-all duration-300 ${stat.border}`}
                 >
                   <div className="text-3xl sm:text-4xl font-extrabold text-white">
                     <Counter value={stat.count} />
@@ -1489,7 +1512,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
                 >
                   {/* Glass Top Gradient Effect */}
                   <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -1539,7 +1562,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <ServiceIcon className="h-5 w-5" />
@@ -1593,7 +1616,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* CSS Project dashboard preview */}
                 <div className="mb-5 bg-[#020205] rounded-2xl border border-white/5 p-1">
@@ -1905,7 +1928,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: idx * 0.15 }}
-                  className="group relative rounded-3xl border border-white/5 bg-white/[0.01] p-6 shadow-xl hover:border-violet-500/25 transition-all duration-300 hover:bg-[#0c0a1a]/40"
+                  className="relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/10 text-xs font-black text-violet-300 group-hover:bg-violet-500 group-hover:text-white transition-all duration-300">
                     {step.step}
@@ -1957,11 +1980,11 @@ export default function Home() {
               return (
                 <motion.div
                   key={ind.name}
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="group rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.01] to-transparent p-6 text-center shadow-lg hover:border-blue-500/25 hover:bg-[#060814]/30 transition-all duration-300"
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5 }}
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.01] to-transparent p-6 text-center shadow-lg hover:border-blue-500/25 hover:bg-[#060814]/30 transition-all duration-300"
                 >
                   <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <IndIcon className="h-5 w-5" />
@@ -2206,7 +2229,7 @@ export default function Home() {
                               value={formState.name}
                               onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                               placeholder="Usman Farooqi"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
                             />
                           </div>
                           <div className="space-y-2">
@@ -2218,26 +2241,23 @@ export default function Home() {
                               value={formState.email}
                               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                               placeholder="name@company.com"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
                             />
                           </div>
                         </div>
 
-                        <div className="space-y-2">
-                          <label htmlFor="form-type" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Growth Goal</label>
-                          <select
-                            id="form-type"
+                          <CustomSelect
+                            label="Growth Goal"
                             value={formState.projectType}
-                            onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-slate-300 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                          >
-                            <option value="Web Project">WordPress / Web Development Project</option>
-                            <option value="Project Management">Full Project Delivery & Sprint Coordination</option>
-                            <option value="AI & Automation">AI Integration & Process Automation Flow</option>
-                            <option value="CRM Build">HubSpot / Salesforce Pipeline Config</option>
-                            <option value="Team Scale">Team Structuring & Hiring Support</option>
-                          </select>
-                        </div>
+                            onChange={(val) => setFormState({ ...formState, projectType: val })}
+                            options={[
+                              { value: "Web Project", label: "WordPress / Web Development Project" },
+                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
+                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
+                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
+                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
+                            ]}
+                          />
 
                         <div className="space-y-2">
                           <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
@@ -2247,7 +2267,7 @@ export default function Home() {
                             value={formState.details}
                             onChange={(e) => setFormState({ ...formState, details: e.target.value })}
                             placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
                           />
                         </div>
 
@@ -2286,27 +2306,52 @@ export default function Home() {
       {/* ----------------------------------------------------
           Footer
           ---------------------------------------------------- */}
-      <footer className="border-t border-white/5 py-12 text-center text-xs text-slate-500 bg-[#020205]/80">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <div className="flex items-center justify-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 p-[1px]">
-              <div className="flex h-full w-full items-center justify-center rounded-lg bg-[#020205] text-[10px] font-black text-white">
-                UF
+      <footer className="border-t border-white/5 py-16 bg-gradient-to-b from-[#020205] to-[#010103] relative overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+          <div className="grid gap-12 sm:grid-cols-3 items-center text-center sm:text-left">
+            
+            {/* Left: Branding */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center sm:justify-start gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1px] shadow-lg shadow-violet-500/20">
+                  <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#020205] text-sm font-black text-white">
+                    UF
+                  </div>
+                </div>
+                <div className="text-left">
+                  <span className="block font-bold text-slate-200">Usman Farooqi</span>
+                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Lead</span>
+                </div>
               </div>
+              <p className="text-xs text-slate-500 max-w-xs mx-auto sm:mx-0 leading-relaxed">
+                Structuring bespoke digital frameworks across high-growth industries that require robust performance.
+              </p>
             </div>
-            <span className="font-semibold text-slate-300 text-xs">Usman Farooqi</span>
-          </div>
-          
-          <p className="text-slate-600">
-            © {new Date().getFullYear()} Usman Farooqi — Technology & Business Growth Specialist. Built with Next.js & Framer Motion.
-          </p>
 
-          <div className="flex justify-center gap-4 text-slate-400">
-            <a href="#about" className="hover:text-white transition-colors">About</a>
-            <span>•</span>
-            <a href="#projects" className="hover:text-white transition-colors">Projects</a>
-            <span>•</span>
-            <a href="#contact" className="hover:text-white transition-colors">Growth Call</a>
+            {/* Center: Contact Info */}
+            <div className="flex flex-col items-center justify-center gap-3">
+              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
+                <Mail className="h-3.5 w-3.5 text-slate-400 group-hover:text-violet-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">usmanfar2002@gmail.com</span>
+              </a>
+              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
+                <Phone className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">+92 302 4422053</span>
+              </a>
+            </div>
+
+            {/* Right: Links */}
+            <div className="flex flex-col items-center sm:items-end justify-center gap-4">
+              <div className="flex items-center gap-4">
+                <a href="#projects" className="text-sm font-semibold text-slate-400 hover:text-white transition-colors">Portfolio</a>
+                <a href="https://www.linkedin.com/in/usman-farooqi-172b14248/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+              </div>
+              <p className="text-[10px] text-slate-600 font-medium">
+                © {new Date().getFullYear()} All rights reserved.
+              </p>
+            </div>
+
           </div>
         </div>
       </footer>
