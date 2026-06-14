@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { CustomSelect } from "@/components/CustomSelect";
 import { Preloader } from "@/components/Preloader";
+import { FeaturedProjects } from "@/components/FeaturedProjects";
 import { AnimatePresence, motion, useScroll, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import {
   Brain,
@@ -314,7 +315,7 @@ const industries = [
   { name: "Travel & Hospitality", icon: Compass, desc: "Automated custom bookings & luxury agency setups" },
   { name: "Car Rental Systems", icon: Laptop, desc: "Bespoke fleet reservation engines" },
   { name: "Automotive Marketplaces", icon: Database, desc: "High-performance catalogs & CRM routers" },
-  { name: "Recruitment & Placement", icon: Users, desc: "Applicant screening pipelines & ATS platforms" },
+  { name: "Digital Marketing Agencies", icon: Users, desc: "Applicant screening pipelines & ATS platforms" },
   { name: "Professional Service Brands", icon: Award, desc: "High-ticket client acquisition systems" }
 ];
 
@@ -1466,9 +1467,9 @@ export default function Home() {
               {[
                 "Project Management & Sprints",
                 "WordPress CMS Development",
-                "AI-assisted Operations",
-                "CRM Schema & Pipelines",
-                "Team Hiring & Vetting",
+                "Website Deployment & Management",
+                "Domain, Hosting & Business Email Setup",
+                "AI-Assisted Website Creation",
                 "Client Relationship Success"
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2 text-xs font-medium text-slate-400">
@@ -1786,135 +1787,30 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 6: Interactive Case Studies Storytelling
+          Section 6: Featured Projects
           ---------------------------------------------------- */}
-      <span id="case-studies-anchor" className="block relative -top-24 pointer-events-none" />
-      <section id="projects-case-studies" className="border-t border-white/5 py-20 md:py-28 relative bg-[#04040c]/20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
-            
-            {/* Left Column: Heading and Selector Tabs */}
-            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-                <span>Deep Dive Case Studies</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Delivery and outcome logs.
-              </h2>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Click on the systems below to analyze the challenge diagnostics, custom engineering roadmap, and final impact details.
-              </p>
+      <span id="projects-anchor" className="block relative -top-24 pointer-events-none" />
+      <section id="projects" className="border-t border-white/5 py-20 md:py-32 relative bg-[#020205]">
+        
+        {/* Background glow */}
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.08),transparent_70%)] blur-[100px] pointer-events-none" />
 
-              {/* Selector Tabs */}
-              <div className="flex flex-col gap-2.5 pt-4">
-                {projectsData.map((project) => (
-                  <button
-                    key={project.id}
-                    onClick={() => setSelectedProject(project)}
-                    className={`group flex items-center justify-between text-left px-5 py-4 rounded-2xl border transition-all duration-300 ${
-                      selectedProject.id === project.id
-                        ? "bg-gradient-to-r from-violet-500/10 to-blue-500/10 border-violet-500/40 shadow-[0_0_15px_rgba(139,92,246,0.1)] text-white"
-                        : "bg-white/[0.01] border-white/5 text-slate-400 hover:border-white/10 hover:text-white"
-                    }`}
-                  >
-                    <div className="flex flex-col">
-                      <span className="text-sm font-bold">{project.name}</span>
-                      <span className="text-[10px] uppercase tracking-wider text-slate-500 group-hover:text-slate-300 mt-1">
-                        {project.tagline}
-                      </span>
-                    </div>
-                    <ArrowUpRight className={`h-4 w-4 shrink-0 transition-transform ${
-                      selectedProject.id === project.id ? "rotate-45 text-violet-400" : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    }`} />
-                  </button>
-                ))}
-              </div>
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 relative z-10">
+          <div className="text-center mb-16 md:mb-24">
+            <div className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400 mb-6">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+              <span>Portfolio Showcase</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
             </div>
-
-            {/* Right Column: Dynamic Case Study Detail Timeline */}
-            <div className="lg:col-span-7 lg:pl-6">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedProject.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0c0a1a] via-[#020205] to-[#04091a] p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden"
-                >
-                  <div className="absolute top-0 right-0 h-40 w-40 bg-violet-600/5 blur-3xl pointer-events-none" />
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {selectedProject.tags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-white/5 border border-white/10 px-3.5 py-1 text-[10px] font-bold tracking-wider text-slate-300 uppercase">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                    {selectedProject.name}
-                  </h3>
-                  <p className="mt-2 text-xs uppercase tracking-widest text-violet-400 font-extrabold">
-                    {selectedProject.tagline}
-                  </p>
-
-                  {/* Connected Vertical Timeline Road */}
-                  <div className="relative border-l border-white/10 pl-6 ml-4 space-y-8 mt-10">
-                    {/* Node 1 */}
-                    <div className="relative">
-                      <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500/25 border border-rose-500" />
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
-                        <span>01. Project Bottleneck</span>
-                      </h4>
-                      <p className="text-sm leading-relaxed text-slate-300 mt-2">
-                        {selectedProject.challenge}
-                      </p>
-                    </div>
-
-                    {/* Node 2 */}
-                    <div className="relative">
-                      <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500/25 border border-blue-500" />
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1.5">
-                        <span>02. Management & Dev Coordination</span>
-                      </h4>
-                      <p className="text-sm leading-relaxed text-slate-300 mt-2">
-                        {selectedProject.solution}
-                      </p>
-                    </div>
-
-                    {/* Node 3 */}
-                    <div className="relative">
-                      <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500/25 border border-emerald-500" />
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                        <span>03. Final Outcome & Metrics</span>
-                      </h4>
-                      <div className="mt-2 bg-gradient-to-r from-emerald-500/10 to-transparent rounded-2xl border border-emerald-500/20 p-4.5">
-                        <p className="text-sm leading-relaxed text-slate-200 font-medium">
-                          {selectedProject.impact}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom metrics grid */}
-                  <div className="grid grid-cols-2 gap-4 mt-10 pt-6 border-t border-white/5">
-                    {selectedProject.metrics.map((metric, idx) => (
-                      <div key={idx} className="rounded-2xl bg-[#020205]/80 border border-white/5 p-4 text-center">
-                        <div className="text-3xl font-black text-white text-glow-purple">
-                          {metric.value}
-                        </div>
-                        <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                          {metric.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Projects</span>
+            </h2>
+            <p className="mt-6 text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+              A curated selection of high-performance websites and digital solutions I've deployed across various industries. Click any project to view details.
+            </p>
           </div>
+
+          <FeaturedProjects />
         </div>
       </section>
 
