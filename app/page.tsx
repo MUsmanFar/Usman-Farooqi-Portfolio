@@ -106,187 +106,204 @@ const expertiseAreas = [
 
 const services = [
   {
-    title: "Digital Project Management",
-    description: "Leading web and application builds from initial user story discovery to roadmap design, sprints, QA, and deployment.",
-    details: ["Agile/Scrum Sprint Coordination", "Scope & Resource Planning", "QA Auditing & Performance Checks", "Detailed Status Reporting"],
-    icon: Compass
-  },
-  {
-    title: "WordPress Development",
-    description: "Building landing pages, corporate portals, and marketing sites designed to convert visitors into business leads.",
-    details: ["Custom Block & Builder Frameworks", "Theme Setup & Site Migrations", "Google Core Web Vitals Optimization", "Plugin Security & Backups"],
+    title: "Business Website Development",
+    description: "Building professional, high-performing websites tailored to your business goals and industry standards.",
+    details: ["Corporate Portals", "Responsive Design", "Speed Optimization", "SEO Foundations"],
     icon: Laptop
   },
   {
-    title: "Operations Automation",
-    description: "Stitching automated alerts, CRM updates, and AI qualifiers together to remove manual drag and backend delays.",
-    details: ["Zapier & Make Automation Maps", "AI Prompt Engineering Tools", "Automated Slack/Email Alerts", "Process Audit & Templates"],
+    title: "Landing Page Development",
+    description: "Creating highly optimized landing pages designed to convert visitors into leads and customers.",
+    details: ["Conversion Optimization", "A/B Testing Ready", "Fast Loading", "Lead Capture Integration"],
+    icon: Target
+  },
+  {
+    title: "WordPress Development",
+    description: "Custom WordPress solutions, theme modifications, and complete site builds using modern builders.",
+    details: ["Elementor Pro", "WooCommerce Setup", "Plugin Management", "Custom Blocks"],
+    icon: Code2
+  },
+  {
+    title: "Website Management",
+    description: "Ongoing maintenance, security updates, and performance monitoring to keep your site running smoothly.",
+    details: ["cPanel Administration", "Domain Management", "Business Email Setup", "Website Migration"],
+    icon: ShieldCheck
+  },
+  {
+    title: "AI-Powered Website Creation",
+    description: "Leveraging modern AI tools and vibe coding workflows to rapidly prototype and build digital solutions.",
+    details: ["Google AI Studio", "Antigravity IDE", "Hostinger Horizons", "Rapid Prototyping"],
     icon: Brain
   },
   {
-    title: "CRM Setup & Pipeline Config",
-    description: "Setting up database schemas, scoring fields, and automated routing rules in HubSpot and Salesforce.",
-    details: ["CRM Contact Database Mapping", "Automated Lead Distribution Routing", "Email Nurturing Sequence Setup", "Pipeline Analytics Dashboards"],
-    icon: Workflow
-  },
-  {
-    title: "Team Hiring & Structure",
-    description: "Helping agencies scale operations by auditing bottlenecks, setting up vetting channels, and hiring talent.",
-    details: ["Developer Skill Assessment Vetting", "Onboarding Systems & Docs", "Resource Capability Planning", "Freelancer & Contractor Hubs"],
-    icon: Users
-  },
-  {
-    title: "Digital Operations Consulting",
-    description: "Analyzing business technology stacks to reduce subscription waste, improve coordination, and clear delivery bottlenecks.",
-    details: ["Tech Stack Consolidation Audit", "Standard Operating Procedures (SOPs)", "Time Tracker & Task Management Setup", "Cross-Team Workflow Mapping"],
-    icon: Sparkles
+    title: "Project Coordination",
+    description: "Managing digital projects from requirement gathering to final deployment with clear communication.",
+    details: ["Client Communication", "Team Coordination", "Project Planning", "Workflow Management"],
+    icon: Compass
   }
 ];
 
 const impactMetrics = [
-  { label: "Websites Coordinated", value: "32+" },
-  { label: "Industries Served", value: "6" },
-  { label: "Operations Campaigns", value: "120+" },
-  { label: "AI & Automation Flows", value: "45+" },
-  { label: "Project Solutions", value: "85+" }
+  { label: "Websites Delivered", value: "15+" },
+  { label: "Industries Served", value: "4+" },
+  { label: "Years Experience", value: "3+" },
+  { label: "International Clients", value: "Multiple" }
 ];
 
 const projectsData: Project[] = [
   {
     id: "ann",
     name: "America Needs Nurses",
-    tagline: "Healthcare Recruitment Platform Project",
+    tagline: "Healthcare Recruitment Platform",
     challenge: "Fragmented applicant tracking and manual placements delayed nurse staffing while organic site traffic lagged in a competitive sector.",
-    solution: "Directed custom recruitment portal development, structured automatic applicant tracking system (ATS) syncs, and coordinated the local SEO roadmap.",
+    solution: "Directed custom recruitment portal development, structured automatic ATS syncs, and coordinated the local SEO roadmap.",
     impact: "Accelerated placement velocity by 30% and increased organic search lead impressions by 250% within 6 months.",
-    tags: ["Project Management", "WordPress CMS", "CRM Operations", "Healthcare"],
+    tags: ["Project Management", "WordPress", "Healthcare"],
     metrics: [{ label: "Lead Growth", value: "+250%" }, { label: "Placement Velocity", value: "-30%" }]
+  },
+  {
+    id: "gnn",
+    name: "Georgian Needs Nurses",
+    tagline: "Regional Healthcare Staffing",
+    challenge: "Needed a regional variant of the main recruitment platform to target the Georgian market specifically.",
+    solution: "Deployed a customized regional platform with localized SEO and synchronized job feeds.",
+    impact: "Established a dedicated regional presence leading to increased localized application rates.",
+    tags: ["Web Development", "Localization", "Healthcare"],
+    metrics: [{ label: "Local Reach", value: "Expanded" }, { label: "Applications", value: "Increased" }]
+  },
+  {
+    id: "gjt",
+    name: "Go-Jetter Travel & Tours",
+    tagline: "Travel Booking Platform",
+    challenge: "Complex custom tour bookings required extensive manual sales support, limiting booking volume.",
+    solution: "Developed and maintained travel websites, coordinating mobile app integrations and managing hosting.",
+    impact: "Improved user experience and structured the website for scalable booking operations.",
+    tags: ["WordPress Developer", "Travel & Tourism"],
+    metrics: [{ label: "User Experience", value: "Improved" }, { label: "Hosting", value: "Managed" }]
+  },
+  {
+    id: "it",
+    name: "Ihawa Travel",
+    tagline: "Custom Travel Booking Hub",
+    challenge: "Capturing search market share for custom global travel destinations without high ad spending.",
+    solution: "Managed structured content hub development and mapped search keywords, optimizing booking engine interface flows.",
+    impact: "Attained top 3 rankings for 40+ high-intent search queries, bringing in consistent monthly bookings organically.",
+    tags: ["SEO Strategy", "Travel & Tourism"],
+    metrics: [{ label: "Search Ranking", value: "Top 3" }, { label: "Organic Bookings", value: "+140%" }]
   },
   {
     id: "acr",
     name: "Atlanta Car Rental",
-    tagline: "Luxury Vehicle Reservation Portal",
+    tagline: "Vehicle Reservation Portal",
     challenge: "A crowded regional travel market demanded a high-end booking platform with a lower lead cost than aggregate platforms.",
-    solution: "Managed the luxury fleet booking project, structured Google Ads campaigns with optimized landing pages, and implemented automated CRM lead scoring.",
-    impact: "Boosted direct bookings by 180% and reduced lead acquisition cost by 45% using automated operations.",
-    tags: ["Digital Operations", "Google Ads Strategy", "Client Management", "Travel"],
+    solution: "Managed website operations, improved booking conversion processes, and coordinated digital growth initiatives.",
+    impact: "Boosted direct bookings by 180% and reduced lead acquisition cost by 45%.",
+    tags: ["Website Development", "Car Rental"],
     metrics: [{ label: "Direct Bookings", value: "+180%" }, { label: "CPA Reduction", value: "-45%" }]
+  },
+  {
+    id: "pcr",
+    name: "Priceless Car Rental",
+    tagline: "Marketing & Website Management",
+    challenge: "Needed comprehensive website management and competitive analysis to improve marketplace visibility.",
+    solution: "Executed marketplace research, competitive analysis, and ongoing website management.",
+    impact: "Improved booking visibility and streamlined digital operations.",
+    tags: ["Website Management", "Car Rental"],
+    metrics: [{ label: "Visibility", value: "Improved" }, { label: "Operations", value: "Streamlined" }]
   },
   {
     id: "yr",
     name: "YalaRide",
-    tagline: "Transportation Dispatch Onboarding App",
+    tagline: "Transportation Portal Development",
     challenge: "Scaling demand across regional hubs created a massive onboarding bottleneck for driver credentials.",
-    solution: "Supervised web platform delivery and custom CRM workflows, integrating screening automation and automated team alerts.",
-    impact: "Helped secure 10,000+ driver sign-ups and cut screening onboarding time in half using automated tools.",
-    tags: ["Process Automation", "Team Coordination", "Project Delivery", "Automotive"],
+    solution: "Led the YalaRide portal development project, overseeing the web platform delivery.",
+    impact: "Helped secure 10,000+ driver sign-ups and cut screening onboarding time in half.",
+    tags: ["Project Management", "Car Rental"],
     metrics: [{ label: "Driver Sign-ups", value: "10K+" }, { label: "Onboarding Time", value: "-50%" }]
   },
   {
     id: "adt",
     name: "Arrowhead DigiTech",
-    tagline: "Lead Acquisition Agency Site Release",
+    tagline: "Lead Acquisition Agency Site",
     challenge: "The digital growth agency required a high-converting web platform to establish authority and capture inbound leads.",
-    solution: "Managed Next.js platform design and development, oversaw HubSpot pipeline mappings, and audited site performance scores.",
+    solution: "Managed Next.js platform design and development, overseeing full project delivery.",
     impact: "Increased inbound lead conversion rates from 1.2% to 4.8% and established a premium visual system.",
-    tags: ["Project Management", "Web Operations", "Conversion Optimization", "Marketing"],
+    tags: ["Web Development Lead", "Digital Services"],
     metrics: [{ label: "Conversion Rate", value: "4.8x" }, { label: "Inbound Leads", value: "+220%" }]
-  },
-  {
-    id: "cc",
-    name: "Cars Compound",
-    tagline: "Automotive Catalog & CRM Integration",
-    challenge: "Low-speed catalog searches caused high user bounce rates and lost lead submissions for the dealership network.",
-    solution: "Oversaw lightning-fast inventory catalog delivery and connected multi-channel lead routing triggers with CRM routing rules.",
-    impact: "Reduced site search load times under 1s, leading to a 65% bounce reduction and 80% higher lead submissions.",
-    tags: ["Project Management", "CRM Integrations", "Operations", "Automotive"],
-    metrics: [{ label: "Bounce Rate", value: "-65%" }, { label: "Lead Submissions", value: "+80%" }]
-  },
-  {
-    id: "gjt",
-    name: "Go-Jetter Travel & Tours",
-    tagline: "Interactive Tour Builder & AI Sync",
-    challenge: "Complex custom tour bookings required extensive manual sales support, limiting booking volume.",
-    solution: "Supervised developer execution on an interactive package builder, linked to an automated AI assistant that qualifies travel preferences.",
-    impact: "Automated 70% of pre-sales trip customization, increasing custom package sales by 95%.",
-    tags: ["AI Operations", "Team Leadership", "Client Success", "Travel"],
-    metrics: [{ label: "Automated Prep", value: "70%" }, { label: "Sales Growth", value: "+95%" }]
-  },
-  {
-    id: "it",
-    name: "Ihawa Travel",
-    tagline: "Custom Travel Booking Hub Release",
-    challenge: "Capturing search market share for custom global travel destinations without high ad spending.",
-    solution: "Managed structured content hub development and mapped search keywords, optimizing booking engine interface flows.",
-    impact: "Attained top 3 rankings for 40+ high-intent search queries, bringing in consistent monthly bookings organically.",
-    tags: ["SEO Strategy", "Web Development", "Project Delivery", "Travel"],
-    metrics: [{ label: "Search Ranking", value: "Top 3" }, { label: "Organic Bookings", value: "+140%" }]
   }
 ];
 
 const processSteps = [
   {
-    step: "01",
-    title: "Discovery & Blueprinting",
-    description: "We audit your current site metrics, outline project parameters, CRM schema, and design a detailed scope of work (SOP) mapped to business goals.",
-    details: ["Competitor Gap Audits", "Tech Stack Inspections", "CRM Schema Planning", "Commercial Goal Mapping"]
+    step: "2024",
+    title: "Arrowhead Digital Marketing",
+    description: "Web Development Lead & Project Manager (2024 - Present). Managing website projects from planning to deployment.",
+    details: ["Leading client communication and project execution", "Building and maintaining WordPress websites", "Coordinating software development initiatives", "Managing hosting, domains, and website infrastructure", "Leading the YalaRide portal development project"]
   },
   {
-    step: "02",
-    title: "Development Coordination",
-    description: "I manage developers and designers to build high-performance web properties using WordPress or custom frontend frameworks.",
-    details: ["Agile Sprint Planning", "Conversion-Focused Direction", "Responsive Design Checks", "WordPress Theme Customization"]
+    step: "2023",
+    title: "Go-Jetter Travel & Tours",
+    description: "WordPress Developer & Project Coordinator (2023 - 2024). Developed and maintained travel websites.",
+    details: ["Coordinated mobile app development projects", "Managed hosting and deployment processes", "Improved user experience and website structure"]
   },
   {
-    step: "03",
-    title: "AI & Workflow Automation",
-    description: "Operational bottlenecks are removed by stitching CRM pipelines, email triggers, lead qualifiers, and automated AI assistance together.",
-    details: ["CRM Syncing & Setup", "AI Automated Funnel Qualifiers", "Intelligent Notifications & Alert Triggers", "Multi-Source Lead Routing"]
+    step: "2024",
+    title: "Atlanta Car Rental LLC",
+    description: "Sales Team Leader & Website Development (2024 - 2025). Managed website operations and remote sales teams.",
+    details: ["Improved booking conversion processes", "Coordinated digital growth initiatives", "Led remote sales teams"]
   },
   {
-    step: "04",
-    title: "Quality Audit & Release",
-    description: "We run comprehensive speed, conversion tracking, and responsive compatibility tests to verify that the build is ready for launch.",
-    details: ["Google Tag Manager Setup", "Continuous Conversion Optimizations", "TypeScript & Build Sanity checks", "Operational Handover Documentation"]
+    step: "2024",
+    title: "Priceless Car Rental USA",
+    description: "Virtual Marketing Assistant (2024). Oversaw website management and competitive analysis.",
+    details: ["Website management", "Competitive analysis", "Marketplace research", "Booking visibility improvements"]
   }
 ];
 
 const techStack = [
   {
-    category: "Project & Team Management",
-    desc: "Methodologies and tools used to coordinate digital teams and delivery",
+    category: "Web Development",
+    desc: "Building professional and responsive websites",
     items: [
-      { name: "Agile / Scrum Coordination", level: 95 },
-      { name: "Scope & Requirement Analysis", level: 95 },
-      { name: "Hiring & Talent Screening", level: 90 },
-      { name: "JIRA / Trello / ClickUp", level: 95 },
-      { name: "Client Relations & Support", level: 95 },
-      { name: "Standard Operating Procedures (SOPs)", level: 92 },
-      { name: "Quality Assurance (QA) Auditing", level: 90 }
+      { name: "WordPress Development", level: 95 },
+      { name: "Elementor", level: 95 },
+      { name: "WooCommerce", level: 90 },
+      { name: "Responsive Design", level: 95 },
+      { name: "Landing Pages", level: 95 },
+      { name: "Website Optimization", level: 90 }
     ]
   },
   {
-    category: "Web & CMS Development",
-    desc: "Designing and releasing high-converting web properties",
+    category: "Project Management",
+    desc: "Coordinating projects from start to finish",
     items: [
-      { name: "WordPress & Elementor", level: 95 },
-      { name: "Gutenberg Block Customization", level: 90 },
-      { name: "Next.js (Team Delivery)", level: 85 },
-      { name: "React / HTML5 / CSS3", level: 85 },
-      { name: "Speed & Core Web Vitals Opt.", level: 92 },
-      { name: "Domain & Site Migrations", level: 94 }
+      { name: "Client Communication", level: 95 },
+      { name: "Team Coordination", level: 90 },
+      { name: "Project Planning", level: 95 },
+      { name: "Workflow Management", level: 90 },
+      { name: "Requirement Gathering", level: 95 }
     ]
   },
   {
-    category: "AI Tools & Digital Operations",
-    desc: "Streamlining workflow speeds and lead generation databases",
+    category: "Hosting & Deployment",
+    desc: "Managing server infrastructure and site migrations",
     items: [
-      { name: "AI-assisted coding (Cursor/LLMs)", level: 90 },
-      { name: "Workflow Automation (Zapier/Make)", level: 95 },
-      { name: "CRM Setup (HubSpot/Salesforce)", level: 92 },
-      { name: "Google Tag Manager / GA4", level: 90 },
-      { name: "Google Ads Strategy Setup", level: 92 },
-      { name: "Automated Lead Routing Setup", level: 95 }
+      { name: "Domain Management", level: 95 },
+      { name: "cPanel Administration", level: 90 },
+      { name: "Business Email Setup", level: 95 },
+      { name: "Website Migration", level: 90 },
+      { name: "Website Deployment", level: 95 }
+    ]
+  },
+  {
+    category: "AI Website Creation",
+    desc: "Leveraging AI workflows for rapid delivery",
+    items: [
+      { name: "Google AI Studio", level: 90 },
+      { name: "Antigravity IDE", level: 95 },
+      { name: "Hostinger Horizons", level: 90 },
+      { name: "AI Assisted Prototyping", level: 90 },
+      { name: "Vibe Coding Workflows", level: 95 }
     ]
   }
 ];
@@ -300,52 +317,6 @@ const industries = [
   { name: "Professional Service Brands", icon: Award, desc: "High-ticket client acquisition systems" }
 ];
 
-const testimonials = [
-  {
-    quote: "Usman managed the America Needs Nurses recruitment platform release flawlessly. His coordination between our frontend team, our ATS synchronization flows, and our SEO roadmap created a highly reliable source of qualified candidates.",
-    author: "Founder & Director",
-    company: "America Needs Nurses",
-    rating: 5,
-    tag: "Healthcare Operations"
-  },
-  {
-    quote: "We were struggling to organize leads and schedule bookings without burning through our ad spend. Usman coordinated the booking system project, set up HubSpot CRM pipelines, and optimized our Google Ads layout, driving a 180% reservation growth.",
-    author: "Operations Director",
-    company: "Atlanta Car Rental",
-    rating: 5,
-    tag: "Luxury Travel Ops"
-  },
-  {
-    quote: "Usman's project management and operations insight transformed our driver intake speed. He structured driver vetting roadmaps and Slack automation alerts, helping us scale to over 10,000 driver registrations while saving our dispatch teams hundreds of hours.",
-    author: "CEO & Founder",
-    company: "YalaRide",
-    rating: 5,
-    tag: "Automotive Logistics"
-  }
-];
-
-const comparisons = [
-  {
-    feature: "Strategic Scope",
-    usman: "Steers cross-functional projects, coordinating developers, CRM systems, and automations.",
-    agency: "Writes code or edits basic page templates with no operational or scheduling scope."
-  },
-  {
-    feature: "Delivery Quality",
-    usman: "Ensures sub-second speed audits, robust CRM data flows, and thorough QA checks.",
-    agency: "Installs heavy plugin themes with slow loads, fragile databases, and high bounce rates."
-  },
-  {
-    feature: "Operational Leverage",
-    usman: "Saves manual back-office hours using custom AI prompt scripts and Zapier integrations.",
-    agency: "No automation or workflow scaling strategy; relies on manual manual actions."
-  },
-  {
-    feature: "Accountability",
-    usman: "Provides detailed sprints, clear KPI indicators, transparent communications, and NDAs.",
-    agency: "Fails to meet schedules, lacks structured project tracking, and has poor updates."
-  }
-];
 
 // ----------------------------------------------------
 // Project CSS Preview Components
@@ -994,13 +965,14 @@ function HeroVisual() {
 // Main Homepage Redesign Component
 // ----------------------------------------------------
 export default function Home() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project>(projectsData[0]);
   const [isNavScrolled, setIsNavScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Scroll event listener for Navbar state
   useEffect(() => {
@@ -1015,13 +987,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Testimonials Carousel Auto Rotation Hook (Rotates every 6 seconds)
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
+
 
   // Intersection observer to track active section in viewport
   useEffect(() => {
@@ -1050,43 +1016,45 @@ export default function Home() {
     };
   }, []);
 
-  const handleTestimonialChange = (index: number) => {
-    setActiveTestimonial(index);
-  };
 
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email) return;
 
+    setIsSubmitting(true);
+    setSubmitError("");
+
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY_HERE", // Replace with your Web3Forms access key
+          access_key: "ee364713-6bed-4680-9d13-beaebe42c587",
           name: formState.name,
           email: formState.email,
           projectType: formState.projectType,
           message: formState.details
         })
       });
+      
+      const result = await response.json();
+      
+      if (response.status === 200) {
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+          setFormState({ name: "", email: "", projectType: "Web Project", details: "" });
+        }, 4500);
+      } else {
+        setSubmitError(result.message || "Something went wrong. Please try again later.");
+      }
     } catch (err) {
       console.error(err);
+      setSubmitError("Failed to submit form. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormState({ name: "", email: "", projectType: "Web Project", details: "" });
-    }, 4500);
   };
 
   const renderProjectPreview = (id: string) => {
@@ -1324,21 +1292,23 @@ export default function Home() {
             {/* Glowing Accent Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-950/20 px-4.5 py-1.5 text-xs font-semibold tracking-wider text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
               <Sparkles className="h-3.5 w-3.5 animate-pulse text-violet-400" />
-              <span>PROJECT MANAGER • WEB DEVELOPMENT & DIGITAL OPERATIONS LEAD</span>
+              <span>WEB DEVELOPMENT • PROJECT MANAGEMENT • AI WEBSITE CREATION</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.08] lg:max-w-[640px]">
-              Strategic execution that turns technology into{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-blue-400 bg-clip-text text-transparent text-glow-purple">
-                business growth.
-              </span>
+              Usman Farooqi
             </h1>
 
             {/* Sub-Headline description */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-[560px]">
-              Hi, I am <strong className="text-white font-semibold">Usman Farooqi</strong>. I bridge web development with digital and sales operations, leading teams to build high-performance sites (WordPress & custom), automate workflows, and scale client delivery using AI-assisted efficiency.
-            </p>
+            <div className="space-y-4 max-w-[560px]">
+              <p className="text-base sm:text-lg md:text-xl text-white font-semibold leading-relaxed">
+                Web Development Lead Helping Businesses Launch High-Converting Websites & Digital Solutions
+              </p>
+              <p className="text-sm md:text-base text-slate-400 leading-relaxed">
+                I help businesses build professional websites, manage digital projects, and create modern online experiences. With experience across healthcare, travel, car rental, and service industries, I have successfully delivered websites, managed development teams, and coordinated software projects for growing businesses.
+              </p>
+            </div>
 
             {/* Target capabilities checklist */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[480px]">
@@ -1360,17 +1330,17 @@ export default function Home() {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a
-                href="#contact"
+                href="#projects"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-blue-600 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-violet-950/30 hover:shadow-violet-600/40 transform hover:-translate-y-0.5 transition-all duration-300"
               >
-                Book Strategy Session
+                View My Work
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="#projects"
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-slate-200 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
               >
-                Explore Case Studies
+                Contact Me
               </a>
             </div>
           </motion.div>
@@ -1413,22 +1383,23 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="lg:col-span-7 space-y-6"
             >
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-                <span>About Me</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                An operations lead focused on the ultimate outcome:{" "}
-                <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                  Execution & Delivery.
-                </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                About Me
               </h2>
-              <p className="text-slate-300 leading-relaxed text-base">
-                I do not just deliver lines of code. I manage and deliver cohesive digital operations. By blending web project management, team leadership, CRM pipelines, and AI-assisted workflows, I help agencies scale operations and build stable websites that convert interest into revenue.
-              </p>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                Whether coordinating developers to build custom platforms or designing automated workflows to qualify driver intakes for ride companies, my systems have one core mission: to optimize delivery, remove back-office overhead, and align tech to business goals.
-              </p>
+              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                  I am a Web Development Lead and Project Manager based in Lahore, Pakistan.
+                </p>
+                <p>
+                  Over the past several years, I have worked with businesses across multiple industries including healthcare, travel, tourism, car rental, recruitment, and local service companies.
+                </p>
+                <p>
+                  My experience includes website planning, WordPress development, hosting and domain management, business email configuration, website migrations, project coordination, and ongoing website maintenance.
+                </p>
+                <p>
+                  More recently, I have also started leveraging AI-powered development tools and modern vibe coding workflows to rapidly build business websites, landing pages, and digital solutions while maintaining a strong focus on user experience and business goals.
+                </p>
+              </div>
 
               {/* Approach Badges */}
               <div className="grid gap-4 sm:grid-cols-2 pt-4">
@@ -1591,7 +1562,7 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 5: Featured Projects Grid (Visual Showcase)
+          Section 5: Featured Projects
           ---------------------------------------------------- */}
       <section id="projects" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
@@ -1797,20 +1768,20 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 7: Results & Impact
+          Section 7: Achievements
           ---------------------------------------------------- */}
-      <section id="results" className="border-t border-white/5 py-20 md:py-28 relative bg-[#04040c]/30">
+      <section id="achievements" className="border-t border-white/5 py-20 md:py-28 relative bg-[#04040c]/30">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Results & Impact</span>
+              <span>Achievements</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Proven results by the numbers.
+              Proven Results.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Every digital investment is tracked directly to measurable pipeline impact. We focus on business outcomes, not visual drafts.
+              Consistently delivering quality web projects and digital solutions across international markets.
             </p>
           </div>
 
@@ -1837,9 +1808,9 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 8: Technology Stack
+          Section 8: Skills Section
           ---------------------------------------------------- */}
-      <section id="technologies" className="border-t border-white/5 py-20 md:py-28 relative">
+      <section id="skills" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             
@@ -1847,19 +1818,19 @@ export default function Home() {
             <div className="lg:col-span-5 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                <span>Skills & Tools</span>
+                <span>Skills</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                Modern tools mapped to scale.
+                Technical Expertise.
               </h2>
               <p className="text-slate-300 leading-relaxed text-sm">
-                I configure structured task pipelines and templates to ensure quality releases, low latency, and consistent tracking.
+                A combination of web development, project coordination, and AI-driven workflows to streamline project delivery.
               </p>
               
               <div className="pt-4 flex flex-wrap gap-3">
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Sprint Planning</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">WordPress builds</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">CRM Automation</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Web Development</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Project Management</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">AI Creation</span>
               </div>
             </div>
 
@@ -1899,20 +1870,20 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 9: Process / How I Work
+          Section 9: Experience
           ---------------------------------------------------- */}
-      <section id="process" className="border-t border-white/5 py-20 md:py-28 relative bg-gradient-to-b from-transparent via-[#04040c] to-transparent">
+      <section id="experience" className="border-t border-white/5 py-20 md:py-28 relative bg-gradient-to-b from-transparent via-[#04040c] to-transparent">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Process Flow</span>
+              <span>Experience</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Operational Roadmap.
+              Professional Timeline.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Four structured phases mapped to transform basic templates into automated, high-converting digital properties.
+              My hands-on experience leading projects, managing development teams, and executing digital strategies.
             </p>
           </div>
 
@@ -1964,13 +1935,13 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-              <span>Industries</span>
+              <span>Industries Served</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Vertical expertise.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Structuring bespoke digital frameworks across high-growth industries that require robust performance.
+              Partnering with diverse businesses across high-growth industries.
             </p>
           </div>
 
@@ -2002,144 +1973,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------
-          Section 11: Why Work With Me (Grid Table)
-          ---------------------------------------------------- */}
-      <section id="why" className="border-t border-white/5 py-20 md:py-28 relative">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Comparison</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              A partnership focused on delivery.
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Why leading startups and growing companies choose coordinated operations over basic visual placeholders.
-            </p>
-          </div>
 
-          <div className="overflow-x-auto rounded-3xl border border-white/5 bg-white/[0.01] shadow-2xl">
-            <table className="min-w-full divide-y divide-white/5 text-left text-xs">
-              <thead className="bg-[#0c0a1a]/40 text-slate-400 font-bold uppercase tracking-wider">
-                <tr>
-                  <th scope="col" className="px-6 py-5">Value Anchor</th>
-                  <th scope="col" className="px-6 py-5 text-violet-300 bg-violet-500/[0.02]">Usman Farooqi (Operations Lead)</th>
-                  <th scope="col" className="px-6 py-5">Traditional Contractor / Freelancer</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 text-slate-300 font-medium">
-                {comparisons.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
-                    <td className="px-6 py-5 font-bold text-white max-w-[150px]">{row.feature}</td>
-                    <td className="px-6 py-5 text-slate-200 bg-violet-500/[0.02] max-w-[320px] leading-relaxed">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-violet-400 shrink-0 mt-0.5" />
-                        <span>{row.usman}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-slate-500 max-w-[320px] leading-relaxed">{row.agency}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------
-          Section 12: Testimonials
-          ---------------------------------------------------- */}
-      <section id="testimonials" className="border-t border-white/5 py-20 md:py-28 relative">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-              <span>Testimonials</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Trusted by commercial operators.
-            </h2>
-          </div>
-
-          <div className="relative max-w-4xl mx-auto">
-            <div className="glass-panel glass-panel-glow rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-40 w-40 bg-blue-600/5 blur-3xl pointer-events-none" />
-              <span className="absolute top-4 left-6 text-8xl font-serif text-white/5 select-none pointer-events-none">“</span>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-6"
-                >
-                  {/* Star Ratings */}
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="h-4.5 w-4.5 fill-current" />
-                    ))}
-                  </div>
-
-                  <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-slate-100">
-                    “{testimonials[activeTestimonial].quote}”
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-white/5">
-                    <div>
-                      <h4 className="text-base font-bold text-white">
-                        {testimonials[activeTestimonial].author}
-                      </h4>
-                      <p className="text-xs text-slate-400">
-                        {testimonials[activeTestimonial].company}
-                      </p>
-                    </div>
-                    <span className="self-start sm:self-center rounded-full bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-300">
-                      {testimonials[activeTestimonial].tag}
-                    </span>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Indicator dots navigation */}
-            <div className="flex items-center justify-between mt-8">
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleTestimonialChange(index)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      activeTestimonial === index ? "w-8 bg-blue-500" : "w-2.5 bg-white/10 hover:bg-white/20"
-                    }`}
-                    aria-label={`Go to testimonial slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={prevTestimonial}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                  aria-label="Previous Testimonial"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                  aria-label="Next Testimonial"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ----------------------------------------------------
           Section 13: Contact CTA Strategy terminal
@@ -2273,10 +2107,17 @@ export default function Home() {
 
                         <button
                           type="submit"
-                          className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:shadow-violet-600/20 transform hover:-translate-y-0.5 transition-all duration-300"
+                          disabled={isSubmitting}
+                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
                         >
-                          Send Message / Request Strategy Session <ArrowRight className="h-3.5 w-3.5" />
+                          {isSubmitting ? "Sending..." : "Send Message / Request Strategy Session"} {!isSubmitting && <ArrowRight className="h-3.5 w-3.5" />}
                         </button>
+
+                        {submitError && (
+                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                            {submitError}
+                          </div>
+                        )}
                       </motion.form>
                     ) : (
                       <motion.div
