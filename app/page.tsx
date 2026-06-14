@@ -64,42 +64,42 @@ interface Project {
 const expertiseAreas = [
   {
     title: "Project Management",
-    description: "Steering cross-functional technical teams to deliver high-performance web applications and systems on schedule.",
+    description: "Managing website projects from planning and coordination to successful deployment and delivery.",
     icon: Compass,
     accent: "from-blue-500/20 to-indigo-500/20",
     iconColor: "text-blue-400"
   },
   {
     title: "WordPress Website Creation",
-    description: "Designing fast, responsive websites using WordPress, Gutenberg, and element builders optimized for conversions.",
+    description: "Building responsive business websites using WordPress, Elementor, and modern page builders.",
     icon: Laptop,
     accent: "from-purple-500/20 to-pink-500/20",
     iconColor: "text-purple-400"
   },
   {
     title: "AI-Assisted Operations",
-    description: "Utilizing modern AI tools, agent systems, and prompt engineering to scale development speed and team leverage.",
+    description: "Using AI development tools and Vibe Coding workflows to create business websites efficiently.",
     icon: Brain,
     accent: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-400"
   },
   {
     title: "Website Deployment & Management",
-    description: "Configuring CRM databases (HubSpot, Salesforce) and automated triggers to track leads from intake to close.",
+    description: "Handling website launches, migrations, maintenance, performance updates, and ongoing support.",
     icon: Workflow,
     accent: "from-rose-500/20 to-orange-500/20",
     iconColor: "text-rose-400"
   },
   {
     title: "Domain, Hosting & Email Management",
-    description: "Screening, recruiting, and managing distributed developers, designers, and specialists to support agency scale.",
+    description: "Managing domains, DNS records, hosting environments, cPanel configurations, and business emails.",
     icon: Users,
     accent: "from-cyan-500/20 to-blue-500/20",
     iconColor: "text-cyan-400"
   },
   {
     title: "Client & Project Success",
-    description: "Gathering project parameters, managing expectations, and maintaining detailed transparency anchors throughout builds.",
+    description: "Working directly with clients, gathering requirements, coordinating teams, and ensuring smooth execution.",
     icon: Award,
     accent: "from-violet-500/20 to-purple-500/20",
     iconColor: "text-violet-400"
@@ -121,7 +121,7 @@ const services = [
   },
   {
     title: "WordPress Development",
-    description: "Custom WordPress solutions, theme modifications, and complete site builds using modern builders.",
+    description: "WordPress Websites solutions, theme modifications, and complete site builds using modern builders.",
     details: ["Elementor Pro", "WooCommerce Setup", "Plugin Management", "Custom Blocks"],
     icon: Code2
   },
@@ -134,7 +134,7 @@ const services = [
   {
     title: "AI-Powered Website Creation",
     description: "Leveraging modern AI tools and vibe coding workflows to rapidly prototype and build digital solutions.",
-    details: ["Google AI Studio", "Antigravity IDE", "Hostinger Horizons", "Rapid Prototyping"],
+    details: ["Google AI Studio", "Antigravity IDE", "Hostinger Horizons", "Rapid Prompting"],
     icon: Brain
   },
   {
@@ -1050,9 +1050,9 @@ export default function Home() {
           botcheck: formState.botcheck
         })
       });
-      
+
       const result = await response.json();
-      
+
       if (response.status === 200) {
         setFormSubmitted(true);
         setTimeout(() => {
@@ -1093,104 +1093,104 @@ export default function Home() {
   ];
   const renderContactForm = () => (
     <div className="glass-panel rounded-3xl p-6 sm:p-8 relative">
-                  <AnimatePresence mode="wait">
-                    {!formSubmitted ? (
-                      <motion.form
-                        key="contact-form"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onSubmit={handleFormSubmit}
-                        className="space-y-5"
-                      >
-                        <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
-                        
-                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
-                        
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <div className="space-y-2">
-                            <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
-                            <input
-                              type="text"
-                              id="form-name"
-                              required
-                              value={formState.name}
-                              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                              placeholder="Usman Farooqi"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
-                            <input
-                              type="email"
-                              id="form-email"
-                              required
-                              value={formState.email}
-                              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                              placeholder="name@company.com"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                        </div>
+      <AnimatePresence mode="wait">
+        {!formSubmitted ? (
+          <motion.form
+            key="contact-form"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onSubmit={handleFormSubmit}
+            className="space-y-5"
+          >
+            <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
 
-                          <CustomSelect
-                            label="Growth Goal"
-                            value={formState.projectType}
-                            onChange={(val) => setFormState({ ...formState, projectType: val })}
-                            options={[
-                              { value: "Web Project", label: "WordPress / Web Development Project" },
-                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
-                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
-                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
-                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
-                            ]}
-                          />
+            <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
 
-                        <div className="space-y-2">
-                          <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
-                          <textarea
-                            id="form-details"
-                            rows={4}
-                            value={formState.details}
-                            onChange={(e) => setFormState({ ...formState, details: e.target.value })}
-                            placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
-                          />
-                        </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
+                <input
+                  type="text"
+                  id="form-name"
+                  required
+                  value={formState.name}
+                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                  placeholder="Usman Farooqi"
+                  className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
+                <input
+                  type="email"
+                  id="form-email"
+                  required
+                  value={formState.email}
+                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                  placeholder="name@company.com"
+                  className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                />
+              </div>
+            </div>
 
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
-                        >
-                          <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
-                        </button>
+            <CustomSelect
+              label="Growth Goal"
+              value={formState.projectType}
+              onChange={(val) => setFormState({ ...formState, projectType: val })}
+              options={[
+                { value: "Web Project", label: "WordPress / Web Development Project" },
+                { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
+                { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
+                { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
+                { value: "Team Scale", label: "Team Structuring & Hiring Support" }
+              ]}
+            />
 
-                        {submitError && (
-                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
-                            {submitError}
-                          </div>
-                        )}
-                      </motion.form>
-                    ) : (
-                      <motion.div
-                        key="success-message"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="text-center py-10 space-y-4"
-                      >
-                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
-                          <Check className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
-                        <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
-                          Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+            <div className="space-y-2">
+              <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
+              <textarea
+                id="form-details"
+                rows={4}
+                value={formState.details}
+                onChange={(e) => setFormState({ ...formState, details: e.target.value })}
+                placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
+                className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
+            >
+              <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
+            </button>
+
+            {submitError && (
+              <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                {submitError}
+              </div>
+            )}
+          </motion.form>
+        ) : (
+          <motion.div
+            key="success-message"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            className="text-center py-10 space-y-4"
+          >
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
+              <Check className="h-6 w-6" />
+            </div>
+            <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
+            <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
+              Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 
 
@@ -1200,8 +1200,8 @@ export default function Home() {
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      
-      
+
+
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -1230,7 +1230,7 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-  {/* Canvas network background + mouse spotlight */}
+      {/* Canvas network background + mouse spotlight */}
       <NetworkBackground />
       <MouseSpotlight />
 
@@ -1240,9 +1240,9 @@ export default function Home() {
       <motion.nav
         className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-1 group/sidebar"
         initial={{ opacity: 0, x: -20 }}
-        animate={{ 
-          opacity: activeSection === "contact" ? 0 : 1, 
-          x: activeSection === "contact" ? -20 : 0 
+        animate={{
+          opacity: activeSection === "contact" ? 0 : 1,
+          x: activeSection === "contact" ? -20 : 0
         }}
         style={{ pointerEvents: activeSection === "contact" ? "none" : "auto" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -1264,11 +1264,10 @@ export default function Home() {
             <a
               key={id}
               href={`#${id}`}
-              className={`group/link relative flex items-center gap-0 w-10 hover:w-36 overflow-hidden rounded-xl px-2.5 py-2.5 transition-all duration-300 ease-out ${
-                activeSection === id
-                  ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 border border-violet-500/20 text-white w-36"
-                  : "text-slate-400 hover:text-white border border-transparent hover:border-white/8 hover:bg-white/5"
-              }`}
+              className={`group/link relative flex items-center gap-0 w-10 hover:w-36 overflow-hidden rounded-xl px-2.5 py-2.5 transition-all duration-300 ease-out ${activeSection === id
+                ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 border border-violet-500/20 text-white w-36"
+                : "text-slate-400 hover:text-white border border-transparent hover:border-white/8 hover:bg-white/5"
+                }`}
               title={label}
             >
               {activeSection === id && (
@@ -1278,9 +1277,8 @@ export default function Home() {
                   transition={{ type: "spring", stiffness: 400, damping: 35 }}
                 />
               )}
-              <Icon className={`h-4 w-4 shrink-0 transition-colors duration-200 ${
-                activeSection === id ? "text-violet-400" : "text-slate-400 group-hover/link:text-white"
-              }`} />
+              <Icon className={`h-4 w-4 shrink-0 transition-colors duration-200 ${activeSection === id ? "text-violet-400" : "text-slate-400 group-hover/link:text-white"
+                }`} />
               <span className="ml-2.5 text-[11px] font-semibold tracking-wide whitespace-nowrap opacity-0 group-hover/link:opacity-100 transition-opacity duration-200">
                 {label}
               </span>
@@ -1393,13 +1391,12 @@ export default function Home() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.07, duration: 0.3 }}
-                      className={`flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${
-                        activeSection === id
-                          ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 text-white border border-violet-500/20"
-                          : "text-slate-400 hover:text-white hover:bg-white/5"
-                      }`}
+                      className={`flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${activeSection === id
+                        ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 text-white border border-violet-500/20"
+                        : "text-slate-400 hover:text-white hover:bg-white/5"
+                        }`}
                     >
-                      <Icon className={`h-4.5 w-4.5 ${ activeSection === id ? "text-violet-400" : "text-slate-500" }`} />
+                      <Icon className={`h-4.5 w-4.5 ${activeSection === id ? "text-violet-400" : "text-slate-500"}`} />
                       {label}
                       {activeSection === id && (
                         <span className="ml-auto h-1.5 w-1.5 rounded-full bg-violet-400" />
@@ -1433,7 +1430,7 @@ export default function Home() {
           ---------------------------------------------------- */}
       <section id="home" className="relative min-h-screen flex flex-col justify-center pt-16 pb-16 md:pt-0 md:pb-0">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-10 lg:grid-cols-12 lg:items-center">
-          
+
           {/* Left Text Block */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1466,7 +1463,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[480px]">
               {[
                 "Project Management & Sprints",
-                "WordPress CMS Development",
+                "WordPress Website Development",
                 "Website Deployment & Management",
                 "Domain, Hosting & Business Email Setup",
                 "AI-Assisted Website Creation",
@@ -1526,7 +1523,7 @@ export default function Home() {
       <section id="about" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            
+
             {/* Left Glass Panel Content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -1560,18 +1557,12 @@ export default function Home() {
                   <h4 className="text-sm font-bold uppercase tracking-wider text-violet-300 flex items-center gap-2">
                     <Zap className="h-4 w-4 text-violet-400" /> Focus Point
                   </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                    Business KPIs, resource scheduling, custom LLM tool integration, and CRM system mapping.
-                  </p>
                 </div>
                 <div className="rounded-2xl border border-white/5 bg-[#050b18]/60 p-5 shadow-lg relative overflow-hidden group hover:border-blue-500/20 transition-all duration-300">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <h4 className="text-sm font-bold uppercase tracking-wider text-blue-300 flex items-center gap-2">
                     <Layers className="h-4 w-4 text-blue-400" /> Growth Philosophy
                   </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                    Execution alignment. Directing projects from concept to launch with clear goals, team coordination, and client updates.
-                  </p>
                 </div>
               </div>
             </motion.div>
@@ -1585,10 +1576,10 @@ export default function Home() {
               className="lg:col-span-5 grid gap-4 sm:grid-cols-2"
             >
               {[
-                { label: "AI systems built", count: "45+", color: "from-violet-500/20 to-purple-500/5", border: "hover:border-violet-500/30 shadow-violet-500/[0.02]" },
-                { label: "Managed web projects", count: "32+", color: "from-blue-500/20 to-indigo-500/5", border: "hover:border-blue-500/30 shadow-blue-500/[0.02]" },
-                { label: "Operations Campaigns", count: "120+", color: "from-pink-500/20 to-rose-500/5", border: "hover:border-pink-500/30 shadow-pink-500/[0.02]" },
-                { label: "Satisfied Partners", count: "99%", color: "from-emerald-500/20 to-teal-500/5", border: "hover:border-emerald-500/30 shadow-emerald-500/[0.02]" }
+                { label: "WordPress Websites Built", count: "20+", color: "from-violet-500/20 to-purple-500/5", border: "hover:border-violet-500/30 shadow-violet-500/[0.02]" },
+                { label: "AI Business Websites Created", count: "10+", color: "from-blue-500/20 to-indigo-500/5", border: "hover:border-blue-500/30 shadow-blue-500/[0.02]" },
+                { label: "Years Experience", count: "3+", color: "from-pink-500/20 to-rose-500/5", border: "hover:border-pink-500/30 shadow-pink-500/[0.02]" },
+                { label: "Industries Served", count: "5+", color: "from-emerald-500/20 to-teal-500/5", border: "hover:border-emerald-500/30 shadow-emerald-500/[0.02]" }
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -1696,7 +1687,7 @@ export default function Home() {
                   <p className="mt-3 text-xs leading-relaxed text-slate-400">
                     {service.description}
                   </p>
-                  
+
                   {/* Detailed features bullet list */}
                   <ul className="mt-5 space-y-2 border-t border-white/5 pt-4">
                     {service.details.map((detail, idx) => (
@@ -1791,7 +1782,7 @@ export default function Home() {
           ---------------------------------------------------- */}
       <span id="projects-anchor" className="block relative -top-24 pointer-events-none" />
       <section id="projects" className="border-t border-white/5 py-20 md:py-32 relative bg-[#020205]">
-        
+
         {/* Background glow */}
         <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.08),transparent_70%)] blur-[100px] pointer-events-none" />
 
@@ -1832,7 +1823,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
             {impactMetrics.map((item, idx) => (
               <motion.div
                 key={item.label}
@@ -1860,7 +1851,7 @@ export default function Home() {
       <section id="skills" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            
+
             {/* Left Side text */}
             <div className="lg:col-span-5 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
@@ -1873,7 +1864,7 @@ export default function Home() {
               <p className="text-slate-300 leading-relaxed text-sm">
                 A combination of web development, project coordination, and AI-driven workflows to streamline project delivery.
               </p>
-              
+
               <div className="pt-4 flex flex-wrap gap-3">
                 <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Web Development</span>
                 <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Project Management</span>
@@ -1937,7 +1928,7 @@ export default function Home() {
           <div className="relative max-w-5xl mx-auto">
             {/* Connected horizontal background roadmap connector line */}
             <div className="hidden xl:block absolute top-[44px] left-8 right-8 h-[1px] bg-gradient-to-r from-violet-500/10 via-blue-500/30 to-violet-500/10 z-0" />
-            
+
             <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4 relative z-10">
               {processSteps.map((step, idx) => (
                 <motion.div
@@ -2027,13 +2018,13 @@ export default function Home() {
           ---------------------------------------------------- */}
       <section id="contact" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          
+
           <div className="rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-[#0c071a] via-[#020205] to-[#04091a] p-8 sm:p-12 md:p-16 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 h-96 w-96 bg-violet-600/[0.03] blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 h-96 w-96 bg-blue-600/[0.02] blur-3xl pointer-events-none" />
 
             <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-              
+
               {/* Context guidelines */}
               <div className="lg:col-span-5 space-y-6">
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
@@ -2088,7 +2079,7 @@ export default function Home() {
 
               {/* Form card */}
               <div className="lg:col-span-7">
-                
+
                 {/* Desktop view */}
                 <div className="hidden lg:block">
                   {renderContactForm()}
@@ -2099,7 +2090,7 @@ export default function Home() {
                     Book Strategy Session <ArrowRight className="h-4.5 w-4.5 shrink-0" />
                   </button>
                 </div>
-  
+
               </div>
             </div>
           </div>
@@ -2113,20 +2104,20 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px]">
           {/* Floating Glass Card */}
           <div className="relative rounded-[32px] overflow-hidden glass-panel border border-white/10 p-8 sm:p-12 shadow-2xl bg-[#03040b]/80 backdrop-blur-xl">
-            
+
             {/* Animated top glow border */}
             <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-70" />
-            
+
             {/* Subtle gradient lighting */}
             <div className="absolute -top-40 -left-40 w-96 h-96 bg-violet-600/20 blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
-            
+
             {/* Floating background particles specific to footer */}
             <div className="absolute top-[20%] right-[10%] w-2 h-2 rounded-full bg-violet-400/40 blur-[1px] animate-pulse pointer-events-none" />
             <div className="absolute bottom-[30%] left-[40%] w-1.5 h-1.5 rounded-full bg-blue-400/40 blur-[1px] animate-pulse pointer-events-none" style={{ animationDelay: "1s" }} />
-            
+
             <div className="relative z-10 grid gap-12 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              
+
               {/* SECTION 1: Profile */}
               <div className="flex flex-col items-center md:items-start space-y-6">
                 <div className="relative h-20 w-20 rounded-full p-[2px] bg-gradient-to-br from-violet-500 to-blue-500 shadow-lg shadow-violet-500/30">
@@ -2185,7 +2176,7 @@ export default function Home() {
             {/* BOTTOM BAR */}
             <div className="relative z-10 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-slate-500 font-medium">© {new Date().getFullYear()} Usman Farooqi. All rights reserved.</p>
-              
+
             </div>
           </div>
         </div>
