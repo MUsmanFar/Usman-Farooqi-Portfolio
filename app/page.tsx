@@ -973,6 +973,15 @@ export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
 
   // Scroll event listener for Navbar state
   useEffect(() => {
@@ -1079,11 +1088,142 @@ export default function Home() {
     { label: "Experience", id: "expertise", icon: Briefcase },
     { label: "Contact", id: "contact", icon: Mail },
   ];
+  const renderContactForm = () => (
+    <div className="glass-panel rounded-3xl p-6 sm:p-8 relative">
+                  <AnimatePresence mode="wait">
+                    {!formSubmitted ? (
+                      <motion.form
+                        key="contact-form"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onSubmit={handleFormSubmit}
+                        className="space-y-5"
+                      >
+                        <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
+                        
+                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
+                        
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div className="space-y-2">
+                            <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
+                            <input
+                              type="text"
+                              id="form-name"
+                              required
+                              value={formState.name}
+                              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                              placeholder="Usman Farooqi"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
+                            <input
+                              type="email"
+                              id="form-email"
+                              required
+                              value={formState.email}
+                              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                              placeholder="name@company.com"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                            />
+                          </div>
+                        </div>
+
+                          <CustomSelect
+                            label="Growth Goal"
+                            value={formState.projectType}
+                            onChange={(val) => setFormState({ ...formState, projectType: val })}
+                            options={[
+                              { value: "Web Project", label: "WordPress / Web Development Project" },
+                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
+                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
+                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
+                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
+                            ]}
+                          />
+
+                        <div className="space-y-2">
+                          <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
+                          <textarea
+                            id="form-details"
+                            rows={4}
+                            value={formState.details}
+                            onChange={(e) => setFormState({ ...formState, details: e.target.value })}
+                            placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
+                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
+                        >
+                          <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
+                        </button>
+
+                        {submitError && (
+                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                            {submitError}
+                          </div>
+                        )}
+                      </motion.form>
+                    ) : (
+                      <motion.div
+                        key="success-message"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-center py-10 space-y-4"
+                      >
+                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
+                          <Check className="h-6 w-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
+                        <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
+                          Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+  );
+
 
   return (
     <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
       
-      {/* Canvas network background + mouse spotlight */}
+      
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#020205]/80 backdrop-blur-md"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-lg relative max-h-[95vh] overflow-y-auto custom-scrollbar rounded-3xl"
+            >
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 z-50 text-slate-400 hover:text-white transition-colors p-2 bg-[#0a0a16]/80 backdrop-blur-md rounded-full border border-white/10 shadow-lg"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              {renderContactForm()}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+  {/* Canvas network background + mouse spotlight */}
       <NetworkBackground />
       <MouseSpotlight />
 
@@ -2042,105 +2182,18 @@ export default function Home() {
 
               {/* Form card */}
               <div className="lg:col-span-7">
-                <div className="glass-panel rounded-3xl p-6 sm:p-8 relative">
-                  <AnimatePresence mode="wait">
-                    {!formSubmitted ? (
-                      <motion.form
-                        key="contact-form"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onSubmit={handleFormSubmit}
-                        className="space-y-5"
-                      >
-                        <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
-                        
-                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
-                        
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <div className="space-y-2">
-                            <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
-                            <input
-                              type="text"
-                              id="form-name"
-                              required
-                              value={formState.name}
-                              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                              placeholder="Usman Farooqi"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
-                            <input
-                              type="email"
-                              id="form-email"
-                              required
-                              value={formState.email}
-                              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                              placeholder="name@company.com"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                        </div>
-
-                          <CustomSelect
-                            label="Growth Goal"
-                            value={formState.projectType}
-                            onChange={(val) => setFormState({ ...formState, projectType: val })}
-                            options={[
-                              { value: "Web Project", label: "WordPress / Web Development Project" },
-                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
-                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
-                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
-                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
-                            ]}
-                          />
-
-                        <div className="space-y-2">
-                          <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
-                          <textarea
-                            id="form-details"
-                            rows={4}
-                            value={formState.details}
-                            onChange={(e) => setFormState({ ...formState, details: e.target.value })}
-                            placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
-                          />
-                        </div>
-
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
-                        >
-                          <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
-                        </button>
-
-                        {submitError && (
-                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
-                            {submitError}
-                          </div>
-                        )}
-                      </motion.form>
-                    ) : (
-                      <motion.div
-                        key="success-message"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="text-center py-10 space-y-4"
-                      >
-                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
-                          <Check className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
-                        <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
-                          Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                
+                {/* Desktop view */}
+                <div className="hidden lg:block">
+                  {renderContactForm()}
                 </div>
+                {/* Mobile view */}
+                <div className="block lg:hidden mt-8 sm:mt-10">
+                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-violet-600 to-blue-600 py-4.5 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-violet-500/20 hover:shadow-violet-500/40 hover:-translate-y-0.5 transform transition-all duration-300">
+                    Book Strategy Session <ArrowRight className="h-4.5 w-4.5 shrink-0" />
+                  </button>
+                </div>
+  
               </div>
             </div>
           </div>
