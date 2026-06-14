@@ -7,51 +7,83 @@ import { ExternalLink, X, Image as ImageIcon } from "lucide-react";
 const projectsData = [
   {
     id: "arrowhead",
-    name: "Arrowhead Digital Marketing",
-    industry: "Digital Marketing Agencies",
-    url: "https://arrowheaddigitalmarketing.com",
-    description: "A comprehensive digital agency website built with WordPress, focusing on high-converting service landing pages and seamless appointment scheduling workflows.",
-    image: "/file.svg" // Placeholder
+    name: "Arrowhead DigiTech",
+    industry: "Digital Marketing Agency",
+    url: "https://arrowheaddigitech.com",
+    description: "A comprehensive digital agency website built with a focus on high-converting service landing pages and seamless appointment scheduling workflows.",
+    image: "/screenshots/arrowhead.png"
   },
   {
-    id: "america-needs-nurses",
+    id: "america-nurses",
     name: "America Needs Nurses",
-    industry: "Healthcare & MedTech",
+    industry: "Healthcare Recruitment",
     url: "https://americaneedsnurses.com",
     description: "Healthcare platform facilitating connections between nursing professionals and medical facilities, featuring secure application forms and a clean, accessible UI.",
-    image: "/file.svg"
+    image: "/screenshots/america-nurses.png"
   },
   {
-    id: "atlanta-car-rental",
+    id: "atlanta-car",
     name: "Atlanta Car Rental",
     industry: "Car Rental Systems",
-    url: "https://atlantacarrental.com",
+    url: "https://atlantacar.ae",
     description: "A robust automotive rental portal integrated with real-time fleet management, booking engines, and secure payment processing.",
-    image: "/file.svg"
+    image: "/screenshots/atlanta-car.png"
+  },
+  {
+    id: "yalaride",
+    name: "YalaRide",
+    industry: "Transportation & Rideshare",
+    url: "https://yalaride.com",
+    description: "A modern ridesharing and transportation portal offering intuitive user flows, real-time tracking concepts, and a mobile-first design.",
+    image: "/screenshots/yalaride.png"
+  },
+  {
+    id: "tight-and-tone",
+    name: "Tight and Tone Wellness Center",
+    industry: "Healthcare & Wellness",
+    url: "https://tightandtonewellnesscenter.com",
+    description: "A wellness and healthcare center website offering seamless service browsing, booking features, and a tranquil design aesthetic.",
+    image: "/screenshots/tight-and-tone.png"
+  },
+  {
+    id: "priceless",
+    name: "Priceless GA",
+    industry: "Car Rental Systems",
+    url: "https://pricelessga.com",
+    description: "A large-scale car rental franchise website, featuring complex reservation logic, location finders, and dynamic pricing integration.",
+    image: "/screenshots/priceless.png"
   },
   {
     id: "go-jetter",
     name: "Go-Jetter Travel & Tours",
-    industry: "Travel & Hospitality",
+    industry: "Travel & Tourism",
     url: "https://go-jetter.com",
     description: "Travel agency website featuring dynamic itinerary displays, custom booking inquiries, and high-performance visual storytelling.",
-    image: "/file.svg"
+    image: "/screenshots/go-jetter.png"
   },
   {
-    id: "ihawa-travel",
-    name: "Ihawa Travel",
-    industry: "Travel & Hospitality",
-    url: "https://ihawatravel.com",
-    description: "An elegant portal for a boutique travel firm, equipped with responsive galleries, custom CRM integration, and mobile-optimized search.",
-    image: "/file.svg"
+    id: "halal-musafir",
+    name: "Halal Musafir",
+    industry: "Travel & Tourism",
+    url: "https://halalmusafir.com",
+    description: "A specialized travel portal offering halal-friendly tours, complete with tailored itineraries, accommodation booking, and cultural guidance.",
+    image: "/screenshots/halal-musafir.png"
   },
   {
-    id: "priceless",
-    name: "Priceless Car Rental USA",
-    industry: "Car Rental Systems",
-    url: "https://pricelesscarrental.com",
-    description: "A large-scale multi-location car rental franchise website, featuring complex reservation logic, location finders, and dynamic pricing integration.",
-    image: "/file.svg"
+    id: "georgia-nurses",
+    name: "Georgia Needs Nurses",
+    industry: "Healthcare Recruitment",
+    url: "https://georgianeedsnurses.com",
+    description: "A localized recruitment platform tailored for healthcare professionals in Georgia, matching qualified nurses with leading medical facilities.",
+    image: "/screenshots/georgia-nurses.png"
+  },
+  {
+    id: "rizitech",
+    name: "Rizitech LLC",
+    industry: "Tech/IT Services",
+    url: "https://rizitech.com",
+    description: "A sleek IT services portal showcasing technical expertise, scalable solutions, and comprehensive client support modules.",
+    image: "/screenshots/rizitech.png"
   }
 ];
 

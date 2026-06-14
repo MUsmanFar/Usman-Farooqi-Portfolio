@@ -1241,10 +1241,10 @@ export default function Home() {
         className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-1 group/sidebar"
         initial={{ opacity: 0, x: -20 }}
         animate={{
-          opacity: activeSection === "contact" ? 0 : 1,
-          x: activeSection === "contact" ? -20 : 0
+          opacity: 1,
+          x: 0
         }}
-        style={{ pointerEvents: activeSection === "contact" ? "none" : "auto" }}
+        style={{ pointerEvents: "auto" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {/* Logo pill at top */}
@@ -1265,7 +1265,7 @@ export default function Home() {
               key={id}
               href={`#${id}`}
               className={`group/link relative flex items-center gap-0 w-10 hover:w-36 overflow-hidden rounded-xl px-2.5 py-2.5 transition-all duration-300 ease-out ${activeSection === id
-                ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 border border-violet-500/20 text-white w-36"
+                ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 border border-violet-500/20 text-white"
                 : "text-slate-400 hover:text-white border border-transparent hover:border-white/8 hover:bg-white/5"
                 }`}
               title={label}
@@ -1406,7 +1406,7 @@ export default function Home() {
                 </nav>
 
                 {/* Bottom CTA */}
-                <div className="px-4 py-6 border-t border-white/5">
+                <div className="px-4 pt-6 pb-24 border-t border-white/5">
                   <a
                     href="#contact"
                     onClick={() => setMobileMenuOpen(false)}
@@ -1704,78 +1704,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------
-          Section 5: Featured Projects
-          ---------------------------------------------------- */}
-      <section id="projects" className="border-t border-white/5 py-20 md:py-28 relative">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Coordinated Projects</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Validated digital transformations.
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Analyze the functional interfaces and direct commercial results constructed under my coordination.
-            </p>
-          </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {projectsData.map((project, idx) => (
-              <motion.article
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
-              >
-                {/* CSS Project dashboard preview */}
-                <div className="mb-5 bg-[#020205] rounded-2xl border border-white/5 p-1">
-                  {renderProjectPreview(project.id)}
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.slice(0, 2).map((tag) => (
-                      <span key={tag} className="text-[9px] uppercase tracking-wider font-extrabold text-slate-500 bg-white/5 border border-white/5 px-2.5 py-0.5 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white group-hover:text-violet-300 transition-colors">
-                    {project.name}
-                  </h3>
-                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
-                    {project.challenge}
-                  </p>
-
-                  <div className="flex items-center gap-3 pt-3 border-t border-white/5">
-                    {project.metrics.map((metric, mIdx) => (
-                      <div key={mIdx} className="flex-1 text-center bg-white/[0.01] border border-white/5 py-2 rounded-xl">
-                        <div className="text-base font-extrabold text-white text-glow-purple">{metric.value}</div>
-                        <div className="text-[8px] uppercase tracking-wider text-slate-500 font-bold mt-0.5">{metric.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Detail link callback to update case study section below */}
-                  <a
-                    href="#case-studies-anchor"
-                    onClick={() => setSelectedProject(project)}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-violet-500/20 py-2.5 text-[10px] font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-all mt-4"
-                  >
-                    View Operational Case Study <ArrowUpRight className="h-3 w-3 text-violet-400" />
-                  </a>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ----------------------------------------------------
           Section 6: Featured Projects
@@ -1950,7 +1879,7 @@ export default function Home() {
                     {step.description}
                   </p>
 
-                  <ul className="mt-5 space-y-2 border-t border-white/5 pt-4">
+                  <ul className="mt-5 space-y-2 border-t border-white/5 pt-4 text-left">
                     {step.details.map((detail, dIdx) => (
                       <li key={dIdx} className="flex items-start gap-2 text-[10px] text-slate-500 group-hover:text-slate-400">
                         <CheckCircle2 className="h-3.5 w-3.5 text-violet-400/85 shrink-0 mt-0.5" />
@@ -2001,9 +1930,6 @@ export default function Home() {
                   <h3 className="mt-4 text-base font-bold text-white group-hover:text-blue-300 transition-colors">
                     {ind.name}
                   </h3>
-                  <p className="mt-2 text-xs text-slate-500 group-hover:text-slate-400 transition-colors">
-                    {ind.desc}
-                  </p>
                 </motion.div>
               );
             })}
