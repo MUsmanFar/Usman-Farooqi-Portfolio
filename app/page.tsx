@@ -1484,7 +1484,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
+                  className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
                 >
                   {/* Glass Top Gradient Effect */}
                   <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -1534,7 +1534,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
+                  className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <ServiceIcon className="h-5 w-5" />
@@ -1588,7 +1588,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* CSS Project dashboard preview */}
                 <div className="mb-5 bg-[#020205] rounded-2xl border border-white/5 p-1">
@@ -1794,10 +1794,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all"
+                className="rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all flex flex-col justify-center items-center isolate overflow-hidden"
               >
                 <div className="text-3xl sm:text-4xl font-black text-white">
-                  <Counter value={item.value} />
+                  {/\d/.test(item.value) ? <Counter value={item.value} /> : item.value}
                 </div>
                 <p className="mt-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   {item.label}
@@ -2111,9 +2111,9 @@ export default function Home() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
+                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
                         >
-                          {isSubmitting ? "Sending..." : "Send Message / Request Strategy Session"} {!isSubmitting && <ArrowRight className="h-3.5 w-3.5" />}
+                          <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
                         </button>
 
                         {submitError && (
@@ -2165,7 +2165,7 @@ export default function Home() {
                 </div>
                 <div className="text-left">
                   <span className="block font-bold text-slate-200">Usman Farooqi</span>
-                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Lead</span>
+                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Development Lead</span>
                 </div>
               </div>
               <p className="text-xs text-slate-500 max-w-xs mx-auto sm:mx-0 leading-relaxed">
@@ -2175,14 +2175,18 @@ export default function Home() {
 
             {/* Center: Contact Info */}
             <div className="flex flex-col items-center justify-center gap-3">
-              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
-                <Mail className="h-3.5 w-3.5 text-slate-400 group-hover:text-violet-400 transition-colors" />
-                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">usmanfar2002@gmail.com</span>
+              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-violet-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors truncate">usmanfar2002@gmail.com</span>
               </a>
-              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
-                <Phone className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Phone className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" />
                 <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">+92 302 4422053</span>
               </a>
+              <div className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Compass className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">Lahore, Pakistan</span>
+              </div>
             </div>
 
             {/* Right: Links */}

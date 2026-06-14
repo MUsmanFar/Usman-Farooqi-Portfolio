@@ -36,7 +36,7 @@ export function CustomSelect({ value, onChange, options, label }: CustomSelectPr
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between rounded-xl border border-white/10 bg-gradient-to-b from-[#0a0a16]/80 to-[#020205]/90 px-4 py-3.5 text-base sm:text-sm text-slate-200 focus:border-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20 shadow-lg shadow-black/20 transition-all hover:border-violet-500/30 hover:shadow-violet-900/10"
       >
-        <span className="truncate font-medium">{selectedLabel}</span>
+        <span className="break-words whitespace-normal text-left font-medium">{selectedLabel}</span>
         <div className={`flex items-center justify-center h-6 w-6 rounded-md bg-white/5 transition-transform duration-300 ${isOpen ? "rotate-180 bg-violet-500/10 text-violet-400" : "text-slate-400"}`}>
           <ChevronDown className="h-3.5 w-3.5" />
         </div>
@@ -71,7 +71,7 @@ export function CustomSelect({ value, onChange, options, label }: CustomSelectPr
                         : "text-slate-300 hover:bg-white/[0.04] hover:text-white border border-transparent"
                     }`}
                   >
-                    <span className="truncate">{opt.label}</span>
+                    <span className="break-words whitespace-normal pr-2">{opt.label}</span>
                     {isSelected && (
                       <motion.div 
                         initial={{ scale: 0 }} 
