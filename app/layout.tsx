@@ -13,21 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Usman Farooqi | Technology & Business Growth Specialist",
+  title: "Usman Farooqi | Project Manager & Digital Operations Lead",
   description:
-    "Premium digital growth systems for businesses — AI, SEO, Google Ads, CRM, automation, and full stack development.",
+    "Professional portfolio of Usman Farooqi, Web Development & Digital Operations Lead. Managing web projects, WordPress delivery, team leadership, and AI-assisted operations.",
   metadataBase: new URL("https://your-domain.com"),
   openGraph: {
-    title: "Usman Farooqi | Technology & Business Growth Specialist",
+    title: "Usman Farooqi | Project Manager & Digital Operations Lead",
     description:
-      "Premium digital growth systems for businesses — AI, SEO, Google Ads, CRM, automation, and full stack development.",
+      "Professional portfolio of Usman Farooqi, Web Development & Digital Operations Lead. Managing web projects, WordPress delivery, team leadership, and AI-assisted operations.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Usman Farooqi | Technology & Business Growth Specialist",
+    title: "Usman Farooqi | Project Manager & Digital Operations Lead",
     description:
-      "Premium digital growth systems for businesses — AI, SEO, Google Ads, CRM, automation, and full stack development.",
+      "Professional portfolio of Usman Farooqi, Web Development & Digital Operations Lead. Managing web projects, WordPress delivery, team leadership, and AI-assisted operations.",
   },
 };
 
