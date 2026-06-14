@@ -970,7 +970,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "" });
+  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
@@ -1034,7 +1034,8 @@ export default function Home() {
           name: formState.name,
           email: formState.email,
           projectType: formState.projectType,
-          message: formState.details
+          message: formState.details,
+          botcheck: formState.botcheck
         })
       });
       
@@ -1044,7 +1045,7 @@ export default function Home() {
         setFormSubmitted(true);
         setTimeout(() => {
           setFormSubmitted(false);
-          setFormState({ name: "", email: "", projectType: "Web Project", details: "" });
+          setFormState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
         }, 4500);
       } else {
         setSubmitError(result.message || "Something went wrong. Please try again later.");
@@ -2052,6 +2053,8 @@ export default function Home() {
                         className="space-y-5"
                       >
                         <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
+                        
+                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
                         
                         <div className="grid gap-4 sm:grid-cols-2">
                           <div className="space-y-2">
