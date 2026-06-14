@@ -973,6 +973,15 @@ export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
 
   // Scroll event listener for Navbar state
   useEffect(() => {
@@ -1079,11 +1088,142 @@ export default function Home() {
     { label: "Experience", id: "expertise", icon: Briefcase },
     { label: "Contact", id: "contact", icon: Mail },
   ];
+  const renderContactForm = () => (
+    <div className="glass-panel rounded-3xl p-6 sm:p-8 relative">
+                  <AnimatePresence mode="wait">
+                    {!formSubmitted ? (
+                      <motion.form
+                        key="contact-form"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onSubmit={handleFormSubmit}
+                        className="space-y-5"
+                      >
+                        <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
+                        
+                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
+                        
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <div className="space-y-2">
+                            <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
+                            <input
+                              type="text"
+                              id="form-name"
+                              required
+                              value={formState.name}
+                              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                              placeholder="Usman Farooqi"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
+                            <input
+                              type="email"
+                              id="form-email"
+                              required
+                              value={formState.email}
+                              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                              placeholder="name@company.com"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                            />
+                          </div>
+                        </div>
+
+                          <CustomSelect
+                            label="Growth Goal"
+                            value={formState.projectType}
+                            onChange={(val) => setFormState({ ...formState, projectType: val })}
+                            options={[
+                              { value: "Web Project", label: "WordPress / Web Development Project" },
+                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
+                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
+                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
+                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
+                            ]}
+                          />
+
+                        <div className="space-y-2">
+                          <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
+                          <textarea
+                            id="form-details"
+                            rows={4}
+                            value={formState.details}
+                            onChange={(e) => setFormState({ ...formState, details: e.target.value })}
+                            placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
+                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 flex-wrap ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
+                        >
+                          <span className="text-center">{isSubmitting ? "Sending..." : "Request Strategy Session"}</span> {!isSubmitting && <ArrowRight className="h-3.5 w-3.5 shrink-0" />}
+                        </button>
+
+                        {submitError && (
+                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                            {submitError}
+                          </div>
+                        )}
+                      </motion.form>
+                    ) : (
+                      <motion.div
+                        key="success-message"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-center py-10 space-y-4"
+                      >
+                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
+                          <Check className="h-6 w-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
+                        <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
+                          Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+  );
+
 
   return (
     <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
       
-      {/* Canvas network background + mouse spotlight */}
+      
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#020205]/80 backdrop-blur-md"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-lg relative max-h-[95vh] overflow-y-auto custom-scrollbar rounded-3xl"
+            >
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 z-50 text-slate-400 hover:text-white transition-colors p-2 bg-[#0a0a16]/80 backdrop-blur-md rounded-full border border-white/10 shadow-lg"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              {renderContactForm()}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+  {/* Canvas network background + mouse spotlight */}
       <NetworkBackground />
       <MouseSpotlight />
 
@@ -1484,7 +1624,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
+                  className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
                 >
                   {/* Glass Top Gradient Effect */}
                   <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -1534,7 +1674,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
+                  className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <ServiceIcon className="h-5 w-5" />
@@ -1588,7 +1728,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="group relative isolate overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* CSS Project dashboard preview */}
                 <div className="mb-5 bg-[#020205] rounded-2xl border border-white/5 p-1">
@@ -1794,10 +1934,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all"
+                className="rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all flex flex-col justify-center items-center isolate overflow-hidden"
               >
                 <div className="text-3xl sm:text-4xl font-black text-white">
-                  <Counter value={item.value} />
+                  {/\d/.test(item.value) ? <Counter value={item.value} /> : item.value}
                 </div>
                 <p className="mt-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   {item.label}
@@ -2042,105 +2182,18 @@ export default function Home() {
 
               {/* Form card */}
               <div className="lg:col-span-7">
-                <div className="glass-panel rounded-3xl p-6 sm:p-8 relative">
-                  <AnimatePresence mode="wait">
-                    {!formSubmitted ? (
-                      <motion.form
-                        key="contact-form"
-                        initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onSubmit={handleFormSubmit}
-                        className="space-y-5"
-                      >
-                        <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
-                        
-                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
-                        
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <div className="space-y-2">
-                            <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
-                            <input
-                              type="text"
-                              id="form-name"
-                              required
-                              value={formState.name}
-                              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                              placeholder="Usman Farooqi"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label htmlFor="form-email" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Corporate Email</label>
-                            <input
-                              type="email"
-                              id="form-email"
-                              required
-                              value={formState.email}
-                              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                              placeholder="name@company.com"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                            />
-                          </div>
-                        </div>
-
-                          <CustomSelect
-                            label="Growth Goal"
-                            value={formState.projectType}
-                            onChange={(val) => setFormState({ ...formState, projectType: val })}
-                            options={[
-                              { value: "Web Project", label: "WordPress / Web Development Project" },
-                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
-                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
-                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
-                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
-                            ]}
-                          />
-
-                        <div className="space-y-2">
-                          <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
-                          <textarea
-                            id="form-details"
-                            rows={4}
-                            value={formState.details}
-                            onChange={(e) => setFormState({ ...formState, details: e.target.value })}
-                            placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
-                          />
-                        </div>
-
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
-                        >
-                          {isSubmitting ? "Sending..." : "Send Message / Request Strategy Session"} {!isSubmitting && <ArrowRight className="h-3.5 w-3.5" />}
-                        </button>
-
-                        {submitError && (
-                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
-                            {submitError}
-                          </div>
-                        )}
-                      </motion.form>
-                    ) : (
-                      <motion.div
-                        key="success-message"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="text-center py-10 space-y-4"
-                      >
-                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse">
-                          <Check className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white">Strategy Request Confirmed</h3>
-                        <p className="text-xs leading-relaxed text-slate-400 max-w-sm mx-auto">
-                          Thank you! I have received your growth request. I will analyze your parameters and reach out within 1 business day with custom calendar bookings.
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                
+                {/* Desktop view */}
+                <div className="hidden lg:block">
+                  {renderContactForm()}
                 </div>
+                {/* Mobile view */}
+                <div className="block lg:hidden mt-8 sm:mt-10">
+                  <button onClick={() => setIsModalOpen(true)} className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-violet-600 to-blue-600 py-4.5 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-violet-500/20 hover:shadow-violet-500/40 hover:-translate-y-0.5 transform transition-all duration-300">
+                    Book Strategy Session <ArrowRight className="h-4.5 w-4.5 shrink-0" />
+                  </button>
+                </div>
+  
               </div>
             </div>
           </div>
@@ -2165,7 +2218,7 @@ export default function Home() {
                 </div>
                 <div className="text-left">
                   <span className="block font-bold text-slate-200">Usman Farooqi</span>
-                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Lead</span>
+                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Development Lead</span>
                 </div>
               </div>
               <p className="text-xs text-slate-500 max-w-xs mx-auto sm:mx-0 leading-relaxed">
@@ -2175,14 +2228,18 @@ export default function Home() {
 
             {/* Center: Contact Info */}
             <div className="flex flex-col items-center justify-center gap-3">
-              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
-                <Mail className="h-3.5 w-3.5 text-slate-400 group-hover:text-violet-400 transition-colors" />
-                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">usmanfar2002@gmail.com</span>
+              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Mail className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-violet-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors truncate">usmanfar2002@gmail.com</span>
               </a>
-              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
-                <Phone className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Phone className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" />
                 <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">+92 302 4422053</span>
               </a>
+              <div className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full max-w-[220px] justify-start">
+                <Compass className="h-3.5 w-3.5 shrink-0 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">Lahore, Pakistan</span>
+              </div>
             </div>
 
             {/* Right: Links */}
