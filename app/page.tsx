@@ -558,7 +558,193 @@ function Counter({ value, duration = 2.5 }: { value: string; duration?: number }
   );
 }
 
-// Interactive Background System with scroll parallax, moving gradient mesh, and cursor spotlights
+// ============================================================
+// NETWORK PARTICLE BACKGROUND — Canvas-based connected nodes
+// ============================================================
+function NetworkBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
+  const { scrollY } = useScroll();
+  const scrollRef = useRef(0);
+
+  useEffect(() => {
+    const unsub = scrollY.on("change", (v) => { scrollRef.current = v; });
+    return unsub;
+  }, [scrollY]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+
+    const resize = () => {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", (e) => { mouseRef.current = { x: e.clientX, y: e.clientY }; });
+
+    // Node count — fewer on mobile for perf
+    const COUNT = W < 768 ? 45 : 80;
+    const CONNECT_DIST = W < 768 ? 100 : 140;
+    const MOUSE_DIST = 160;
+
+    type Node = {
+      x: number; y: number;
+      vx: number; vy: number;
+      r: number;
+      color: string;
+      pulse: number; pulseDir: number;
+    };
+
+    const palette = [
+      "rgba(96,165,250,",   // electric blue
+      "rgba(139,92,246,",   // violet
+      "rgba(167,139,250,",  // lavender
+      "rgba(59,130,246,",   // blue
+      "rgba(14,165,233,",   // sky
+    ];
+
+    const nodes: Node[] = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: 1.5 + Math.random() * 2,
+      color: palette[Math.floor(Math.random() * palette.length)],
+      pulse: Math.random() * Math.PI * 2,
+      pulseDir: Math.random() > 0.5 ? 1 : -1,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+
+      // Parallax scroll offset — background drifts slowly
+      const scrollOff = scrollRef.current * 0.04;
+
+      // Move nodes
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        n.pulse += 0.025 * n.pulseDir;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      });
+
+      // Mouse attraction
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      // Draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        const ay = a.y + scrollOff;
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const by = b.y + scrollOff;
+          const dx = a.x - b.x;
+          const dy = ay - by;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(a.x, ay);
+            ctx.lineTo(b.x, by);
+            const grad = ctx.createLinearGradient(a.x, ay, b.x, by);
+            grad.addColorStop(0, a.color + alpha + ")");
+            grad.addColorStop(1, b.color + alpha + ")");
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+
+        // Mouse-node connections
+        const dxm = a.x - mx;
+        const dym = (a.y + scrollOff) - my;
+        const mdist = Math.sqrt(dxm * dxm + dym * dym);
+        if (mdist < MOUSE_DIST) {
+          const alpha = (1 - mdist / MOUSE_DIST) * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y + scrollOff);
+          ctx.lineTo(mx, my);
+          ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      // Draw nodes
+      nodes.forEach((n) => {
+        const pulse = 0.6 + Math.sin(n.pulse) * 0.4;
+        const ny = n.y + scrollOff;
+
+        // Outer glow ring
+        const grd = ctx.createRadialGradient(n.x, ny, 0, n.x, ny, n.r * 4);
+        grd.addColorStop(0, n.color + (0.6 * pulse) + ")");
+        grd.addColorStop(1, n.color + "0)");
+        ctx.beginPath();
+        ctx.arc(n.x, ny, n.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(n.x, ny, n.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = n.color + (0.85 * pulse) + ")";
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-0 -z-30 overflow-hidden pointer-events-none" style={{ background: "linear-gradient(135deg, #04050f 0%, #060d1f 30%, #080c1e 60%, #04050f 100%)" }}>
+      {/* Deep navy gradient blobs — give the background life and depth */}
+      <div className="absolute top-[-5%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.12),transparent_65%)] blur-[120px] animate-blob-1" />
+      <div className="absolute top-[20%] right-[-15%] h-[750px] w-[750px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.1),transparent_65%)] blur-[130px] animate-blob-2" />
+      <div className="absolute bottom-[15%] left-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.07),transparent_60%)] blur-[110px] animate-blob-3" />
+      <div className="absolute bottom-[-5%] right-[-5%] h-[550px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.09),transparent_60%)] blur-[100px] animate-blob-4" />
+      {/* Network canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ opacity: 0.75 }} />
+    </div>
+  );
+}
+
+// Mouse spotlight overlay — separate from fixed background
+function MouseSpotlight() {
+  const [pos, setPos] = useState({ x: -999, y: -999 });
+  useEffect(() => {
+    const h = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", h);
+    return () => window.removeEventListener("mousemove", h);
+  }, []);
+  return (
+    <div
+      className="fixed inset-0 -z-20 pointer-events-none transition-opacity duration-500"
+      style={{
+        background: `radial-gradient(700px at ${pos.x}px ${pos.y}px, rgba(99,102,241,0.07), transparent 70%), radial-gradient(350px at ${pos.x}px ${pos.y}px, rgba(59,130,246,0.06), transparent 65%)`
+      }}
+    />
+  );
+}
+
+// Legacy stub — kept for backwards compat if referenced
 const bgParticles = [
   { x: 12, y: 15, size: 2, duration: 18, delay: 0, depth: -0.05 },
   { x: 35, y: 8, size: 3, duration: 25, delay: 2, depth: 0.1 },
@@ -582,262 +768,217 @@ const bgParticles = [
   { x: 90, y: 10, size: 2.5, duration: 22, delay: 2, depth: 0.08 }
 ];
 
-const bgShapes = [
-  { type: "triangle", x: "8%", y: "15%", rotateSpeed: 25, size: 32, duration: 16, depth: 0.1 },
-  { type: "square", x: "88%", y: "22%", rotateSpeed: -20, size: 28, duration: 20, depth: -0.12 },
-  { type: "hexagon", x: "6%", y: "58%", rotateSpeed: 15, size: 36, duration: 24, depth: 0.08 },
-  { type: "ring", x: "82%", y: "68%", rotateSpeed: -25, size: 45, duration: 22, depth: -0.15 },
-  { type: "circle", x: "48%", y: "42%", rotateSpeed: 10, size: 24, duration: 18, depth: 0.05 }
-];
-
-function renderShape(type: string, size: number) {
-  switch (type) {
-    case "triangle":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <polygon points="20,5 35,35 5,35" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "square":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <rect x="5" y="5" width="30" height="30" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "hexagon":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <polygon points="20,3 37,12 37,30 20,39 3,30 3,12" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "ring":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="15" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    default:
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="10" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-  }
-}
-
-function InteractiveBackground() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-
-  // Scroll parallax transforms for various layers
-  const glowY1 = useTransform(scrollY, (y) => y * 0.12);
-  const glowY2 = useTransform(scrollY, (y) => y * -0.08);
-  const glowY3 = useTransform(scrollY, (y) => y * 0.06);
-  const glowY4 = useTransform(scrollY, (y) => y * -0.05);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  return (
-    <div className="fixed inset-0 -z-30 overflow-hidden pointer-events-none w-full h-full">
-      {/* 1. Moving Gradient Mesh - warps slowly over time */}
-      <motion.div
-        style={{ y: glowY1 }}
-        className="absolute top-[-10%] left-[-20%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.15),transparent_70%)] blur-[100px] animate-blob-1"
-      />
-      <motion.div
-        style={{ y: glowY2 }}
-        className="absolute top-[25%] right-[-20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12),transparent_70%)] blur-[110px] animate-blob-2"
-      />
-      <motion.div
-        style={{ y: glowY3 }}
-        className="absolute bottom-[20%] left-[-15%] h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(236,72,153,0.08),transparent_65%)] blur-[105px] animate-blob-3"
-      />
-      <motion.div
-        style={{ y: glowY4 }}
-        className="absolute bottom-[-10%] right-[-10%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08),transparent_65%)] blur-[100px] animate-blob-4"
-      />
-
-      {/* 2. Floating Parallax Particles */}
-      <div className="absolute inset-0 opacity-25">
-        {bgParticles.map((pt, i) => {
-          // Calculate scroll transform for this depth layer
-          const yOffset = useTransform(scrollY, (y) => y * pt.depth);
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-slate-400/30 animate-float"
-              style={{
-                width: `${pt.size}px`,
-                height: `${pt.size}px`,
-                top: `${pt.y}%`,
-                left: `${pt.x}%`,
-                animationDuration: `${pt.duration}s`,
-                animationDelay: `${pt.delay}s`,
-                y: yOffset
-              }}
-            />
-          );
-        })}
-      </div>
-
-      {/* 3. Floating Geometric Parallax Shapes */}
-      <div className="absolute inset-0 opacity-15">
-        {bgShapes.map((shape, i) => {
-          const yOffset = useTransform(scrollY, (y) => y * shape.depth);
-          return (
-            <motion.div
-              key={i}
-              className="absolute animate-float"
-              style={{
-                top: shape.y,
-                left: shape.x,
-                animationDuration: `${shape.duration}s`,
-                y: yOffset
-              }}
-            >
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: Math.abs(shape.rotateSpeed), repeat: Infinity, ease: "linear" }}
-              >
-                {renderShape(shape.type, shape.size)}
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* 4. Mouse Reactive Spotlight glow */}
-      <div
-        className="absolute inset-0 z-10 transition-opacity duration-300 opacity-60"
-        style={{
-          background: `
-            radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(139, 92, 246, 0.08), transparent 75%),
-            radial-gradient(300px at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.06), transparent 70%)
-          `
-        }}
-      />
-    </div>
-  );
-}
+// ============================================================
+// HERO VISUAL — Orbital portrait with tech rings & particles
+// ============================================================
 
 
-// Portrait Visual Frame (tilts dynamically based on cursor coordinates, with rotating circles and floating badges)
 function HeroVisual() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateX = useTransform(my, [-300, 300], [10, -10]);
+  const rotateY = useTransform(mx, [-300, 300], [-10, 10]);
 
-  const rotateX = useTransform(y, [-300, 300], [12, -12]);
-  const rotateY = useTransform(x, [-300, 300], [-12, 12]);
-
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = event.clientX - rect.left - width / 2;
-    const mouseY = event.clientY - rect.top - height / 2;
-    x.set(mouseX);
-    y.set(mouseY);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set(e.clientX - rect.left - rect.width / 2);
+    my.set(e.clientY - rect.top - rect.height / 2);
   };
-
   const handleMouseLeave = () => {
-    animate(x, 0, { type: "spring", stiffness: 200, damping: 25 });
-    animate(y, 0, { type: "spring", stiffness: 200, damping: 25 });
+    animate(mx, 0, { type: "spring", stiffness: 180, damping: 22 });
+    animate(my, 0, { type: "spring", stiffness: 180, damping: 22 });
   };
+
+  // Orbital particle positions (angle in degrees for each dot on each ring)
+  const ring1Dots = [0, 90, 180, 270];
+  const ring2Dots = [45, 135, 225, 315];
+  const ring3Dots = [20, 110, 200, 290, 60, 150];
 
   return (
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex h-[400px] w-full items-center justify-center overflow-visible md:h-[500px] cursor-pointer"
-      style={{ perspective: 1200 }}
+      className="relative flex h-[480px] w-full items-center justify-center overflow-visible cursor-pointer select-none"
+      style={{ perspective: 1400 }}
     >
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative w-full max-w-[440px] h-full flex items-center justify-center transition-all duration-100 ease-out"
+        className="relative flex items-center justify-center"
       >
-        {/* Core background glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-violet-600/5 blur-[80px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[260px] w-[260px] rounded-full bg-blue-500/5 blur-[80px] pointer-events-none" />
+        {/* ── DEEP AMBIENT GLOW LAYERS ── */}
+        <div className="absolute h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.18),transparent_65%)] blur-[60px] pointer-events-none" />
+        <div className="absolute h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12),transparent_60%)] blur-[50px] pointer-events-none" />
+        <div className="absolute h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.2),transparent_55%)] blur-[40px] pointer-events-none" />
 
-        {/* Concentric rotating design rings */}
-        <div className="absolute h-[330px] w-[330px] rounded-full border border-dashed border-white/5 opacity-50 animate-spin-slow" />
-        <div className="absolute h-[250px] w-[250px] rounded-full border border-dashed border-violet-500/10 opacity-60 animate-spin-reverse" />
-
-        {/* Usman Portrait Image Card inside a glowing visual frame */}
-        <div
-          className="absolute flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1.5px] shadow-[0_20px_50px_rgba(139,92,246,0.15)] overflow-hidden"
-          style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
-        >
-          <div className="relative h-full w-full rounded-[22px] overflow-hidden bg-[#020205]">
-            <img 
-              src="/usman-portrait.jpg" 
-              alt="Usman Farooqi" 
-              className="h-full w-full object-cover object-center scale-102 hover:scale-108 transition-all duration-500"
-            />
-          </div>
+        {/* ── RING 1 — outermost slow spin ── */}
+        <div className="absolute h-[390px] w-[390px] rounded-full border border-blue-400/10 animate-spin-slow" style={{ transform: "translateZ(-20px)" }} />
+        <div className="absolute h-[390px] w-[390px] rounded-full" style={{ transform: "translateZ(-20px)" }}>
+          {ring1Dots.map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[390px] w-[390px] rounded-full animate-spin-slow"
+              style={{ animationDuration: "40s" }}
+            >
+              <div
+                className="absolute h-2.5 w-2.5 rounded-full bg-blue-400/60 shadow-[0_0_8px_rgba(96,165,250,0.8)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(195px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
         </div>
 
-        {/* Floating tech badges */}
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-          className="absolute top-[14%] left-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0a1b]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(70px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-violet-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-violet-200">Project Manager</span>
-        </motion.div>
+        {/* ── RING 2 — mid reverse spin ── */}
+        <svg className="absolute h-[300px] w-[300px] animate-spin-reverse" style={{ transform: "translateZ(0px)" }} viewBox="0 0 300 300">
+          <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(139,92,246,0.15)" strokeWidth="1" strokeDasharray="6 8" />
+          <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(96,165,250,0.08)" strokeWidth="0.5" />
+        </svg>
+        <div className="absolute h-[300px] w-[300px] rounded-full" style={{ transform: "translateZ(0px)" }}>
+          {ring2Dots.map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[300px] w-[300px] rounded-full animate-spin-reverse"
+            >
+              <div
+                className="absolute h-3 w-3 rounded-full bg-violet-400/70 shadow-[0_0_10px_rgba(139,92,246,0.9)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(150px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 7, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-          className="absolute bottom-[18%] right-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#050b18]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(80px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">WordPress builds</span>
-        </motion.div>
+        {/* ── RING 3 — inner fast spin, tilted ellipse ── */}
+        <svg className="absolute h-[210px] w-[210px] animate-spin-slow-mid" style={{ transform: "translateZ(15px) rotateX(60deg)" }} viewBox="0 0 210 210">
+          <ellipse cx="105" cy="105" rx="103" ry="40" fill="none" stroke="rgba(96,165,250,0.2)" strokeWidth="1" />
+        </svg>
+        <div className="absolute h-[210px] w-[210px]" style={{ transform: "translateZ(15px) rotateX(60deg)" }}>
+          {ring3Dots.slice(0, 3).map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[210px] w-[210px] rounded-full animate-spin-slow-mid"
+            >
+              <div
+                className="absolute h-2 w-2 rounded-full bg-sky-300/80 shadow-[0_0_8px_rgba(14,165,233,1)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(103px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
-        <motion.div
-          animate={{ y: [0, -7, 0] }}
-          transition={{ duration: 5, ease: "easeInOut", repeat: Infinity, delay: 1 }}
-          className="absolute top-[44%] right-[-5%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#081216]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(60px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">AI-assisted Dev</span>
-        </motion.div>
+        {/* ── RING 4 — tiny inner energy ring ── */}
+        <svg className="absolute h-[160px] w-[160px] animate-spin-reverse-fast" style={{ transform: "translateZ(25px)" }} viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="78" fill="none" stroke="rgba(167,139,250,0.2)" strokeWidth="1" strokeDasharray="3 5" />
+        </svg>
 
-        <motion.div
-          animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-          className="absolute bottom-[8%] left-[0%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#160613]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(90px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-pink-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-pink-200">Digital Ops / CRM</span>
-        </motion.div>
+        {/* ── NETWORK SVG LINES — abstract digital connections ── */}
+        <svg className="absolute h-[420px] w-[420px] opacity-20" viewBox="0 0 420 420" fill="none">
+          <line x1="210" y1="80" x2="340" y2="160" stroke="rgba(96,165,250,0.6)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="210" y1="80" x2="80" y2="155" stroke="rgba(139,92,246,0.6)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="340" y1="160" x2="360" y2="290" stroke="rgba(59,130,246,0.5)" strokeWidth="0.5" strokeDasharray="3 7" />
+          <line x1="80" y1="155" x2="60" y2="285" stroke="rgba(167,139,250,0.5)" strokeWidth="0.5" strokeDasharray="3 7" />
+          <line x1="60" y1="285" x2="130" y2="360" stroke="rgba(96,165,250,0.4)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="360" y1="290" x2="290" y2="355" stroke="rgba(139,92,246,0.4)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <circle cx="210" cy="80" r="3" fill="rgba(96,165,250,0.5)" />
+          <circle cx="340" cy="160" r="2.5" fill="rgba(139,92,246,0.6)" />
+          <circle cx="80" cy="155" r="2.5" fill="rgba(167,139,250,0.6)" />
+          <circle cx="360" cy="290" r="2" fill="rgba(59,130,246,0.5)" />
+          <circle cx="60" cy="285" r="2" fill="rgba(96,165,250,0.5)" />
+          <circle cx="130" cy="360" r="2" fill="rgba(139,92,246,0.4)" />
+          <circle cx="290" cy="355" r="2" fill="rgba(167,139,250,0.4)" />
+        </svg>
 
-        {/* Small stats float element */}
-        <motion.div
-          className="absolute top-[68%] right-[15%] w-[150px] bg-[#020205]/95 border border-white/10 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex flex-col gap-1"
-          style={{ transform: "translateZ(50px)" }}
+        {/* ── FLOATING PARTICLE CLUSTER — scattered micro-dots ── */}
+        {[
+          { top: "8%", left: "18%", size: 3, color: "rgba(96,165,250,0.7)", delay: 0, duration: 7 },
+          { top: "14%", left: "75%", size: 2, color: "rgba(139,92,246,0.8)", delay: 1, duration: 9 },
+          { top: "78%", left: "12%", size: 2.5, color: "rgba(167,139,250,0.7)", delay: 2, duration: 6 },
+          { top: "82%", left: "80%", size: 3, color: "rgba(59,130,246,0.7)", delay: 0.5, duration: 8 },
+          { top: "50%", left: "5%", size: 2, color: "rgba(14,165,233,0.6)", delay: 1.5, duration: 10 },
+          { top: "48%", left: "92%", size: 2, color: "rgba(139,92,246,0.6)", delay: 3, duration: 7.5 },
+          { top: "28%", left: "88%", size: 1.5, color: "rgba(96,165,250,0.5)", delay: 0.8, duration: 11 },
+          { top: "70%", left: "88%", size: 2, color: "rgba(167,139,250,0.6)", delay: 2.2, duration: 8 },
+          { top: "35%", left: "8%", size: 1.5, color: "rgba(59,130,246,0.5)", delay: 1.2, duration: 9.5 },
+          { top: "60%", left: "50%", size: 1, color: "rgba(96,165,250,0.4)", delay: 4, duration: 13 },
+        ].map((p, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              top: p.top, left: p.left,
+              width: p.size, height: p.size,
+              background: p.color,
+              boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
+            }}
+            animate={{ y: [0, -12, 0], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* ── PORTRAIT FRAME — glowing gradient border ── */}
+        <div
+          className="relative z-10 flex h-[220px] w-[220px] items-center justify-center rounded-[28px] p-[2px]"
+          style={{
+            background: "linear-gradient(135deg, rgba(99,102,241,0.8), rgba(59,130,246,0.7), rgba(139,92,246,0.8))",
+            boxShadow: "0 0 40px rgba(99,102,241,0.3), 0 0 80px rgba(59,130,246,0.15), 0 20px 60px rgba(0,0,0,0.5)",
+            transform: "translateZ(30px)",
+          }}
         >
-          <div className="flex items-center justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold">
-            <span>Sprint Status</span>
-            <span className="text-emerald-400">100% QA</span>
+          <div className="h-full w-full rounded-[26px] overflow-hidden bg-[#04050f]">
+            <img
+              src="/usman-portrait.jpg"
+              alt="Usman Farooqi"
+              className="h-full w-full object-cover object-center hover:scale-105 transition-transform duration-700"
+            />
           </div>
-          <div className="text-xs font-extrabold text-white">32+ Projects Released</div>
-          <div className="w-full bg-white/5 h-1 rounded overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-full w-full" />
-          </div>
-        </motion.div>
+          {/* Portrait inner glow overlay */}
+          <div className="absolute inset-0 rounded-[26px] bg-gradient-to-t from-indigo-950/40 via-transparent to-transparent pointer-events-none" />
+        </div>
+
+        {/* ── ENERGY ARC — SVG light trail around portrait ── */}
+        <svg className="absolute h-[260px] w-[260px] animate-spin-slow" style={{ transform: "translateZ(20px)", animationDuration: "20s" }} viewBox="0 0 260 260">
+          <path
+            d="M 130 5 A 125 125 0 0 1 255 130"
+            fill="none"
+            stroke="url(#arcGrad)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(96,165,250,0)" />
+              <stop offset="50%" stopColor="rgba(96,165,250,0.8)" />
+              <stop offset="100%" stopColor="rgba(139,92,246,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <svg className="absolute h-[260px] w-[260px] animate-spin-reverse" style={{ transform: "translateZ(20px)", animationDuration: "15s" }} viewBox="0 0 260 260">
+          <path
+            d="M 130 255 A 125 125 0 0 1 5 130"
+            fill="none"
+            stroke="url(#arcGrad2)"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient id="arcGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(139,92,246,0)" />
+              <stop offset="50%" stopColor="rgba(167,139,250,0.6)" />
+              <stop offset="100%" stopColor="rgba(96,165,250,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
+
       </motion.div>
     </div>
   );
@@ -948,10 +1089,11 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative isolate min-h-screen bg-[#020205] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
+    <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
       
-      {/* Background spotlights & parallax layers */}
-      <InteractiveBackground />
+      {/* Canvas network background + mouse spotlight */}
+      <NetworkBackground />
+      <MouseSpotlight />
 
       {/* ============================================================
           FLOATING GLASS SIDEBAR — Desktop Navigation
@@ -1146,8 +1288,8 @@ export default function Home() {
       {/* ----------------------------------------------------
           Section 1: Hero
           ---------------------------------------------------- */}
-      <section id="home" className="relative pt-20 pb-20 md:pt-32 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-12 lg:grid-cols-12 lg:items-center">
+      <section id="home" className="relative min-h-screen flex flex-col justify-center pt-16 pb-16 md:pt-0 md:pb-0">
+        <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-10 lg:grid-cols-12 lg:items-center">
           
           {/* Left Text Block */}
           <motion.div
