@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { CustomSelect } from "@/components/CustomSelect";
 import { AnimatePresence, motion, useScroll, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import {
   Brain,
@@ -104,187 +106,204 @@ const expertiseAreas = [
 
 const services = [
   {
-    title: "Digital Project Management",
-    description: "Leading web and application builds from initial user story discovery to roadmap design, sprints, QA, and deployment.",
-    details: ["Agile/Scrum Sprint Coordination", "Scope & Resource Planning", "QA Auditing & Performance Checks", "Detailed Status Reporting"],
-    icon: Compass
-  },
-  {
-    title: "WordPress Development",
-    description: "Building landing pages, corporate portals, and marketing sites designed to convert visitors into business leads.",
-    details: ["Custom Block & Builder Frameworks", "Theme Setup & Site Migrations", "Google Core Web Vitals Optimization", "Plugin Security & Backups"],
+    title: "Business Website Development",
+    description: "Building professional, high-performing websites tailored to your business goals and industry standards.",
+    details: ["Corporate Portals", "Responsive Design", "Speed Optimization", "SEO Foundations"],
     icon: Laptop
   },
   {
-    title: "Operations Automation",
-    description: "Stitching automated alerts, CRM updates, and AI qualifiers together to remove manual drag and backend delays.",
-    details: ["Zapier & Make Automation Maps", "AI Prompt Engineering Tools", "Automated Slack/Email Alerts", "Process Audit & Templates"],
+    title: "Landing Page Development",
+    description: "Creating highly optimized landing pages designed to convert visitors into leads and customers.",
+    details: ["Conversion Optimization", "A/B Testing Ready", "Fast Loading", "Lead Capture Integration"],
+    icon: Target
+  },
+  {
+    title: "WordPress Development",
+    description: "Custom WordPress solutions, theme modifications, and complete site builds using modern builders.",
+    details: ["Elementor Pro", "WooCommerce Setup", "Plugin Management", "Custom Blocks"],
+    icon: Code2
+  },
+  {
+    title: "Website Management",
+    description: "Ongoing maintenance, security updates, and performance monitoring to keep your site running smoothly.",
+    details: ["cPanel Administration", "Domain Management", "Business Email Setup", "Website Migration"],
+    icon: ShieldCheck
+  },
+  {
+    title: "AI-Powered Website Creation",
+    description: "Leveraging modern AI tools and vibe coding workflows to rapidly prototype and build digital solutions.",
+    details: ["Google AI Studio", "Antigravity IDE", "Hostinger Horizons", "Rapid Prototyping"],
     icon: Brain
   },
   {
-    title: "CRM Setup & Pipeline Config",
-    description: "Setting up database schemas, scoring fields, and automated routing rules in HubSpot and Salesforce.",
-    details: ["CRM Contact Database Mapping", "Automated Lead Distribution Routing", "Email Nurturing Sequence Setup", "Pipeline Analytics Dashboards"],
-    icon: Workflow
-  },
-  {
-    title: "Team Hiring & Structure",
-    description: "Helping agencies scale operations by auditing bottlenecks, setting up vetting channels, and hiring talent.",
-    details: ["Developer Skill Assessment Vetting", "Onboarding Systems & Docs", "Resource Capability Planning", "Freelancer & Contractor Hubs"],
-    icon: Users
-  },
-  {
-    title: "Digital Operations Consulting",
-    description: "Analyzing business technology stacks to reduce subscription waste, improve coordination, and clear delivery bottlenecks.",
-    details: ["Tech Stack Consolidation Audit", "Standard Operating Procedures (SOPs)", "Time Tracker & Task Management Setup", "Cross-Team Workflow Mapping"],
-    icon: Sparkles
+    title: "Project Coordination",
+    description: "Managing digital projects from requirement gathering to final deployment with clear communication.",
+    details: ["Client Communication", "Team Coordination", "Project Planning", "Workflow Management"],
+    icon: Compass
   }
 ];
 
 const impactMetrics = [
-  { label: "Websites Coordinated", value: "32+" },
-  { label: "Industries Served", value: "6" },
-  { label: "Operations Campaigns", value: "120+" },
-  { label: "AI & Automation Flows", value: "45+" },
-  { label: "Project Solutions", value: "85+" }
+  { label: "Websites Delivered", value: "15+" },
+  { label: "Industries Served", value: "4+" },
+  { label: "Years Experience", value: "3+" },
+  { label: "International Clients", value: "Multiple" }
 ];
 
 const projectsData: Project[] = [
   {
     id: "ann",
     name: "America Needs Nurses",
-    tagline: "Healthcare Recruitment Platform Project",
+    tagline: "Healthcare Recruitment Platform",
     challenge: "Fragmented applicant tracking and manual placements delayed nurse staffing while organic site traffic lagged in a competitive sector.",
-    solution: "Directed custom recruitment portal development, structured automatic applicant tracking system (ATS) syncs, and coordinated the local SEO roadmap.",
+    solution: "Directed custom recruitment portal development, structured automatic ATS syncs, and coordinated the local SEO roadmap.",
     impact: "Accelerated placement velocity by 30% and increased organic search lead impressions by 250% within 6 months.",
-    tags: ["Project Management", "WordPress CMS", "CRM Operations", "Healthcare"],
+    tags: ["Project Management", "WordPress", "Healthcare"],
     metrics: [{ label: "Lead Growth", value: "+250%" }, { label: "Placement Velocity", value: "-30%" }]
+  },
+  {
+    id: "gnn",
+    name: "Georgian Needs Nurses",
+    tagline: "Regional Healthcare Staffing",
+    challenge: "Needed a regional variant of the main recruitment platform to target the Georgian market specifically.",
+    solution: "Deployed a customized regional platform with localized SEO and synchronized job feeds.",
+    impact: "Established a dedicated regional presence leading to increased localized application rates.",
+    tags: ["Web Development", "Localization", "Healthcare"],
+    metrics: [{ label: "Local Reach", value: "Expanded" }, { label: "Applications", value: "Increased" }]
+  },
+  {
+    id: "gjt",
+    name: "Go-Jetter Travel & Tours",
+    tagline: "Travel Booking Platform",
+    challenge: "Complex custom tour bookings required extensive manual sales support, limiting booking volume.",
+    solution: "Developed and maintained travel websites, coordinating mobile app integrations and managing hosting.",
+    impact: "Improved user experience and structured the website for scalable booking operations.",
+    tags: ["WordPress Developer", "Travel & Tourism"],
+    metrics: [{ label: "User Experience", value: "Improved" }, { label: "Hosting", value: "Managed" }]
+  },
+  {
+    id: "it",
+    name: "Ihawa Travel",
+    tagline: "Custom Travel Booking Hub",
+    challenge: "Capturing search market share for custom global travel destinations without high ad spending.",
+    solution: "Managed structured content hub development and mapped search keywords, optimizing booking engine interface flows.",
+    impact: "Attained top 3 rankings for 40+ high-intent search queries, bringing in consistent monthly bookings organically.",
+    tags: ["SEO Strategy", "Travel & Tourism"],
+    metrics: [{ label: "Search Ranking", value: "Top 3" }, { label: "Organic Bookings", value: "+140%" }]
   },
   {
     id: "acr",
     name: "Atlanta Car Rental",
-    tagline: "Luxury Vehicle Reservation Portal",
+    tagline: "Vehicle Reservation Portal",
     challenge: "A crowded regional travel market demanded a high-end booking platform with a lower lead cost than aggregate platforms.",
-    solution: "Managed the luxury fleet booking project, structured Google Ads campaigns with optimized landing pages, and implemented automated CRM lead scoring.",
-    impact: "Boosted direct bookings by 180% and reduced lead acquisition cost by 45% using automated operations.",
-    tags: ["Digital Operations", "Google Ads Strategy", "Client Management", "Travel"],
+    solution: "Managed website operations, improved booking conversion processes, and coordinated digital growth initiatives.",
+    impact: "Boosted direct bookings by 180% and reduced lead acquisition cost by 45%.",
+    tags: ["Website Development", "Car Rental"],
     metrics: [{ label: "Direct Bookings", value: "+180%" }, { label: "CPA Reduction", value: "-45%" }]
+  },
+  {
+    id: "pcr",
+    name: "Priceless Car Rental",
+    tagline: "Marketing & Website Management",
+    challenge: "Needed comprehensive website management and competitive analysis to improve marketplace visibility.",
+    solution: "Executed marketplace research, competitive analysis, and ongoing website management.",
+    impact: "Improved booking visibility and streamlined digital operations.",
+    tags: ["Website Management", "Car Rental"],
+    metrics: [{ label: "Visibility", value: "Improved" }, { label: "Operations", value: "Streamlined" }]
   },
   {
     id: "yr",
     name: "YalaRide",
-    tagline: "Transportation Dispatch Onboarding App",
+    tagline: "Transportation Portal Development",
     challenge: "Scaling demand across regional hubs created a massive onboarding bottleneck for driver credentials.",
-    solution: "Supervised web platform delivery and custom CRM workflows, integrating screening automation and automated team alerts.",
-    impact: "Helped secure 10,000+ driver sign-ups and cut screening onboarding time in half using automated tools.",
-    tags: ["Process Automation", "Team Coordination", "Project Delivery", "Automotive"],
+    solution: "Led the YalaRide portal development project, overseeing the web platform delivery.",
+    impact: "Helped secure 10,000+ driver sign-ups and cut screening onboarding time in half.",
+    tags: ["Project Management", "Car Rental"],
     metrics: [{ label: "Driver Sign-ups", value: "10K+" }, { label: "Onboarding Time", value: "-50%" }]
   },
   {
     id: "adt",
     name: "Arrowhead DigiTech",
-    tagline: "Lead Acquisition Agency Site Release",
+    tagline: "Lead Acquisition Agency Site",
     challenge: "The digital growth agency required a high-converting web platform to establish authority and capture inbound leads.",
-    solution: "Managed Next.js platform design and development, oversaw HubSpot pipeline mappings, and audited site performance scores.",
+    solution: "Managed Next.js platform design and development, overseeing full project delivery.",
     impact: "Increased inbound lead conversion rates from 1.2% to 4.8% and established a premium visual system.",
-    tags: ["Project Management", "Web Operations", "Conversion Optimization", "Marketing"],
+    tags: ["Web Development Lead", "Digital Services"],
     metrics: [{ label: "Conversion Rate", value: "4.8x" }, { label: "Inbound Leads", value: "+220%" }]
-  },
-  {
-    id: "cc",
-    name: "Cars Compound",
-    tagline: "Automotive Catalog & CRM Integration",
-    challenge: "Low-speed catalog searches caused high user bounce rates and lost lead submissions for the dealership network.",
-    solution: "Oversaw lightning-fast inventory catalog delivery and connected multi-channel lead routing triggers with CRM routing rules.",
-    impact: "Reduced site search load times under 1s, leading to a 65% bounce reduction and 80% higher lead submissions.",
-    tags: ["Project Management", "CRM Integrations", "Operations", "Automotive"],
-    metrics: [{ label: "Bounce Rate", value: "-65%" }, { label: "Lead Submissions", value: "+80%" }]
-  },
-  {
-    id: "gjt",
-    name: "Go-Jetter Travel & Tours",
-    tagline: "Interactive Tour Builder & AI Sync",
-    challenge: "Complex custom tour bookings required extensive manual sales support, limiting booking volume.",
-    solution: "Supervised developer execution on an interactive package builder, linked to an automated AI assistant that qualifies travel preferences.",
-    impact: "Automated 70% of pre-sales trip customization, increasing custom package sales by 95%.",
-    tags: ["AI Operations", "Team Leadership", "Client Success", "Travel"],
-    metrics: [{ label: "Automated Prep", value: "70%" }, { label: "Sales Growth", value: "+95%" }]
-  },
-  {
-    id: "it",
-    name: "Ihawa Travel",
-    tagline: "Custom Travel Booking Hub Release",
-    challenge: "Capturing search market share for custom global travel destinations without high ad spending.",
-    solution: "Managed structured content hub development and mapped search keywords, optimizing booking engine interface flows.",
-    impact: "Attained top 3 rankings for 40+ high-intent search queries, bringing in consistent monthly bookings organically.",
-    tags: ["SEO Strategy", "Web Development", "Project Delivery", "Travel"],
-    metrics: [{ label: "Search Ranking", value: "Top 3" }, { label: "Organic Bookings", value: "+140%" }]
   }
 ];
 
 const processSteps = [
   {
-    step: "01",
-    title: "Discovery & Blueprinting",
-    description: "We audit your current site metrics, outline project parameters, CRM schema, and design a detailed scope of work (SOP) mapped to business goals.",
-    details: ["Competitor Gap Audits", "Tech Stack Inspections", "CRM Schema Planning", "Commercial Goal Mapping"]
+    step: "2024",
+    title: "Arrowhead Digital Marketing",
+    description: "Web Development Lead & Project Manager (2024 - Present). Managing website projects from planning to deployment.",
+    details: ["Leading client communication and project execution", "Building and maintaining WordPress websites", "Coordinating software development initiatives", "Managing hosting, domains, and website infrastructure", "Leading the YalaRide portal development project"]
   },
   {
-    step: "02",
-    title: "Development Coordination",
-    description: "I manage developers and designers to build high-performance web properties using WordPress or custom frontend frameworks.",
-    details: ["Agile Sprint Planning", "Conversion-Focused Direction", "Responsive Design Checks", "WordPress Theme Customization"]
+    step: "2023",
+    title: "Go-Jetter Travel & Tours",
+    description: "WordPress Developer & Project Coordinator (2023 - 2024). Developed and maintained travel websites.",
+    details: ["Coordinated mobile app development projects", "Managed hosting and deployment processes", "Improved user experience and website structure"]
   },
   {
-    step: "03",
-    title: "AI & Workflow Automation",
-    description: "Operational bottlenecks are removed by stitching CRM pipelines, email triggers, lead qualifiers, and automated AI assistance together.",
-    details: ["CRM Syncing & Setup", "AI Automated Funnel Qualifiers", "Intelligent Notifications & Alert Triggers", "Multi-Source Lead Routing"]
+    step: "2024",
+    title: "Atlanta Car Rental LLC",
+    description: "Sales Team Leader & Website Development (2024 - 2025). Managed website operations and remote sales teams.",
+    details: ["Improved booking conversion processes", "Coordinated digital growth initiatives", "Led remote sales teams"]
   },
   {
-    step: "04",
-    title: "Quality Audit & Release",
-    description: "We run comprehensive speed, conversion tracking, and responsive compatibility tests to verify that the build is ready for launch.",
-    details: ["Google Tag Manager Setup", "Continuous Conversion Optimizations", "TypeScript & Build Sanity checks", "Operational Handover Documentation"]
+    step: "2024",
+    title: "Priceless Car Rental USA",
+    description: "Virtual Marketing Assistant (2024). Oversaw website management and competitive analysis.",
+    details: ["Website management", "Competitive analysis", "Marketplace research", "Booking visibility improvements"]
   }
 ];
 
 const techStack = [
   {
-    category: "Project & Team Management",
-    desc: "Methodologies and tools used to coordinate digital teams and delivery",
+    category: "Web Development",
+    desc: "Building professional and responsive websites",
     items: [
-      { name: "Agile / Scrum Coordination", level: 95 },
-      { name: "Scope & Requirement Analysis", level: 95 },
-      { name: "Hiring & Talent Screening", level: 90 },
-      { name: "JIRA / Trello / ClickUp", level: 95 },
-      { name: "Client Relations & Support", level: 95 },
-      { name: "Standard Operating Procedures (SOPs)", level: 92 },
-      { name: "Quality Assurance (QA) Auditing", level: 90 }
+      { name: "WordPress Development", level: 95 },
+      { name: "Elementor", level: 95 },
+      { name: "WooCommerce", level: 90 },
+      { name: "Responsive Design", level: 95 },
+      { name: "Landing Pages", level: 95 },
+      { name: "Website Optimization", level: 90 }
     ]
   },
   {
-    category: "Web & CMS Development",
-    desc: "Designing and releasing high-converting web properties",
+    category: "Project Management",
+    desc: "Coordinating projects from start to finish",
     items: [
-      { name: "WordPress & Elementor", level: 95 },
-      { name: "Gutenberg Block Customization", level: 90 },
-      { name: "Next.js (Team Delivery)", level: 85 },
-      { name: "React / HTML5 / CSS3", level: 85 },
-      { name: "Speed & Core Web Vitals Opt.", level: 92 },
-      { name: "Domain & Site Migrations", level: 94 }
+      { name: "Client Communication", level: 95 },
+      { name: "Team Coordination", level: 90 },
+      { name: "Project Planning", level: 95 },
+      { name: "Workflow Management", level: 90 },
+      { name: "Requirement Gathering", level: 95 }
     ]
   },
   {
-    category: "AI Tools & Digital Operations",
-    desc: "Streamlining workflow speeds and lead generation databases",
+    category: "Hosting & Deployment",
+    desc: "Managing server infrastructure and site migrations",
     items: [
-      { name: "AI-assisted coding (Cursor/LLMs)", level: 90 },
-      { name: "Workflow Automation (Zapier/Make)", level: 95 },
-      { name: "CRM Setup (HubSpot/Salesforce)", level: 92 },
-      { name: "Google Tag Manager / GA4", level: 90 },
-      { name: "Google Ads Strategy Setup", level: 92 },
-      { name: "Automated Lead Routing Setup", level: 95 }
+      { name: "Domain Management", level: 95 },
+      { name: "cPanel Administration", level: 90 },
+      { name: "Business Email Setup", level: 95 },
+      { name: "Website Migration", level: 90 },
+      { name: "Website Deployment", level: 95 }
+    ]
+  },
+  {
+    category: "AI Website Creation",
+    desc: "Leveraging AI workflows for rapid delivery",
+    items: [
+      { name: "Google AI Studio", level: 90 },
+      { name: "Antigravity IDE", level: 95 },
+      { name: "Hostinger Horizons", level: 90 },
+      { name: "AI Assisted Prototyping", level: 90 },
+      { name: "Vibe Coding Workflows", level: 95 }
     ]
   }
 ];
@@ -298,52 +317,6 @@ const industries = [
   { name: "Professional Service Brands", icon: Award, desc: "High-ticket client acquisition systems" }
 ];
 
-const testimonials = [
-  {
-    quote: "Usman managed the America Needs Nurses recruitment platform release flawlessly. His coordination between our frontend team, our ATS synchronization flows, and our SEO roadmap created a highly reliable source of qualified candidates.",
-    author: "Founder & Director",
-    company: "America Needs Nurses",
-    rating: 5,
-    tag: "Healthcare Operations"
-  },
-  {
-    quote: "We were struggling to organize leads and schedule bookings without burning through our ad spend. Usman coordinated the booking system project, set up HubSpot CRM pipelines, and optimized our Google Ads layout, driving a 180% reservation growth.",
-    author: "Operations Director",
-    company: "Atlanta Car Rental",
-    rating: 5,
-    tag: "Luxury Travel Ops"
-  },
-  {
-    quote: "Usman's project management and operations insight transformed our driver intake speed. He structured driver vetting roadmaps and Slack automation alerts, helping us scale to over 10,000 driver registrations while saving our dispatch teams hundreds of hours.",
-    author: "CEO & Founder",
-    company: "YalaRide",
-    rating: 5,
-    tag: "Automotive Logistics"
-  }
-];
-
-const comparisons = [
-  {
-    feature: "Strategic Scope",
-    usman: "Steers cross-functional projects, coordinating developers, CRM systems, and automations.",
-    agency: "Writes code or edits basic page templates with no operational or scheduling scope."
-  },
-  {
-    feature: "Delivery Quality",
-    usman: "Ensures sub-second speed audits, robust CRM data flows, and thorough QA checks.",
-    agency: "Installs heavy plugin themes with slow loads, fragile databases, and high bounce rates."
-  },
-  {
-    feature: "Operational Leverage",
-    usman: "Saves manual back-office hours using custom AI prompt scripts and Zapier integrations.",
-    agency: "No automation or workflow scaling strategy; relies on manual manual actions."
-  },
-  {
-    feature: "Accountability",
-    usman: "Provides detailed sprints, clear KPI indicators, transparent communications, and NDAs.",
-    agency: "Fails to meet schedules, lacks structured project tracking, and has poor updates."
-  }
-];
 
 // ----------------------------------------------------
 // Project CSS Preview Components
@@ -558,7 +531,193 @@ function Counter({ value, duration = 2.5 }: { value: string; duration?: number }
   );
 }
 
-// Interactive Background System with scroll parallax, moving gradient mesh, and cursor spotlights
+// ============================================================
+// NETWORK PARTICLE BACKGROUND — Canvas-based connected nodes
+// ============================================================
+function NetworkBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
+  const { scrollY } = useScroll();
+  const scrollRef = useRef(0);
+
+  useEffect(() => {
+    const unsub = scrollY.on("change", (v) => { scrollRef.current = v; });
+    return unsub;
+  }, [scrollY]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+
+    const resize = () => {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", (e) => { mouseRef.current = { x: e.clientX, y: e.clientY }; });
+
+    // Node count — fewer on mobile for perf
+    const COUNT = W < 768 ? 45 : 80;
+    const CONNECT_DIST = W < 768 ? 100 : 140;
+    const MOUSE_DIST = 160;
+
+    type Node = {
+      x: number; y: number;
+      vx: number; vy: number;
+      r: number;
+      color: string;
+      pulse: number; pulseDir: number;
+    };
+
+    const palette = [
+      "rgba(96,165,250,",   // electric blue
+      "rgba(139,92,246,",   // violet
+      "rgba(167,139,250,",  // lavender
+      "rgba(59,130,246,",   // blue
+      "rgba(14,165,233,",   // sky
+    ];
+
+    const nodes: Node[] = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: 1.5 + Math.random() * 2,
+      color: palette[Math.floor(Math.random() * palette.length)],
+      pulse: Math.random() * Math.PI * 2,
+      pulseDir: Math.random() > 0.5 ? 1 : -1,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+
+      // Parallax scroll offset — background drifts slowly
+      const scrollOff = scrollRef.current * 0.04;
+
+      // Move nodes
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        n.pulse += 0.025 * n.pulseDir;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      });
+
+      // Mouse attraction
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      // Draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        const ay = a.y + scrollOff;
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const by = b.y + scrollOff;
+          const dx = a.x - b.x;
+          const dy = ay - by;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(a.x, ay);
+            ctx.lineTo(b.x, by);
+            const grad = ctx.createLinearGradient(a.x, ay, b.x, by);
+            grad.addColorStop(0, a.color + alpha + ")");
+            grad.addColorStop(1, b.color + alpha + ")");
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+
+        // Mouse-node connections
+        const dxm = a.x - mx;
+        const dym = (a.y + scrollOff) - my;
+        const mdist = Math.sqrt(dxm * dxm + dym * dym);
+        if (mdist < MOUSE_DIST) {
+          const alpha = (1 - mdist / MOUSE_DIST) * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y + scrollOff);
+          ctx.lineTo(mx, my);
+          ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      // Draw nodes
+      nodes.forEach((n) => {
+        const pulse = 0.6 + Math.sin(n.pulse) * 0.4;
+        const ny = n.y + scrollOff;
+
+        // Outer glow ring
+        const grd = ctx.createRadialGradient(n.x, ny, 0, n.x, ny, n.r * 4);
+        grd.addColorStop(0, n.color + (0.6 * pulse) + ")");
+        grd.addColorStop(1, n.color + "0)");
+        ctx.beginPath();
+        ctx.arc(n.x, ny, n.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(n.x, ny, n.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = n.color + (0.85 * pulse) + ")";
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-0 -z-30 overflow-hidden pointer-events-none" style={{ background: "linear-gradient(135deg, #04050f 0%, #060d1f 30%, #080c1e 60%, #04050f 100%)" }}>
+      {/* Deep navy gradient blobs — give the background life and depth */}
+      <div className="absolute top-[-5%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.12),transparent_65%)] blur-[120px] animate-blob-1" />
+      <div className="absolute top-[20%] right-[-15%] h-[750px] w-[750px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.1),transparent_65%)] blur-[130px] animate-blob-2" />
+      <div className="absolute bottom-[15%] left-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.07),transparent_60%)] blur-[110px] animate-blob-3" />
+      <div className="absolute bottom-[-5%] right-[-5%] h-[550px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.09),transparent_60%)] blur-[100px] animate-blob-4" />
+      {/* Network canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ opacity: 0.75 }} />
+    </div>
+  );
+}
+
+// Mouse spotlight overlay — separate from fixed background
+function MouseSpotlight() {
+  const [pos, setPos] = useState({ x: -999, y: -999 });
+  useEffect(() => {
+    const h = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", h);
+    return () => window.removeEventListener("mousemove", h);
+  }, []);
+  return (
+    <div
+      className="fixed inset-0 -z-20 pointer-events-none transition-opacity duration-500"
+      style={{
+        background: `radial-gradient(700px at ${pos.x}px ${pos.y}px, rgba(99,102,241,0.07), transparent 70%), radial-gradient(350px at ${pos.x}px ${pos.y}px, rgba(59,130,246,0.06), transparent 65%)`
+      }}
+    />
+  );
+}
+
+// Legacy stub — kept for backwards compat if referenced
 const bgParticles = [
   { x: 12, y: 15, size: 2, duration: 18, delay: 0, depth: -0.05 },
   { x: 35, y: 8, size: 3, duration: 25, delay: 2, depth: 0.1 },
@@ -582,262 +741,221 @@ const bgParticles = [
   { x: 90, y: 10, size: 2.5, duration: 22, delay: 2, depth: 0.08 }
 ];
 
-const bgShapes = [
-  { type: "triangle", x: "8%", y: "15%", rotateSpeed: 25, size: 32, duration: 16, depth: 0.1 },
-  { type: "square", x: "88%", y: "22%", rotateSpeed: -20, size: 28, duration: 20, depth: -0.12 },
-  { type: "hexagon", x: "6%", y: "58%", rotateSpeed: 15, size: 36, duration: 24, depth: 0.08 },
-  { type: "ring", x: "82%", y: "68%", rotateSpeed: -25, size: 45, duration: 22, depth: -0.15 },
-  { type: "circle", x: "48%", y: "42%", rotateSpeed: 10, size: 24, duration: 18, depth: 0.05 }
-];
-
-function renderShape(type: string, size: number) {
-  switch (type) {
-    case "triangle":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <polygon points="20,5 35,35 5,35" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "square":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <rect x="5" y="5" width="30" height="30" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "hexagon":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <polygon points="20,3 37,12 37,30 20,39 3,30 3,12" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    case "ring":
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="15" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-    default:
-      return (
-        <svg width={size} height={size} viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="10" className="stroke-white/10 fill-none" strokeWidth="1" />
-        </svg>
-      );
-  }
-}
-
-function InteractiveBackground() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-
-  // Scroll parallax transforms for various layers
-  const glowY1 = useTransform(scrollY, (y) => y * 0.12);
-  const glowY2 = useTransform(scrollY, (y) => y * -0.08);
-  const glowY3 = useTransform(scrollY, (y) => y * 0.06);
-  const glowY4 = useTransform(scrollY, (y) => y * -0.05);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  return (
-    <div className="fixed inset-0 -z-30 overflow-hidden pointer-events-none w-full h-full">
-      {/* 1. Moving Gradient Mesh - warps slowly over time */}
-      <motion.div
-        style={{ y: glowY1 }}
-        className="absolute top-[-10%] left-[-20%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.15),transparent_70%)] blur-[100px] animate-blob-1"
-      />
-      <motion.div
-        style={{ y: glowY2 }}
-        className="absolute top-[25%] right-[-20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12),transparent_70%)] blur-[110px] animate-blob-2"
-      />
-      <motion.div
-        style={{ y: glowY3 }}
-        className="absolute bottom-[20%] left-[-15%] h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(236,72,153,0.08),transparent_65%)] blur-[105px] animate-blob-3"
-      />
-      <motion.div
-        style={{ y: glowY4 }}
-        className="absolute bottom-[-10%] right-[-10%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08),transparent_65%)] blur-[100px] animate-blob-4"
-      />
-
-      {/* 2. Floating Parallax Particles */}
-      <div className="absolute inset-0 opacity-25">
-        {bgParticles.map((pt, i) => {
-          // Calculate scroll transform for this depth layer
-          const yOffset = useTransform(scrollY, (y) => y * pt.depth);
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-slate-400/30 animate-float"
-              style={{
-                width: `${pt.size}px`,
-                height: `${pt.size}px`,
-                top: `${pt.y}%`,
-                left: `${pt.x}%`,
-                animationDuration: `${pt.duration}s`,
-                animationDelay: `${pt.delay}s`,
-                y: yOffset
-              }}
-            />
-          );
-        })}
-      </div>
-
-      {/* 3. Floating Geometric Parallax Shapes */}
-      <div className="absolute inset-0 opacity-15">
-        {bgShapes.map((shape, i) => {
-          const yOffset = useTransform(scrollY, (y) => y * shape.depth);
-          return (
-            <motion.div
-              key={i}
-              className="absolute animate-float"
-              style={{
-                top: shape.y,
-                left: shape.x,
-                animationDuration: `${shape.duration}s`,
-                y: yOffset
-              }}
-            >
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: Math.abs(shape.rotateSpeed), repeat: Infinity, ease: "linear" }}
-              >
-                {renderShape(shape.type, shape.size)}
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* 4. Mouse Reactive Spotlight glow */}
-      <div
-        className="absolute inset-0 z-10 transition-opacity duration-300 opacity-60"
-        style={{
-          background: `
-            radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(139, 92, 246, 0.08), transparent 75%),
-            radial-gradient(300px at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.06), transparent 70%)
-          `
-        }}
-      />
-    </div>
-  );
-}
+// ============================================================
+// HERO VISUAL — Orbital portrait with tech rings & particles
+// ============================================================
 
 
-// Portrait Visual Frame (tilts dynamically based on cursor coordinates, with rotating circles and floating badges)
 function HeroVisual() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateX = useTransform(my, [-300, 300], [10, -10]);
+  const rotateY = useTransform(mx, [-300, 300], [-10, 10]);
 
-  const rotateX = useTransform(y, [-300, 300], [12, -12]);
-  const rotateY = useTransform(x, [-300, 300], [-12, 12]);
-
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = event.clientX - rect.left - width / 2;
-    const mouseY = event.clientY - rect.top - height / 2;
-    x.set(mouseX);
-    y.set(mouseY);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set(e.clientX - rect.left - rect.width / 2);
+    my.set(e.clientY - rect.top - rect.height / 2);
   };
-
   const handleMouseLeave = () => {
-    animate(x, 0, { type: "spring", stiffness: 200, damping: 25 });
-    animate(y, 0, { type: "spring", stiffness: 200, damping: 25 });
+    animate(mx, 0, { type: "spring", stiffness: 180, damping: 22 });
+    animate(my, 0, { type: "spring", stiffness: 180, damping: 22 });
   };
+
+  // Orbital particle positions (angle in degrees for each dot on each ring)
+  const ring1Dots = [0, 90, 180, 270];
+  const ring2Dots = [45, 135, 225, 315];
+  const ring3Dots = [20, 110, 200, 290, 60, 150];
 
   return (
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative flex h-[400px] w-full items-center justify-center overflow-visible md:h-[500px] cursor-pointer"
-      style={{ perspective: 1200 }}
+      className="relative flex h-[480px] w-full items-center justify-center overflow-visible cursor-pointer select-none"
+      style={{ perspective: 1400 }}
     >
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative w-full max-w-[440px] h-full flex items-center justify-center transition-all duration-100 ease-out"
+        className="relative flex items-center justify-center"
       >
-        {/* Core background glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-violet-600/5 blur-[80px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[260px] w-[260px] rounded-full bg-blue-500/5 blur-[80px] pointer-events-none" />
+        {/* ── DEEP AMBIENT GLOW LAYERS ── */}
+        <div className="absolute h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.18),transparent_65%)] blur-[60px] pointer-events-none" />
+        <div className="absolute h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12),transparent_60%)] blur-[50px] pointer-events-none" />
+        <div className="absolute h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.2),transparent_55%)] blur-[40px] pointer-events-none" />
 
-        {/* Concentric rotating design rings */}
-        <div className="absolute h-[330px] w-[330px] rounded-full border border-dashed border-white/5 opacity-50 animate-spin-slow" />
-        <div className="absolute h-[250px] w-[250px] rounded-full border border-dashed border-violet-500/10 opacity-60 animate-spin-reverse" />
-
-        {/* Usman Portrait Image Card inside a glowing visual frame */}
-        <div
-          className="absolute flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1.5px] shadow-[0_20px_50px_rgba(139,92,246,0.15)] overflow-hidden"
-          style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
-        >
-          <div className="relative h-full w-full rounded-[22px] overflow-hidden bg-[#020205]">
-            <img 
-              src="/usman-portrait.jpg" 
-              alt="Usman Farooqi" 
-              className="h-full w-full object-cover object-center scale-102 hover:scale-108 transition-all duration-500"
-            />
-          </div>
+        {/* ── RING 1 — outermost slow spin ── */}
+        <div className="absolute h-[390px] w-[390px] rounded-full border border-blue-400/10 animate-spin-slow" style={{ transform: "translateZ(-20px)" }} />
+        <div className="absolute h-[390px] w-[390px] rounded-full" style={{ transform: "translateZ(-20px)" }}>
+          {ring1Dots.map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[390px] w-[390px] rounded-full animate-spin-slow"
+              style={{ animationDuration: "40s" }}
+            >
+              <div
+                className="absolute h-2.5 w-2.5 rounded-full bg-blue-400/60 shadow-[0_0_8px_rgba(96,165,250,0.8)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(195px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
         </div>
 
-        {/* Floating tech badges */}
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-          className="absolute top-[14%] left-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0a1b]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(70px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-violet-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-violet-200">Project Manager</span>
-        </motion.div>
+        {/* ── RING 2 — mid reverse spin ── */}
+        <svg className="absolute h-[300px] w-[300px] animate-spin-reverse" style={{ transform: "translateZ(0px)" }} viewBox="0 0 300 300">
+          <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(139,92,246,0.15)" strokeWidth="1" strokeDasharray="6 8" />
+          <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(96,165,250,0.08)" strokeWidth="0.5" />
+        </svg>
+        <div className="absolute h-[300px] w-[300px] rounded-full" style={{ transform: "translateZ(0px)" }}>
+          {ring2Dots.map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[300px] w-[300px] rounded-full animate-spin-reverse"
+            >
+              <div
+                className="absolute h-3 w-3 rounded-full bg-violet-400/70 shadow-[0_0_10px_rgba(139,92,246,0.9)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(150px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 7, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-          className="absolute bottom-[18%] right-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#050b18]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(80px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">WordPress builds</span>
-        </motion.div>
+        {/* ── RING 3 — inner fast spin, tilted ellipse ── */}
+        <svg className="absolute h-[210px] w-[210px] animate-spin-slow-mid" style={{ transform: "translateZ(15px) rotateX(60deg)" }} viewBox="0 0 210 210">
+          <ellipse cx="105" cy="105" rx="103" ry="40" fill="none" stroke="rgba(96,165,250,0.2)" strokeWidth="1" />
+        </svg>
+        <div className="absolute h-[210px] w-[210px]" style={{ transform: "translateZ(15px) rotateX(60deg)" }}>
+          {ring3Dots.slice(0, 3).map((angle) => (
+            <div
+              key={angle}
+              className="absolute h-[210px] w-[210px] rounded-full animate-spin-slow-mid"
+            >
+              <div
+                className="absolute h-2 w-2 rounded-full bg-sky-300/80 shadow-[0_0_8px_rgba(14,165,233,1)]"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  transform: `rotate(${angle}deg) translateX(103px) translateY(-50%)`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
-        <motion.div
-          animate={{ y: [0, -7, 0] }}
-          transition={{ duration: 5, ease: "easeInOut", repeat: Infinity, delay: 1 }}
-          className="absolute top-[44%] right-[-5%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#081216]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(60px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">AI-assisted Dev</span>
-        </motion.div>
+        {/* ── RING 4 — tiny inner energy ring ── */}
+        <svg className="absolute h-[160px] w-[160px] animate-spin-reverse-fast" style={{ transform: "translateZ(25px)" }} viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="78" fill="none" stroke="rgba(167,139,250,0.2)" strokeWidth="1" strokeDasharray="3 5" />
+        </svg>
 
-        <motion.div
-          animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-          className="absolute bottom-[8%] left-[0%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#160613]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(90px)" }}
-        >
-          <span className="flex h-2 w-2 rounded-full bg-pink-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-pink-200">Digital Ops / CRM</span>
-        </motion.div>
+        {/* ── NETWORK SVG LINES — abstract digital connections ── */}
+        <svg className="absolute h-[420px] w-[420px] opacity-20" viewBox="0 0 420 420" fill="none">
+          <line x1="210" y1="80" x2="340" y2="160" stroke="rgba(96,165,250,0.6)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="210" y1="80" x2="80" y2="155" stroke="rgba(139,92,246,0.6)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="340" y1="160" x2="360" y2="290" stroke="rgba(59,130,246,0.5)" strokeWidth="0.5" strokeDasharray="3 7" />
+          <line x1="80" y1="155" x2="60" y2="285" stroke="rgba(167,139,250,0.5)" strokeWidth="0.5" strokeDasharray="3 7" />
+          <line x1="60" y1="285" x2="130" y2="360" stroke="rgba(96,165,250,0.4)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <line x1="360" y1="290" x2="290" y2="355" stroke="rgba(139,92,246,0.4)" strokeWidth="0.5" strokeDasharray="4 6" />
+          <circle cx="210" cy="80" r="3" fill="rgba(96,165,250,0.5)" />
+          <circle cx="340" cy="160" r="2.5" fill="rgba(139,92,246,0.6)" />
+          <circle cx="80" cy="155" r="2.5" fill="rgba(167,139,250,0.6)" />
+          <circle cx="360" cy="290" r="2" fill="rgba(59,130,246,0.5)" />
+          <circle cx="60" cy="285" r="2" fill="rgba(96,165,250,0.5)" />
+          <circle cx="130" cy="360" r="2" fill="rgba(139,92,246,0.4)" />
+          <circle cx="290" cy="355" r="2" fill="rgba(167,139,250,0.4)" />
+        </svg>
 
-        {/* Small stats float element */}
-        <motion.div
-          className="absolute top-[68%] right-[15%] w-[150px] bg-[#020205]/95 border border-white/10 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex flex-col gap-1"
-          style={{ transform: "translateZ(50px)" }}
+        {/* ── FLOATING PARTICLE CLUSTER — scattered micro-dots ── */}
+        {[
+          { top: "8%", left: "18%", size: 3, color: "rgba(96,165,250,0.7)", delay: 0, duration: 7 },
+          { top: "14%", left: "75%", size: 2, color: "rgba(139,92,246,0.8)", delay: 1, duration: 9 },
+          { top: "78%", left: "12%", size: 2.5, color: "rgba(167,139,250,0.7)", delay: 2, duration: 6 },
+          { top: "82%", left: "80%", size: 3, color: "rgba(59,130,246,0.7)", delay: 0.5, duration: 8 },
+          { top: "50%", left: "5%", size: 2, color: "rgba(14,165,233,0.6)", delay: 1.5, duration: 10 },
+          { top: "48%", left: "92%", size: 2, color: "rgba(139,92,246,0.6)", delay: 3, duration: 7.5 },
+          { top: "28%", left: "88%", size: 1.5, color: "rgba(96,165,250,0.5)", delay: 0.8, duration: 11 },
+          { top: "70%", left: "88%", size: 2, color: "rgba(167,139,250,0.6)", delay: 2.2, duration: 8 },
+          { top: "35%", left: "8%", size: 1.5, color: "rgba(59,130,246,0.5)", delay: 1.2, duration: 9.5 },
+          { top: "60%", left: "50%", size: 1, color: "rgba(96,165,250,0.4)", delay: 4, duration: 13 },
+        ].map((p, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              top: p.top, left: p.left,
+              width: p.size, height: p.size,
+              background: p.color,
+              boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
+            }}
+            animate={{ y: [0, -12, 0], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* ── PORTRAIT FRAME — glowing gradient border ── */}
+        <div
+          className="relative z-10 flex h-[220px] w-[220px] items-center justify-center rounded-[28px] p-[2px]"
+          style={{
+            background: "linear-gradient(135deg, rgba(99,102,241,0.8), rgba(59,130,246,0.7), rgba(139,92,246,0.8))",
+            boxShadow: "0 0 40px rgba(99,102,241,0.3), 0 0 80px rgba(59,130,246,0.15), 0 20px 60px rgba(0,0,0,0.5)",
+            transform: "translateZ(30px)",
+          }}
         >
-          <div className="flex items-center justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold">
-            <span>Sprint Status</span>
-            <span className="text-emerald-400">100% QA</span>
+          <div className="relative h-full w-full rounded-[26px] overflow-hidden bg-[#04050f]">
+            <Image
+              src="/usman-portrait.jpg"
+              alt="Usman Farooqi"
+              fill
+              priority
+              quality={95}
+              sizes="220px"
+              className="object-cover object-center hover:scale-105 transition-transform duration-700"
+            />
           </div>
-          <div className="text-xs font-extrabold text-white">32+ Projects Released</div>
-          <div className="w-full bg-white/5 h-1 rounded overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-full w-full" />
-          </div>
-        </motion.div>
+          {/* Portrait inner glow overlay */}
+          <div className="absolute inset-0 rounded-[26px] bg-gradient-to-t from-indigo-950/40 via-transparent to-transparent pointer-events-none" />
+        </div>
+
+        {/* ── ENERGY ARC — SVG light trail around portrait ── */}
+        <svg className="absolute h-[260px] w-[260px] animate-spin-slow" style={{ transform: "translateZ(20px)", animationDuration: "20s" }} viewBox="0 0 260 260">
+          <path
+            d="M 130 5 A 125 125 0 0 1 255 130"
+            fill="none"
+            stroke="url(#arcGrad)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(96,165,250,0)" />
+              <stop offset="50%" stopColor="rgba(96,165,250,0.8)" />
+              <stop offset="100%" stopColor="rgba(139,92,246,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <svg className="absolute h-[260px] w-[260px] animate-spin-reverse" style={{ transform: "translateZ(20px)", animationDuration: "15s" }} viewBox="0 0 260 260">
+          <path
+            d="M 130 255 A 125 125 0 0 1 5 130"
+            fill="none"
+            stroke="url(#arcGrad2)"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <defs>
+            <linearGradient id="arcGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(139,92,246,0)" />
+              <stop offset="50%" stopColor="rgba(167,139,250,0.6)" />
+              <stop offset="100%" stopColor="rgba(96,165,250,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
+
       </motion.div>
     </div>
   );
@@ -847,13 +965,14 @@ function HeroVisual() {
 // Main Homepage Redesign Component
 // ----------------------------------------------------
 export default function Home() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project>(projectsData[0]);
   const [isNavScrolled, setIsNavScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "" });
+  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Scroll event listener for Navbar state
   useEffect(() => {
@@ -868,13 +987,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Testimonials Carousel Auto Rotation Hook (Rotates every 6 seconds)
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
+
 
   // Intersection observer to track active section in viewport
   useEffect(() => {
@@ -903,26 +1016,46 @@ export default function Home() {
     };
   }, []);
 
-  const handleTestimonialChange = (index: number) => {
-    setActiveTestimonial(index);
-  };
 
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
 
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email) return;
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormState({ name: "", email: "", projectType: "Web Project", details: "" });
-    }, 4500);
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "ee364713-6bed-4680-9d13-beaebe42c587",
+          name: formState.name,
+          email: formState.email,
+          projectType: formState.projectType,
+          message: formState.details,
+          botcheck: formState.botcheck
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (response.status === 200) {
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+          setFormState({ name: "", email: "", projectType: "Web Project", details: "", botcheck: false });
+        }, 4500);
+      } else {
+        setSubmitError(result.message || "Something went wrong. Please try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Failed to submit form. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderProjectPreview = (id: string) => {
@@ -948,10 +1081,11 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative isolate min-h-screen bg-[#020205] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
+    <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
       
-      {/* Background spotlights & parallax layers */}
-      <InteractiveBackground />
+      {/* Canvas network background + mouse spotlight */}
+      <NetworkBackground />
+      <MouseSpotlight />
 
       {/* ============================================================
           FLOATING GLASS SIDEBAR — Desktop Navigation
@@ -1146,8 +1280,8 @@ export default function Home() {
       {/* ----------------------------------------------------
           Section 1: Hero
           ---------------------------------------------------- */}
-      <section id="home" className="relative pt-20 pb-20 md:pt-32 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-12 lg:grid-cols-12 lg:items-center">
+      <section id="home" className="relative min-h-screen flex flex-col justify-center pt-16 pb-16 md:pt-0 md:pb-0">
+        <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-10 lg:grid-cols-12 lg:items-center">
           
           {/* Left Text Block */}
           <motion.div
@@ -1159,21 +1293,23 @@ export default function Home() {
             {/* Glowing Accent Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-950/20 px-4.5 py-1.5 text-xs font-semibold tracking-wider text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
               <Sparkles className="h-3.5 w-3.5 animate-pulse text-violet-400" />
-              <span>PROJECT MANAGER • WEB DEVELOPMENT & DIGITAL OPERATIONS LEAD</span>
+              <span>WEB DEVELOPMENT • PROJECT MANAGEMENT • AI WEBSITE CREATION</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.08] lg:max-w-[640px]">
-              Strategic execution that turns technology into{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-blue-400 bg-clip-text text-transparent text-glow-purple">
-                business growth.
-              </span>
+              Usman Farooqi
             </h1>
 
             {/* Sub-Headline description */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-[560px]">
-              Hi, I am <strong className="text-white font-semibold">Usman Farooqi</strong>. I bridge web development with digital and sales operations, leading teams to build high-performance sites (WordPress & custom), automate workflows, and scale client delivery using AI-assisted efficiency.
-            </p>
+            <div className="space-y-4 max-w-[560px]">
+              <p className="text-base sm:text-lg md:text-xl text-white font-semibold leading-relaxed">
+                Web Development Lead Helping Businesses Launch High-Converting Websites & Digital Solutions
+              </p>
+              <p className="text-sm md:text-base text-slate-400 leading-relaxed">
+                I help businesses build professional websites, manage digital projects, and create modern online experiences. With experience across healthcare, travel, car rental, and service industries, I have successfully delivered websites, managed development teams, and coordinated software projects for growing businesses.
+              </p>
+            </div>
 
             {/* Target capabilities checklist */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[480px]">
@@ -1195,17 +1331,17 @@ export default function Home() {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a
-                href="#contact"
+                href="#projects"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-blue-600 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-violet-950/30 hover:shadow-violet-600/40 transform hover:-translate-y-0.5 transition-all duration-300"
               >
-                Book Strategy Session
+                View My Work
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="#projects"
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-slate-200 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
               >
-                Explore Case Studies
+                Contact Me
               </a>
             </div>
           </motion.div>
@@ -1248,22 +1384,23 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="lg:col-span-7 space-y-6"
             >
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-                <span>About Me</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                An operations lead focused on the ultimate outcome:{" "}
-                <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                  Execution & Delivery.
-                </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                About Me
               </h2>
-              <p className="text-slate-300 leading-relaxed text-base">
-                I do not just deliver lines of code. I manage and deliver cohesive digital operations. By blending web project management, team leadership, CRM pipelines, and AI-assisted workflows, I help agencies scale operations and build stable websites that convert interest into revenue.
-              </p>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                Whether coordinating developers to build custom platforms or designing automated workflows to qualify driver intakes for ride companies, my systems have one core mission: to optimize delivery, remove back-office overhead, and align tech to business goals.
-              </p>
+              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                  I am a Web Development Lead and Project Manager based in Lahore, Pakistan.
+                </p>
+                <p>
+                  Over the past several years, I have worked with businesses across multiple industries including healthcare, travel, tourism, car rental, recruitment, and local service companies.
+                </p>
+                <p>
+                  My experience includes website planning, WordPress development, hosting and domain management, business email configuration, website migrations, project coordination, and ongoing website maintenance.
+                </p>
+                <p>
+                  More recently, I have also started leveraging AI-powered development tools and modern vibe coding workflows to rapidly build business websites, landing pages, and digital solutions while maintaining a strong focus on user experience and business goals.
+                </p>
+              </div>
 
               {/* Approach Badges */}
               <div className="grid gap-4 sm:grid-cols-2 pt-4">
@@ -1304,7 +1441,7 @@ export default function Home() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className={`relative rounded-3xl border border-white/5 bg-gradient-to-br ${stat.color} p-6 shadow-xl text-center backdrop-blur-md transition-all duration-300 ${stat.border}`}
+                  className={`relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br ${stat.color} p-6 shadow-xl text-center backdrop-blur-md transition-all duration-300 ${stat.border}`}
                 >
                   <div className="text-3xl sm:text-4xl font-extrabold text-white">
                     <Counter value={stat.count} />
@@ -1347,7 +1484,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6.5 shadow-lg transition-all duration-300 hover:border-violet-500/25 hover:bg-white/[0.04] hover:-translate-y-1"
                 >
                   {/* Glass Top Gradient Effect */}
                   <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -1397,7 +1534,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6.5 shadow-xl transition-all duration-300 hover:border-blue-500/20 hover:bg-[#060814]/40"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <ServiceIcon className="h-5 w-5" />
@@ -1426,7 +1563,7 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 5: Featured Projects Grid (Visual Showcase)
+          Section 5: Featured Projects
           ---------------------------------------------------- */}
       <section id="projects" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
@@ -1451,7 +1588,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-[#0c0a1f]/40 to-transparent p-5 shadow-2xl transition-all duration-300 hover:border-violet-500/20 hover:-translate-y-1.5 flex flex-col justify-between"
               >
                 {/* CSS Project dashboard preview */}
                 <div className="mb-5 bg-[#020205] rounded-2xl border border-white/5 p-1">
@@ -1632,20 +1769,20 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 7: Results & Impact
+          Section 7: Achievements
           ---------------------------------------------------- */}
-      <section id="results" className="border-t border-white/5 py-20 md:py-28 relative bg-[#04040c]/30">
+      <section id="achievements" className="border-t border-white/5 py-20 md:py-28 relative bg-[#04040c]/30">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Results & Impact</span>
+              <span>Achievements</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Proven results by the numbers.
+              Proven Results.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Every digital investment is tracked directly to measurable pipeline impact. We focus on business outcomes, not visual drafts.
+              Consistently delivering quality web projects and digital solutions across international markets.
             </p>
           </div>
 
@@ -1672,9 +1809,9 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 8: Technology Stack
+          Section 8: Skills Section
           ---------------------------------------------------- */}
-      <section id="technologies" className="border-t border-white/5 py-20 md:py-28 relative">
+      <section id="skills" className="border-t border-white/5 py-20 md:py-28 relative">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             
@@ -1682,19 +1819,19 @@ export default function Home() {
             <div className="lg:col-span-5 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                <span>Skills & Tools</span>
+                <span>Skills</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                Modern tools mapped to scale.
+                Technical Expertise.
               </h2>
               <p className="text-slate-300 leading-relaxed text-sm">
-                I configure structured task pipelines and templates to ensure quality releases, low latency, and consistent tracking.
+                A combination of web development, project coordination, and AI-driven workflows to streamline project delivery.
               </p>
               
               <div className="pt-4 flex flex-wrap gap-3">
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Sprint Planning</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">WordPress builds</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">CRM Automation</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Web Development</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Project Management</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">AI Creation</span>
               </div>
             </div>
 
@@ -1734,20 +1871,20 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------
-          Section 9: Process / How I Work
+          Section 9: Experience
           ---------------------------------------------------- */}
-      <section id="process" className="border-t border-white/5 py-20 md:py-28 relative bg-gradient-to-b from-transparent via-[#04040c] to-transparent">
+      <section id="experience" className="border-t border-white/5 py-20 md:py-28 relative bg-gradient-to-b from-transparent via-[#04040c] to-transparent">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Process Flow</span>
+              <span>Experience</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Operational Roadmap.
+              Professional Timeline.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Four structured phases mapped to transform basic templates into automated, high-converting digital properties.
+              My hands-on experience leading projects, managing development teams, and executing digital strategies.
             </p>
           </div>
 
@@ -1763,7 +1900,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: idx * 0.15 }}
-                  className="group relative rounded-3xl border border-white/5 bg-white/[0.01] p-6 shadow-xl hover:border-violet-500/25 transition-all duration-300 hover:bg-[#0c0a1a]/40"
+                  className="relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent p-6 text-center shadow-lg hover:border-violet-500/20 transition-all"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/10 text-xs font-black text-violet-300 group-hover:bg-violet-500 group-hover:text-white transition-all duration-300">
                     {step.step}
@@ -1799,13 +1936,13 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-              <span>Industries</span>
+              <span>Industries Served</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Vertical expertise.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Structuring bespoke digital frameworks across high-growth industries that require robust performance.
+              Partnering with diverse businesses across high-growth industries.
             </p>
           </div>
 
@@ -1815,11 +1952,11 @@ export default function Home() {
               return (
                 <motion.div
                   key={ind.name}
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="group rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.01] to-transparent p-6 text-center shadow-lg hover:border-blue-500/25 hover:bg-[#060814]/30 transition-all duration-300"
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5 }}
+                  className="group relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.01] to-transparent p-6 text-center shadow-lg hover:border-blue-500/25 hover:bg-[#060814]/30 transition-all duration-300"
                 >
                   <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-slate-300 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
                     <IndIcon className="h-5 w-5" />
@@ -1837,144 +1974,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------
-          Section 11: Why Work With Me (Grid Table)
-          ---------------------------------------------------- */}
-      <section id="why" className="border-t border-white/5 py-20 md:py-28 relative">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Comparison</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              A partnership focused on delivery.
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Why leading startups and growing companies choose coordinated operations over basic visual placeholders.
-            </p>
-          </div>
 
-          <div className="overflow-x-auto rounded-3xl border border-white/5 bg-white/[0.01] shadow-2xl">
-            <table className="min-w-full divide-y divide-white/5 text-left text-xs">
-              <thead className="bg-[#0c0a1a]/40 text-slate-400 font-bold uppercase tracking-wider">
-                <tr>
-                  <th scope="col" className="px-6 py-5">Value Anchor</th>
-                  <th scope="col" className="px-6 py-5 text-violet-300 bg-violet-500/[0.02]">Usman Farooqi (Operations Lead)</th>
-                  <th scope="col" className="px-6 py-5">Traditional Contractor / Freelancer</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 text-slate-300 font-medium">
-                {comparisons.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
-                    <td className="px-6 py-5 font-bold text-white max-w-[150px]">{row.feature}</td>
-                    <td className="px-6 py-5 text-slate-200 bg-violet-500/[0.02] max-w-[320px] leading-relaxed">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-violet-400 shrink-0 mt-0.5" />
-                        <span>{row.usman}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-slate-500 max-w-[320px] leading-relaxed">{row.agency}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------
-          Section 12: Testimonials
-          ---------------------------------------------------- */}
-      <section id="testimonials" className="border-t border-white/5 py-20 md:py-28 relative">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-              <span>Testimonials</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Trusted by commercial operators.
-            </h2>
-          </div>
-
-          <div className="relative max-w-4xl mx-auto">
-            <div className="glass-panel glass-panel-glow rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-40 w-40 bg-blue-600/5 blur-3xl pointer-events-none" />
-              <span className="absolute top-4 left-6 text-8xl font-serif text-white/5 select-none pointer-events-none">“</span>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-6"
-                >
-                  {/* Star Ratings */}
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="h-4.5 w-4.5 fill-current" />
-                    ))}
-                  </div>
-
-                  <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-slate-100">
-                    “{testimonials[activeTestimonial].quote}”
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-white/5">
-                    <div>
-                      <h4 className="text-base font-bold text-white">
-                        {testimonials[activeTestimonial].author}
-                      </h4>
-                      <p className="text-xs text-slate-400">
-                        {testimonials[activeTestimonial].company}
-                      </p>
-                    </div>
-                    <span className="self-start sm:self-center rounded-full bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-300">
-                      {testimonials[activeTestimonial].tag}
-                    </span>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Indicator dots navigation */}
-            <div className="flex items-center justify-between mt-8">
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleTestimonialChange(index)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      activeTestimonial === index ? "w-8 bg-blue-500" : "w-2.5 bg-white/10 hover:bg-white/20"
-                    }`}
-                    aria-label={`Go to testimonial slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={prevTestimonial}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                  aria-label="Previous Testimonial"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                  aria-label="Next Testimonial"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ----------------------------------------------------
           Section 13: Contact CTA Strategy terminal
@@ -2054,6 +2054,8 @@ export default function Home() {
                       >
                         <h3 className="text-lg font-bold text-white">Book Your Audit Session</h3>
                         
+                        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} checked={formState.botcheck} onChange={(e) => setFormState({ ...formState, botcheck: e.target.checked })} />
+                        
                         <div className="grid gap-4 sm:grid-cols-2">
                           <div className="space-y-2">
                             <label htmlFor="form-name" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Full Name</label>
@@ -2064,7 +2066,7 @@ export default function Home() {
                               value={formState.name}
                               onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                               placeholder="Usman Farooqi"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
                             />
                           </div>
                           <div className="space-y-2">
@@ -2076,26 +2078,23 @@ export default function Home() {
                               value={formState.email}
                               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                               placeholder="name@company.com"
-                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
+                              className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
                             />
                           </div>
                         </div>
 
-                        <div className="space-y-2">
-                          <label htmlFor="form-type" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Growth Goal</label>
-                          <select
-                            id="form-type"
+                          <CustomSelect
+                            label="Growth Goal"
                             value={formState.projectType}
-                            onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-slate-300 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
-                          >
-                            <option value="Web Project">WordPress / Web Development Project</option>
-                            <option value="Project Management">Full Project Delivery & Sprint Coordination</option>
-                            <option value="AI & Automation">AI Integration & Process Automation Flow</option>
-                            <option value="CRM Build">HubSpot / Salesforce Pipeline Config</option>
-                            <option value="Team Scale">Team Structuring & Hiring Support</option>
-                          </select>
-                        </div>
+                            onChange={(val) => setFormState({ ...formState, projectType: val })}
+                            options={[
+                              { value: "Web Project", label: "WordPress / Web Development Project" },
+                              { value: "Project Management", label: "Full Project Delivery & Sprint Coordination" },
+                              { value: "AI & Automation", label: "AI Integration & Process Automation Flow" },
+                              { value: "CRM Build", label: "HubSpot / Salesforce Pipeline Config" },
+                              { value: "Team Scale", label: "Team Structuring & Hiring Support" }
+                            ]}
+                          />
 
                         <div className="space-y-2">
                           <label htmlFor="form-details" className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Parameters & Timeline</label>
@@ -2105,16 +2104,23 @@ export default function Home() {
                             value={formState.details}
                             onChange={(e) => setFormState({ ...formState, details: e.target.value })}
                             placeholder="Tell me about your business model, metrics bottlenecks, and growth schedule..."
-                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
+                            className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3.5 text-base sm:text-sm text-white placeholder-slate-600 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all resize-none"
                           />
                         </div>
 
                         <button
                           type="submit"
-                          className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:shadow-violet-600/20 transform hover:-translate-y-0.5 transition-all duration-300"
+                          disabled={isSubmitting}
+                          className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg transform transition-all duration-300 ${isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:shadow-violet-600/20 hover:-translate-y-0.5"}`}
                         >
-                          Send Message / Request Strategy Session <ArrowRight className="h-3.5 w-3.5" />
+                          {isSubmitting ? "Sending..." : "Send Message / Request Strategy Session"} {!isSubmitting && <ArrowRight className="h-3.5 w-3.5" />}
                         </button>
+
+                        {submitError && (
+                          <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                            {submitError}
+                          </div>
+                        )}
                       </motion.form>
                     ) : (
                       <motion.div
@@ -2144,27 +2150,52 @@ export default function Home() {
       {/* ----------------------------------------------------
           Footer
           ---------------------------------------------------- */}
-      <footer className="border-t border-white/5 py-12 text-center text-xs text-slate-500 bg-[#020205]/80">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <div className="flex items-center justify-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 p-[1px]">
-              <div className="flex h-full w-full items-center justify-center rounded-lg bg-[#020205] text-[10px] font-black text-white">
-                UF
+      <footer className="border-t border-white/5 py-16 bg-gradient-to-b from-[#020205] to-[#010103] relative overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+          <div className="grid gap-12 sm:grid-cols-3 items-center text-center sm:text-left">
+            
+            {/* Left: Branding */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center sm:justify-start gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1px] shadow-lg shadow-violet-500/20">
+                  <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#020205] text-sm font-black text-white">
+                    UF
+                  </div>
+                </div>
+                <div className="text-left">
+                  <span className="block font-bold text-slate-200">Usman Farooqi</span>
+                  <span className="block text-[10px] uppercase tracking-wider text-violet-400 font-semibold mt-0.5">Project Manager & Web Lead</span>
+                </div>
               </div>
+              <p className="text-xs text-slate-500 max-w-xs mx-auto sm:mx-0 leading-relaxed">
+                Structuring bespoke digital frameworks across high-growth industries that require robust performance.
+              </p>
             </div>
-            <span className="font-semibold text-slate-300 text-xs">Usman Farooqi</span>
-          </div>
-          
-          <p className="text-slate-600">
-            © {new Date().getFullYear()} Usman Farooqi — Technology & Business Growth Specialist. Built with Next.js & Framer Motion.
-          </p>
 
-          <div className="flex justify-center gap-4 text-slate-400">
-            <a href="#about" className="hover:text-white transition-colors">About</a>
-            <span>•</span>
-            <a href="#projects" className="hover:text-white transition-colors">Projects</a>
-            <span>•</span>
-            <a href="#contact" className="hover:text-white transition-colors">Growth Call</a>
+            {/* Center: Contact Info */}
+            <div className="flex flex-col items-center justify-center gap-3">
+              <a href="mailto:usmanfar2002@gmail.com" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
+                <Mail className="h-3.5 w-3.5 text-slate-400 group-hover:text-violet-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">usmanfar2002@gmail.com</span>
+              </a>
+              <a href="tel:+923024422053" className="group flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-2 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300">
+                <Phone className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">+92 302 4422053</span>
+              </a>
+            </div>
+
+            {/* Right: Links */}
+            <div className="flex flex-col items-center sm:items-end justify-center gap-4">
+              <div className="flex items-center gap-4">
+                <a href="#projects" className="text-sm font-semibold text-slate-400 hover:text-white transition-colors">Portfolio</a>
+                <a href="https://www.linkedin.com/in/usman-farooqi-172b14248/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+              </div>
+              <p className="text-[10px] text-slate-600 font-medium">
+                © {new Date().getFullYear()} All rights reserved.
+              </p>
+            </div>
+
           </div>
         </div>
       </footer>
