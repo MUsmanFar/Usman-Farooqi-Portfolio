@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Usman Farooqi | Project Manager & Digital Operations Lead",
   description:
     "Professional portfolio of Usman Farooqi, Web Development & Digital Operations Lead. Managing web projects, WordPress delivery, team leadership, and AI-assisted operations.",
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://usman-farooqi.vercel.app"),
   openGraph: {
     title: "Usman Farooqi | Project Manager & Digital Operations Lead",
     description:
