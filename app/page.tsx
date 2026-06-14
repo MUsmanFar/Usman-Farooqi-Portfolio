@@ -1234,13 +1234,17 @@ export default function Home() {
       <MouseSpotlight />
 
       {/* ============================================================
-          FLOATING GLASS SIDEBAR — Desktop Navigation
+          FLOATING GLASS SIDEBAR - Desktop Navigation
           ============================================================ */}
       <motion.nav
         className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-1 group/sidebar"
         initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        animate={{ 
+          opacity: activeSection === "contact" ? 0 : 1, 
+          x: activeSection === "contact" ? -20 : 0 
+        }}
+        style={{ pointerEvents: activeSection === "contact" ? "none" : "auto" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {/* Logo pill at top */}
         <a
