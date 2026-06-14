@@ -555,15 +555,82 @@ function Counter({ value, duration = 2.5 }: { value: string; duration?: number }
   );
 }
 
-// Interactive Background System with scroll parallax and mouse react spotlight trail
+// Interactive Background System with scroll parallax, moving gradient mesh, and cursor spotlights
+const bgParticles = [
+  { x: 12, y: 15, size: 2, duration: 18, delay: 0, depth: -0.05 },
+  { x: 35, y: 8, size: 3, duration: 25, delay: 2, depth: 0.1 },
+  { x: 55, y: 22, size: 1.5, duration: 15, delay: 1, depth: -0.15 },
+  { x: 78, y: 12, size: 2.5, duration: 22, delay: 4, depth: 0.08 },
+  { x: 92, y: 28, size: 2, duration: 20, delay: 3, depth: -0.07 },
+  { x: 8, y: 45, size: 1.5, duration: 16, delay: 5, depth: 0.12 },
+  { x: 28, y: 55, size: 3.5, duration: 28, delay: 1, depth: -0.1 },
+  { x: 48, y: 38, size: 2, duration: 19, delay: 2, depth: 0.05 },
+  { x: 68, y: 62, size: 2.5, duration: 24, delay: 6, depth: -0.12 },
+  { x: 88, y: 48, size: 1.5, duration: 14, delay: 0, depth: 0.09 },
+  { x: 15, y: 72, size: 2.5, duration: 21, delay: 3, depth: -0.08 },
+  { x: 42, y: 85, size: 2, duration: 23, delay: 7, depth: 0.11 },
+  { x: 62, y: 78, size: 3, duration: 26, delay: 1, depth: -0.14 },
+  { x: 82, y: 88, size: 1.5, duration: 17, delay: 4, depth: 0.06 },
+  { x: 95, y: 68, size: 2, duration: 19, delay: 2, depth: -0.11 },
+  { x: 22, y: 92, size: 2.5, duration: 24, delay: 5, depth: 0.07 },
+  { x: 74, y: 94, size: 2, duration: 20, delay: 0, depth: -0.05 },
+  { x: 50, y: 50, size: 3, duration: 27, delay: 3, depth: 0.13 },
+  { x: 10, y: 60, size: 1.5, duration: 15, delay: 1, depth: -0.09 },
+  { x: 90, y: 10, size: 2.5, duration: 22, delay: 2, depth: 0.08 }
+];
+
+const bgShapes = [
+  { type: "triangle", x: "8%", y: "15%", rotateSpeed: 25, size: 32, duration: 16, depth: 0.1 },
+  { type: "square", x: "88%", y: "22%", rotateSpeed: -20, size: 28, duration: 20, depth: -0.12 },
+  { type: "hexagon", x: "6%", y: "58%", rotateSpeed: 15, size: 36, duration: 24, depth: 0.08 },
+  { type: "ring", x: "82%", y: "68%", rotateSpeed: -25, size: 45, duration: 22, depth: -0.15 },
+  { type: "circle", x: "48%", y: "42%", rotateSpeed: 10, size: 24, duration: 18, depth: 0.05 }
+];
+
+function renderShape(type: string, size: number) {
+  switch (type) {
+    case "triangle":
+      return (
+        <svg width={size} height={size} viewBox="0 0 40 40">
+          <polygon points="20,5 35,35 5,35" className="stroke-white/10 fill-none" strokeWidth="1" />
+        </svg>
+      );
+    case "square":
+      return (
+        <svg width={size} height={size} viewBox="0 0 40 40">
+          <rect x="5" y="5" width="30" height="30" className="stroke-white/10 fill-none" strokeWidth="1" />
+        </svg>
+      );
+    case "hexagon":
+      return (
+        <svg width={size} height={size} viewBox="0 0 40 40">
+          <polygon points="20,3 37,12 37,30 20,39 3,30 3,12" className="stroke-white/10 fill-none" strokeWidth="1" />
+        </svg>
+      );
+    case "ring":
+      return (
+        <svg width={size} height={size} viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="15" className="stroke-white/10 fill-none" strokeWidth="1" />
+        </svg>
+      );
+    default:
+      return (
+        <svg width={size} height={size} viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="10" className="stroke-white/10 fill-none" strokeWidth="1" />
+        </svg>
+      );
+  }
+}
+
 function InteractiveBackground() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
-  // Slow smooth coordinates transforms
-  const glowY1 = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const glowY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const glowY3 = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  // Scroll parallax transforms for various layers
+  const glowY1 = useTransform(scrollY, (y) => y * 0.12);
+  const glowY2 = useTransform(scrollY, (y) => y * -0.08);
+  const glowY3 = useTransform(scrollY, (y) => y * 0.06);
+  const glowY4 = useTransform(scrollY, (y) => y * -0.05);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -574,52 +641,88 @@ function InteractiveBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 -z-30 overflow-hidden pointer-events-none">
-      {/* Mesh glowing spheres */}
+    <div className="fixed inset-0 -z-30 overflow-hidden pointer-events-none w-full h-full">
+      {/* 1. Moving Gradient Mesh - warps slowly over time */}
       <motion.div
         style={{ y: glowY1 }}
-        className="absolute top-[8%] left-[-15%] h-[550px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.18),transparent_65%)] blur-[110px] animate-pulse-glow"
+        className="absolute top-[-10%] left-[-20%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.15),transparent_70%)] blur-[100px] animate-blob-1"
       />
       <motion.div
-        style={{ y: glowY2, animationDelay: "2s" }}
-        className="absolute top-[32%] right-[-15%] h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.15),transparent_65%)] blur-[120px] animate-pulse-glow"
+        style={{ y: glowY2 }}
+        className="absolute top-[25%] right-[-20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.12),transparent_70%)] blur-[110px] animate-blob-2"
       />
       <motion.div
         style={{ y: glowY3 }}
-        className="absolute bottom-[10%] left-[-8%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(236,72,153,0.1),transparent_60%)] blur-[115px]"
+        className="absolute bottom-[20%] left-[-15%] h-[650px] w-[650px] rounded-full bg-[radial-gradient(circle,rgba(236,72,153,0.08),transparent_65%)] blur-[105px] animate-blob-3"
+      />
+      <motion.div
+        style={{ y: glowY4 }}
+        className="absolute bottom-[-10%] right-[-10%] h-[580px] w-[580px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08),transparent_65%)] blur-[100px] animate-blob-4"
       />
 
-      {/* Floating particles */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white animate-float"
-            style={{
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${10 + Math.random() * 15}s`,
-              animationDelay: `${Math.random() * 5}s`
-            }}
-          />
-        ))}
+      {/* 2. Floating Parallax Particles */}
+      <div className="absolute inset-0 opacity-25">
+        {bgParticles.map((pt, i) => {
+          // Calculate scroll transform for this depth layer
+          const yOffset = useTransform(scrollY, (y) => y * pt.depth);
+          return (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-slate-400/30 animate-float"
+              style={{
+                width: `${pt.size}px`,
+                height: `${pt.size}px`,
+                top: `${pt.y}%`,
+                left: `${pt.x}%`,
+                animationDuration: `${pt.duration}s`,
+                animationDelay: `${pt.delay}s`,
+                y: yOffset
+              }}
+            />
+          );
+        })}
       </div>
 
-      {/* Reactive spotlight trail */}
+      {/* 3. Floating Geometric Parallax Shapes */}
+      <div className="absolute inset-0 opacity-15">
+        {bgShapes.map((shape, i) => {
+          const yOffset = useTransform(scrollY, (y) => y * shape.depth);
+          return (
+            <motion.div
+              key={i}
+              className="absolute animate-float"
+              style={{
+                top: shape.y,
+                left: shape.x,
+                animationDuration: `${shape.duration}s`,
+                y: yOffset
+              }}
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: Math.abs(shape.rotateSpeed), repeat: Infinity, ease: "linear" }}
+              >
+                {renderShape(shape.type, shape.size)}
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* 4. Mouse Reactive Spotlight glow */}
       <div
-        className="fixed inset-0 z-30 transition-opacity duration-500 opacity-50"
+        className="absolute inset-0 z-10 transition-opacity duration-300 opacity-60"
         style={{
           background: `
-            radial-gradient(650px at ${mousePos.x}px ${mousePos.y}px, rgba(139, 92, 246, 0.08), transparent 75%),
-            radial-gradient(350px at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.06), transparent 70%)
+            radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(139, 92, 246, 0.08), transparent 75%),
+            radial-gradient(300px at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.06), transparent 70%)
           `
         }}
       />
     </div>
   );
 }
+
 
 // Portrait Visual Frame (tilts dynamically based on cursor coordinates, with rotating circles and floating badges)
 function HeroVisual() {
