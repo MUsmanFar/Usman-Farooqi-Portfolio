@@ -20,6 +20,7 @@ import {
   Users,
   Compass,
   Mail,
+  Phone,
   Sparkles,
   Award,
   Layers,
@@ -27,7 +28,9 @@ import {
   Activity,
   ArrowRight,
   CheckCircle2,
-  Menu,
+  Home as HomeIcon,
+  FolderOpen,
+  Briefcase,
   X,
   Database,
   ArrowDown
@@ -875,7 +878,7 @@ export default function Home() {
 
   // Intersection observer to track active section in viewport
   useEffect(() => {
-    const sections = ["home", "about", "expertise", "services", "projects", "process", "industries", "why", "contact"];
+    const sections = ["home", "about", "projects", "expertise", "contact"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -935,139 +938,215 @@ export default function Home() {
     }
   };
 
+  // Sidebar nav config
+  const sideNavLinks = [
+    { label: "Home", id: "home", icon: HomeIcon },
+    { label: "About", id: "about", icon: Users },
+    { label: "Projects", id: "projects", icon: FolderOpen },
+    { label: "Experience", id: "expertise", icon: Briefcase },
+    { label: "Contact", id: "contact", icon: Mail },
+  ];
+
   return (
-    <div className="relative isolate min-h-screen bg-[#020205] text-slate-100 overflow-x-hidden bg-grid-pattern">
+    <div className="relative isolate min-h-screen bg-[#020205] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
       
       {/* Background spotlights & parallax layers */}
       <InteractiveBackground />
-      
-      {/* ----------------------------------------------------
-          Navbar
-          ---------------------------------------------------- */}
-      <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          isNavScrolled
-            ? "bg-[#020205]/85 backdrop-blur-xl border-b border-white/5 py-4 shadow-xl shadow-black/30"
-            : "bg-transparent py-6 border-b border-transparent"
-        }`}
+
+      {/* ============================================================
+          FLOATING GLASS SIDEBAR — Desktop Navigation
+          ============================================================ */}
+      <motion.nav
+        className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-1 group/sidebar"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 flex items-center justify-between">
-          <a href="#home" className="group flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1px] group-hover:shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all duration-300">
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#020205] text-sm font-black text-white">
-                UF
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-bold tracking-wider text-white group-hover:text-violet-400 transition-colors">
-                Usman Farooqi
-              </span>
-              <span className="text-[9px] tracking-[0.2em] uppercase text-slate-400 group-hover:text-slate-200 transition-colors">
-                Digital Operations Lead
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/5 bg-white/[0.03] p-1.5 backdrop-blur-md">
-            {[
-              ["About", "about"],
-              ["Expertise", "expertise"],
-              ["Services", "services"],
-              ["Projects", "projects"],
-              ["Process", "process"],
-              ["Comparison", "why"],
-              ["CTA", "contact"]
-            ].map(([label, id]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className={`relative px-4 py-1.5 text-xs font-semibold tracking-wide rounded-full transition-all duration-300 ${
-                  activeSection === id
-                    ? "text-white"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                {activeSection === id && (
-                  <motion.span
-                    layoutId="activeNavTab"
-                    className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-violet-500/10 to-blue-500/10 border border-violet-500/25"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Right Action Button */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
-              className="relative group overflow-hidden rounded-full bg-gradient-to-r from-violet-600 to-blue-600 p-[1.5px] font-semibold text-xs text-white shadow-lg shadow-violet-950/20 hover:shadow-violet-500/20 transition-all duration-300"
-            >
-              <span className="relative block rounded-full bg-[#020205] px-5 py-2.5 transition-all duration-300 group-hover:bg-transparent">
-                Launch Growth Call
-              </span>
-            </a>
+        {/* Logo pill at top */}
+        <a
+          href="#home"
+          className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1.5px] shadow-[0_0_20px_rgba(139,92,246,0.25)] hover:shadow-[0_0_30px_rgba(139,92,246,0.45)] transition-all duration-300"
+          title="Usman Farooqi"
+        >
+          <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#020205] text-[11px] font-black text-white">
+            UF
           </div>
+        </a>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white transition-colors"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+        {/* Glass sidebar pill — collapses to icons, expands to icons+labels on hover */}
+        <div className="flex flex-col gap-1 rounded-2xl border border-white/8 bg-[#06040f]/70 backdrop-blur-2xl p-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300">
+          {sideNavLinks.map(({ label, id, icon: Icon }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={`group/link relative flex items-center gap-0 w-10 hover:w-36 overflow-hidden rounded-xl px-2.5 py-2.5 transition-all duration-300 ease-out ${
+                activeSection === id
+                  ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 border border-violet-500/20 text-white w-36"
+                  : "text-slate-400 hover:text-white border border-transparent hover:border-white/8 hover:bg-white/5"
+              }`}
+              title={label}
+            >
+              {activeSection === id && (
+                <motion.span
+                  layoutId="activeSideLink"
+                  className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-violet-500/10 to-blue-500/10"
+                  transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                />
+              )}
+              <Icon className={`h-4 w-4 shrink-0 transition-colors duration-200 ${
+                activeSection === id ? "text-violet-400" : "text-slate-400 group-hover/link:text-white"
+              }`} />
+              <span className="ml-2.5 text-[11px] font-semibold tracking-wide whitespace-nowrap opacity-0 group-hover/link:opacity-100 transition-opacity duration-200">
+                {label}
+              </span>
+              {/* Active dot indicator */}
+              {activeSection === id && (
+                <span className="ml-auto mr-0.5 h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0" />
+              )}
+            </a>
+          ))}
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Contact CTA button at bottom */}
+        <a
+          href="#contact"
+          className="mt-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600/80 to-blue-600/80 border border-violet-500/30 text-white shadow-lg hover:shadow-violet-600/30 hover:scale-105 transition-all duration-300"
+          title="Get in Touch"
+        >
+          <Mail className="h-4 w-4" />
+        </a>
+      </motion.nav>
+
+      {/* ============================================================
+          MOBILE NAVIGATION — Floating hamburger + slide-out drawer
+          ============================================================ */}
+      <div className="md:hidden">
+        {/* Floating hamburger button */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="fixed bottom-6 right-6 z-[60] flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-blue-600 shadow-[0_8px_30px_rgba(139,92,246,0.4)] border border-violet-500/30 text-white"
+          aria-label="Toggle Navigation"
+        >
+          <AnimatePresence mode="wait">
+            {mobileMenuOpen ? (
+              <motion.span
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.18 }}
+              >
+                <X className="h-6 w-6" />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="open"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="flex flex-col gap-1 items-center justify-center w-5"
+              >
+                <span className="block h-0.5 w-5 bg-white rounded" />
+                <span className="block h-0.5 w-3.5 bg-white rounded" />
+                <span className="block h-0.5 w-5 bg-white rounded" />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
+
+        {/* Slide-out drawer overlay */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-white/5 bg-[#020205] px-6 py-8"
-            >
-              <div className="flex flex-col gap-4">
-                {[
-                  ["About", "about"],
-                  ["Expertise", "expertise"],
-                  ["Services", "services"],
-                  ["Projects", "projects"],
-                  ["Process", "process"],
-                  ["Comparison", "why"],
-                  ["Contact", "contact"]
-                ].map(([label, id]) => (
-                  <a
-                    key={id}
-                    href={`#${id}`}
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm"
+              />
+              {/* Drawer panel */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", stiffness: 320, damping: 35 }}
+                className="fixed right-0 top-0 bottom-0 z-[58] w-72 bg-[#080614]/95 backdrop-blur-2xl border-l border-white/8 shadow-2xl flex flex-col"
+              >
+                {/* Drawer Header */}
+                <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1px]">
+                      <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#020205] text-[10px] font-black text-white">UF</div>
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-white">Usman Farooqi</div>
+                      <div className="text-[9px] uppercase tracking-widest text-slate-400">Digital Ops Lead</div>
+                    </div>
+                  </div>
+                  <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-base font-medium text-slate-300 hover:text-white transition-colors py-2 border-b border-white/5"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-400 hover:text-white transition-colors"
                   >
-                    {label}
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {/* Nav Links */}
+                <nav className="flex flex-col gap-1 px-4 py-6 flex-1">
+                  {sideNavLinks.map(({ label, id, icon: Icon }, idx) => (
+                    <motion.a
+                      key={id}
+                      href={`#${id}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.07, duration: 0.3 }}
+                      className={`flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${
+                        activeSection === id
+                          ? "bg-gradient-to-r from-violet-500/15 to-blue-500/10 text-white border border-violet-500/20"
+                          : "text-slate-400 hover:text-white hover:bg-white/5"
+                      }`}
+                    >
+                      <Icon className={`h-4.5 w-4.5 ${ activeSection === id ? "text-violet-400" : "text-slate-500" }`} />
+                      {label}
+                      {activeSection === id && (
+                        <span className="ml-auto h-1.5 w-1.5 rounded-full bg-violet-400" />
+                      )}
+                    </motion.a>
+                  ))}
+                </nav>
+
+                {/* Bottom CTA */}
+                <div className="px-4 py-6 border-t border-white/5">
+                  <a
+                    href="#contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-950/30"
+                  >
+                    Book Strategy Call <ArrowUpRight className="h-4 w-4" />
                   </a>
-                ))}
-                <a
-                  href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-3 text-sm font-semibold text-white shadow-lg"
-                >
-                  Book Growth Call <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-            </motion.div>
+                  <div className="mt-4 text-center text-[10px] text-slate-500">
+                    <a href="mailto:usmanfar2002@gmail.com" className="hover:text-slate-300 transition-colors">usmanfar2002@gmail.com</a>
+                  </div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
-      </header>
+      </div>
+
 
       {/* ----------------------------------------------------
           Section 1: Hero
           ---------------------------------------------------- */}
-      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-28">
+      <section id="home" className="relative pt-20 pb-20 md:pt-32 md:pb-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 grid gap-12 lg:grid-cols-12 lg:items-center">
           
           {/* Left Text Block */}
@@ -1929,8 +2008,20 @@ export default function Home() {
                     </div>
                     <div>
                       <span className="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Email Direct</span>
-                      <a href="mailto:hello@usmanfarooqi.com" className="text-sm font-semibold text-white hover:text-violet-400 transition-colors">
-                        hello@usmanfarooqi.com
+                      <a href="mailto:usmanfar2002@gmail.com" className="text-sm font-semibold text-white hover:text-violet-400 transition-colors">
+                        usmanfar2002@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-300">
+                      <Phone className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Phone / WhatsApp</span>
+                      <a href="tel:+923024422053" className="text-sm font-semibold text-white hover:text-violet-400 transition-colors">
+                        +92 302 4422053
                       </a>
                     </div>
                   </div>
