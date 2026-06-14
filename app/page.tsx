@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { CustomSelect } from "@/components/CustomSelect";
+import { Preloader } from "@/components/Preloader";
 import { AnimatePresence, motion, useScroll, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import {
   Brain,
@@ -965,6 +966,7 @@ function HeroVisual() {
 // Main Homepage Redesign Component
 // ----------------------------------------------------
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project>(projectsData[0]);
   const [isNavScrolled, setIsNavScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -1193,6 +1195,10 @@ export default function Home() {
 
   return (
     <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
+      <AnimatePresence>
+        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
       
       
       <AnimatePresence>
@@ -2279,9 +2285,7 @@ export default function Home() {
             {/* BOTTOM BAR */}
             <div className="relative z-10 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-slate-500 font-medium">© {new Date().getFullYear()} Usman Farooqi. All rights reserved.</p>
-              <p className="text-xs text-slate-500 font-medium flex items-center gap-1.5">
-                Built with Next.js, Framer Motion & Vercel
-              </p>
+              
             </div>
           </div>
         </div>
