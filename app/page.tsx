@@ -70,7 +70,7 @@ const expertiseAreas = [
     iconColor: "text-blue-400"
   },
   {
-    title: "WordPress & Web Development",
+    title: "WordPress Website Creation",
     description: "Designing fast, responsive websites using WordPress, Gutenberg, and element builders optimized for conversions.",
     icon: Laptop,
     accent: "from-purple-500/20 to-pink-500/20",
@@ -84,14 +84,14 @@ const expertiseAreas = [
     iconColor: "text-emerald-400"
   },
   {
-    title: "Sales & CRM Operations",
+    title: "Website Deployment & Management",
     description: "Configuring CRM databases (HubSpot, Salesforce) and automated triggers to track leads from intake to close.",
     icon: Workflow,
     accent: "from-rose-500/20 to-orange-500/20",
     iconColor: "text-rose-400"
   },
   {
-    title: "Team Leadership & Hiring",
+    title: "Domain, Hosting & Email Management",
     description: "Screening, recruiting, and managing distributed developers, designers, and specialists to support agency scale.",
     icon: Users,
     accent: "from-cyan-500/20 to-blue-500/20",
@@ -1195,7 +1195,7 @@ export default function Home() {
 
 
   return (
-    <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern md:pl-20">
+    <div className="relative isolate min-h-screen bg-[#04050f] text-slate-100 overflow-x-hidden bg-grid-pattern">
       <AnimatePresence>
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
