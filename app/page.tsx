@@ -56,198 +56,165 @@ interface Project {
 
 const expertiseAreas = [
   {
-    title: "Full Stack Development",
-    description: "Custom digital platforms built for high performance, enterprise scalability, and direct business growth.",
-    icon: Code2,
+    title: "Project Management",
+    description: "Steering cross-functional technical teams to deliver high-performance web applications and systems on schedule.",
+    icon: Compass,
     accent: "from-blue-500/20 to-indigo-500/20",
     iconColor: "text-blue-400"
   },
   {
-    title: "AI Solutions & Automation",
-    description: "Intelligent AI workflows, conversational agents, and automated operations that multiply team leverage.",
-    icon: Brain,
+    title: "WordPress & Web Development",
+    description: "Designing fast, responsive websites using WordPress, Gutenberg, and element builders optimized for conversions.",
+    icon: Laptop,
     accent: "from-purple-500/20 to-pink-500/20",
     iconColor: "text-purple-400"
   },
   {
-    title: "SEO Services",
-    description: "Search-first digital architecture designed to lift brand authority, search rankings, and organic inbound volume.",
-    icon: Search,
+    title: "AI-Assisted Operations",
+    description: "Utilizing modern AI tools, agent systems, and prompt engineering to scale development speed and team leverage.",
+    icon: Brain,
     accent: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-400"
   },
   {
-    title: "Google Ads Management",
-    description: "Paid acquisition programs structured to maximize profitable growth and predictable return on ad spend.",
-    icon: Target,
+    title: "Sales & CRM Operations",
+    description: "Configuring CRM databases (HubSpot, Salesforce) and automated triggers to track leads from intake to close.",
+    icon: Workflow,
     accent: "from-rose-500/20 to-orange-500/20",
     iconColor: "text-rose-400"
   },
   {
-    title: "Digital Marketing",
-    description: "Omni-channel marketing initiatives that align messaging, customer journey, and commercial targets.",
-    icon: MegaphoneIcon,
+    title: "Team Leadership & Hiring",
+    description: "Screening, recruiting, and managing distributed developers, designers, and specialists to support agency scale.",
+    icon: Users,
     accent: "from-cyan-500/20 to-blue-500/20",
     iconColor: "text-cyan-400"
   },
   {
-    title: "CRM & Business Systems",
-    description: "Tailored business automation and CRM structures for unified database tracking and consistent client communication.",
-    icon: Workflow,
+    title: "Client & Project Success",
+    description: "Gathering project parameters, managing expectations, and maintaining detailed transparency anchors throughout builds.",
+    icon: Award,
     accent: "from-violet-500/20 to-purple-500/20",
     iconColor: "text-violet-400"
-  },
-  {
-    title: "Lead Generation Strategy",
-    description: "Data-driven client acquisition models built to convert inbound traffic into high-intent revenue prospects.",
-    icon: TrendingUp,
-    accent: "from-amber-500/20 to-orange-500/20",
-    iconColor: "text-amber-400"
   }
 ];
 
-function MegaphoneIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="m3 11 18-5v12L3 14v-3z" />
-      <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-    </svg>
-  );
-}
-
 const services = [
   {
-    title: "Platform Development",
-    description: "Engineered web applications and user-centric portals built to convert interest into commercial outcomes.",
-    details: ["Custom React / Next.js Architecture", "API Integration & Backend Development", "Speed & Core Web Vitals Optimization", "Database Architecture"],
+    title: "Digital Project Management",
+    description: "Leading web and application builds from initial user story discovery to roadmap design, sprints, QA, and deployment.",
+    details: ["Agile/Scrum Sprint Coordination", "Scope & Resource Planning", "QA Auditing & Performance Checks", "Detailed Status Reporting"],
+    icon: Compass
+  },
+  {
+    title: "WordPress Development",
+    description: "Building landing pages, corporate portals, and marketing sites designed to convert visitors into business leads.",
+    details: ["Custom Block & Builder Frameworks", "Theme Setup & Site Migrations", "Google Core Web Vitals Optimization", "Plugin Security & Backups"],
     icon: Laptop
   },
   {
-    title: "AI-Driven Automation",
-    description: "Integrate custom AI pipelines and automated triggers that remove operational drag and human error.",
-    details: ["LLM & Chatbot Implementations", "Workflow Automation (Make, Zapier, Custom scripts)", "Intelligent Lead Routing & Alerts", "Operational Process Audits"],
+    title: "Operations Automation",
+    description: "Stitching automated alerts, CRM updates, and AI qualifiers together to remove manual drag and backend delays.",
+    details: ["Zapier & Make Automation Maps", "AI Prompt Engineering Tools", "Automated Slack/Email Alerts", "Process Audit & Templates"],
     icon: Brain
   },
   {
-    title: "SEO & Organic Growth",
-    description: "Strategic content systems, Technical SEO, and authority acquisition designed to dominate commercial keywords.",
-    details: ["Technical Site Audits & Fixing", "Keyword Research & Domain Mapping", "On-Page Semantic Optimization", "Backlink & Authority Building"],
-    icon: Search
-  },
-  {
-    title: "Paid Media Management",
-    description: "End-to-end paid advertising setups targeted to drive qualified transactions and premium clients.",
-    details: ["Search, Display & Remarketing Campaigns", "A/B Landing Page Testing", "Conversion API Integration", "ROAS & Spend Efficiency Audits"],
-    icon: Target
-  },
-  {
-    title: "CRM Integration",
-    description: "Connect HubSpot, Salesforce, or custom CRM solutions with your product platform for seamless pipeline visibility.",
-    details: ["CRM Data Architecture & Syncing", "Automated Lead Scoring", "Email Nurturing Sequence Setup", "Sales Pipeline Dashboard Tracking"],
+    title: "CRM Setup & Pipeline Config",
+    description: "Setting up database schemas, scoring fields, and automated routing rules in HubSpot and Salesforce.",
+    details: ["CRM Contact Database Mapping", "Automated Lead Distribution Routing", "Email Nurturing Sequence Setup", "Pipeline Analytics Dashboards"],
     icon: Workflow
   },
   {
-    title: "Growth Consultations",
-    description: "Strategic analysis to identify bottlenecks in your digital ecosystem and align technology to business revenue goals.",
-    details: ["Funnel Conversion Architecture", "Digital Tech Stack Auditing", "Automation Map Planning", "Growth Marketing Advisory"],
-    icon: Sparkles
+    title: "Team Hiring & Structure",
+    description: "Helping agencies scale operations by auditing bottlenecks, setting up vetting channels, and hiring talent.",
+    details: ["Developer Skill Assessment Vetting", "Onboarding Systems & Docs", "Resource Capability Planning", "Freelancer & Contractor Hubs"],
+    icon: Users
   },
   {
-    title: "Analytics & Optimization",
-    description: "Deploy robust tracking capabilities to trace customer paths from click to close, enabling smart reinvestment decisions.",
-    details: ["Google Tag Manager Setup", "Custom Event Tracking (GA4)", "Heatmaps & User Behavior Analysis", "Post-Purchase Optimization Routing"],
-    icon: LineChart
+    title: "Digital Operations Consulting",
+    description: "Analyzing business technology stacks to reduce subscription waste, improve coordination, and clear delivery bottlenecks.",
+    details: ["Tech Stack Consolidation Audit", "Standard Operating Procedures (SOPs)", "Time Tracker & Task Management Setup", "Cross-Team Workflow Mapping"],
+    icon: Sparkles
   }
 ];
 
 const impactMetrics = [
-  { label: "Websites Developed", value: "32+" },
+  { label: "Websites Coordinated", value: "32+" },
   { label: "Industries Served", value: "6" },
-  { label: "Marketing Campaigns", value: "120+" },
-  { label: "Automation Systems", value: "45+" },
-  { label: "Growth Solutions", value: "85+" }
+  { label: "Operations Campaigns", value: "120+" },
+  { label: "AI & Automation Flows", value: "45+" },
+  { label: "Project Solutions", value: "85+" }
 ];
 
 const projectsData: Project[] = [
   {
     id: "ann",
     name: "America Needs Nurses",
-    tagline: "Healthcare Recruitment Platform",
-    challenge: "Modernizing a fragmented recruitment platform to accelerate nursing placements while boosting organic visibility in a highly competitive sector.",
-    solution: "Built a custom, conversion-driven web application integrated with an automated applicant tracking system (ATS) sync and a targeted local SEO plan.",
-    impact: "Accelerated applicant intake by 40%, reduced placement time, and generated a 250% lift in organic search impressions within 6 months.",
-    tags: ["Full Stack Development", "SEO Roadmap", "CRM Integration", "Healthcare"],
+    tagline: "Healthcare Recruitment Platform Project",
+    challenge: "Fragmented applicant tracking and manual placements delayed nurse staffing while organic site traffic lagged in a competitive sector.",
+    solution: "Directed custom recruitment portal development, structured automatic applicant tracking system (ATS) syncs, and coordinated the local SEO roadmap.",
+    impact: "Accelerated placement velocity by 30% and increased organic search lead impressions by 250% within 6 months.",
+    tags: ["Project Management", "WordPress CMS", "CRM Operations", "Healthcare"],
     metrics: [{ label: "Lead Growth", value: "+250%" }, { label: "Placement Velocity", value: "-30%" }]
   },
   {
     id: "acr",
     name: "Atlanta Car Rental",
-    tagline: "Luxury Vehicle Booking System",
-    challenge: "A highly crowded regional travel market demanded a high-end booking platform with a lower cost per acquisition than aggregate platforms.",
-    solution: "Designed a premium luxury digital interface, structured Google Ads campaigns with custom landing pages, and implemented automated CRM lead nurturing.",
-    impact: "Boosted direct booking revenue by 180% and reduced lead acquisition cost by 45% using automated campaigns.",
-    tags: ["Google Ads", "Web Applications", "CRM Architecture", "Travel"],
+    tagline: "Luxury Vehicle Reservation Portal",
+    challenge: "A crowded regional travel market demanded a high-end booking platform with a lower lead cost than aggregate platforms.",
+    solution: "Managed the luxury fleet booking project, structured Google Ads campaigns with optimized landing pages, and implemented automated CRM lead scoring.",
+    impact: "Boosted direct bookings by 180% and reduced lead acquisition cost by 45% using automated operations.",
+    tags: ["Digital Operations", "Google Ads Strategy", "Client Management", "Travel"],
     metrics: [{ label: "Direct Bookings", value: "+180%" }, { label: "CPA Reduction", value: "-45%" }]
   },
   {
     id: "yr",
     name: "YalaRide",
-    tagline: "On-Demand Transportation App",
-    challenge: "Scaling demand across multiple regional hubs while keeping operational onboarding overhead low.",
-    solution: "Deployed a high-performance web platform, high-converting organic landing pages, and an automated client intake and screening workflow.",
-    impact: "Drove 10,000+ driver sign-ups and reduced operational onboarding time by 50% via intelligent screening bots.",
-    tags: ["Automation Systems", "Lead Generation", "React Platform", "Automotive"],
+    tagline: "Transportation Dispatch Onboarding App",
+    challenge: "Scaling demand across regional hubs created a massive onboarding bottleneck for driver credentials.",
+    solution: "Supervised web platform delivery and custom CRM workflows, integrating screening automation and automated team alerts.",
+    impact: "Helped secure 10,000+ driver sign-ups and cut screening onboarding time in half using automated tools.",
+    tags: ["Process Automation", "Team Coordination", "Project Delivery", "Automotive"],
     metrics: [{ label: "Driver Sign-ups", value: "10K+" }, { label: "Onboarding Time", value: "-50%" }]
   },
   {
     id: "adt",
     name: "Arrowhead DigiTech",
-    tagline: "B2B Lead Acquisition Agency Site",
-    challenge: "Establishing visual authority and scaling conversion rates for a premium digital growth agency.",
-    solution: "Architected a custom Next.js portfolio platform featuring high-end animations, interactive CRM-connected lead forms, and structured marketing funnels.",
+    tagline: "Lead Acquisition Agency Site Release",
+    challenge: "The digital growth agency required a high-converting web platform to establish authority and capture inbound leads.",
+    solution: "Managed Next.js platform design and development, oversaw HubSpot pipeline mappings, and audited site performance scores.",
     impact: "Increased inbound lead conversion rates from 1.2% to 4.8% and established a premium visual system.",
-    tags: ["Next.js", "AI Integrations", "Lead Gen Strategy", "Marketing"],
+    tags: ["Project Management", "Web Operations", "Conversion Optimization", "Marketing"],
     metrics: [{ label: "Conversion Rate", value: "4.8x" }, { label: "Inbound Leads", value: "+220%" }]
   },
   {
     id: "cc",
     name: "Cars Compound",
-    tagline: "Automotive Marketplace Platform",
-    challenge: "Traditional dealership interfaces lacked premium styling, causing high user bounce rates and low lead submissions.",
-    solution: "Engineered a lightning-fast catalog search interface using Next.js and Tailwind, integrated with a multi-channel CRM lead distribution engine.",
-    impact: "Decreased page load times under 1s, resulting in a 65% reduction in bounce rate and 80% higher lead submissions.",
-    tags: ["Next.js", "CRM Automation", "Performance Opt.", "Automotive"],
+    tagline: "Automotive Catalog & CRM Integration",
+    challenge: "Low-speed catalog searches caused high user bounce rates and lost lead submissions for the dealership network.",
+    solution: "Oversaw lightning-fast inventory catalog delivery and connected multi-channel lead routing triggers with CRM routing rules.",
+    impact: "Reduced site search load times under 1s, leading to a 65% bounce reduction and 80% higher lead submissions.",
+    tags: ["Project Management", "CRM Integrations", "Operations", "Automotive"],
     metrics: [{ label: "Bounce Rate", value: "-65%" }, { label: "Lead Submissions", value: "+80%" }]
   },
   {
     id: "gjt",
     name: "Go-Jetter Travel & Tours",
-    tagline: "Premium Travel & Custom Tour Agency",
-    challenge: "High-value tour bookings required complex personalization and manual sales support, limiting growth.",
-    solution: "Created an interactive tour builder interface coupled with an automated AI assistant that qualifies travel preferences and sends direct CRM entries.",
-    impact: "Automated 70% of pre-sales trip customization and increased custom tour package sales by 95%.",
-    tags: ["AI Chatbots", "SEO Services", "Digital Systems", "Travel"],
+    tagline: "Interactive Tour Builder & AI Sync",
+    challenge: "Complex custom tour bookings required extensive manual sales support, limiting booking volume.",
+    solution: "Supervised developer execution on an interactive package builder, linked to an automated AI assistant that qualifies travel preferences.",
+    impact: "Automated 70% of pre-sales trip customization, increasing custom package sales by 95%.",
+    tags: ["AI Operations", "Team Leadership", "Client Success", "Travel"],
     metrics: [{ label: "Automated Prep", value: "70%" }, { label: "Sales Growth", value: "+95%" }]
   },
   {
     id: "it",
     name: "Ihawa Travel",
-    tagline: "Custom Travel Booking Hub",
-    challenge: "Capturing organic search market share for custom global travel destinations without high ad spending.",
-    solution: "Rolled out a content hub optimized with structured data and search-first layout design, backed by a conversion-focused booking engine.",
+    tagline: "Custom Travel Booking Hub Release",
+    challenge: "Capturing search market share for custom global travel destinations without high ad spending.",
+    solution: "Managed structured content hub development and mapped search keywords, optimizing booking engine interface flows.",
     impact: "Attained top 3 rankings for 40+ high-intent search queries, bringing in consistent monthly bookings organically.",
-    tags: ["SEO Services", "Web Development", "Organic Strategy", "Travel"],
+    tags: ["SEO Strategy", "Web Development", "Project Delivery", "Travel"],
     metrics: [{ label: "Search Ranking", value: "Top 3" }, { label: "Organic Bookings", value: "+140%" }]
   }
 ];
@@ -255,27 +222,67 @@ const projectsData: Project[] = [
 const processSteps = [
   {
     step: "01",
-    title: "Discovery & Growth Blueprint",
-    description: "We map out your current conversion metrics, target audience behavior, and construct a precise technological & marketing blueprint mapped to bottom-line revenue outcomes.",
-    details: ["Competitor Gap Analysis", "Infrastructure Auditing", "CRM Schema Planning", "Commercial Goal KPI Mapping"]
+    title: "Discovery & Blueprinting",
+    description: "We audit your current site metrics, outline project parameters, CRM schema, and design a detailed scope of work (SOP) mapped to business goals.",
+    details: ["Competitor Gap Audits", "Tech Stack Inspections", "CRM Schema Planning", "Commercial Goal Mapping"]
   },
   {
     step: "02",
-    title: "Premium Architecture & Build",
-    description: "We construct high-fidelity digital interfaces, optimized speed models, and solid database linkages designed to deliver state-of-the-art experiences.",
-    details: ["Next.js & React Custom Builds", "Conversion-Focused UX Direction", "Clean Code Modular Scalability", "Responsive Touch Design"]
+    title: "Development Coordination",
+    description: "I manage developers and designers to build high-performance web properties using WordPress or custom frontend frameworks.",
+    details: ["Agile Sprint Planning", "Conversion-Focused Direction", "Responsive Design Checks", "WordPress Theme Customization"]
   },
   {
     step: "03",
-    title: "AI & System Automation Linkage",
-    description: "Operational drag is eliminated by stitching CRM pipelines, email triggers, lead qualifiers, and automated AI assistance together into a smooth operational matrix.",
+    title: "AI & Workflow Automation",
+    description: "Operational bottlenecks are removed by stitching CRM pipelines, email triggers, lead qualifiers, and automated AI assistance together.",
     details: ["CRM Syncing & Setup", "AI Automated Funnel Qualifiers", "Intelligent Notifications & Alert Triggers", "Multi-Source Lead Routing"]
   },
   {
     step: "04",
-    title: "Optimization & Revenue Scaling",
-    description: "We launch structured paid acquisition channels, organic optimization protocols, and continuous cohort testing to compound growth over time.",
-    details: ["High-Intent Google Ads Directing", "Continuous Conversion Rate Optimization", "Technical Organic Ranking Pushes", "Cohort & Funnel Performance Audits"]
+    title: "Quality Audit & Release",
+    description: "We run comprehensive speed, conversion tracking, and responsive compatibility tests to verify that the build is ready for launch.",
+    details: ["Google Tag Manager Setup", "Continuous Conversion Optimizations", "TypeScript & Build Sanity checks", "Operational Handover Documentation"]
+  }
+];
+
+const techStack = [
+  {
+    category: "Project & Team Management",
+    desc: "Methodologies and tools used to coordinate digital teams and delivery",
+    items: [
+      { name: "Agile / Scrum Coordination", level: 95 },
+      { name: "Scope & Requirement Analysis", level: 95 },
+      { name: "Hiring & Talent Screening", level: 90 },
+      { name: "JIRA / Trello / ClickUp", level: 95 },
+      { name: "Client Relations & Support", level: 95 },
+      { name: "Standard Operating Procedures (SOPs)", level: 92 },
+      { name: "Quality Assurance (QA) Auditing", level: 90 }
+    ]
+  },
+  {
+    category: "Web & CMS Development",
+    desc: "Designing and releasing high-converting web properties",
+    items: [
+      { name: "WordPress & Elementor", level: 95 },
+      { name: "Gutenberg Block Customization", level: 90 },
+      { name: "Next.js (Team Delivery)", level: 85 },
+      { name: "React / HTML5 / CSS3", level: 85 },
+      { name: "Speed & Core Web Vitals Opt.", level: 92 },
+      { name: "Domain & Site Migrations", level: 94 }
+    ]
+  },
+  {
+    category: "AI Tools & Digital Operations",
+    desc: "Streamlining workflow speeds and lead generation databases",
+    items: [
+      { name: "AI-assisted coding (Cursor/LLMs)", level: 90 },
+      { name: "Workflow Automation (Zapier/Make)", level: 95 },
+      { name: "CRM Setup (HubSpot/Salesforce)", level: 92 },
+      { name: "Google Tag Manager / GA4", level: 90 },
+      { name: "Google Ads Strategy Setup", level: 92 },
+      { name: "Automated Lead Routing Setup", level: 95 }
+    ]
   }
 ];
 
@@ -290,89 +297,48 @@ const industries = [
 
 const testimonials = [
   {
-    quote: "Usman delivered a premium digital solution that transformed our patient and client intake. His combination of Next.js architecture, custom automation workflows, and SEO strategy didn't just build a website — it created a recurring revenue stream.",
+    quote: "Usman managed the America Needs Nurses recruitment platform release flawlessly. His coordination between our frontend team, our ATS synchronization flows, and our SEO roadmap created a highly reliable source of qualified candidates.",
     author: "Founder & Director",
     company: "America Needs Nurses",
     rating: 5,
-    tag: "Healthcare Tech"
+    tag: "Healthcare Operations"
   },
   {
-    quote: "We were struggling to scale direct bookings without burning through massive ad spend on aggregate platforms. Usman built a premium portal, optimized our Google Ads layout, and synced our entire pipeline with HubSpot. Our direct reservations grew by 180% while cutting acquisition costs in half.",
+    quote: "We were struggling to organize leads and schedule bookings without burning through our ad spend. Usman coordinated the booking system project, set up HubSpot CRM pipelines, and optimized our Google Ads layout, driving a 180% reservation growth.",
     author: "Operations Director",
     company: "Atlanta Car Rental",
     rating: 5,
-    tag: "Luxury Travel"
+    tag: "Luxury Travel Ops"
   },
   {
-    quote: "Most developers just write code. Usman understood our business structure. He automated driver screening and routed leads smoothly, freeing up countless hours for our dispatch teams. Visual aesthetics are spectacular, but the actual operational leverage is what wowed us.",
+    quote: "Usman's project management and operations insight transformed our driver intake speed. He structured driver vetting roadmaps and Slack automation alerts, helping us scale to over 10,000 driver registrations while saving our dispatch teams hundreds of hours.",
     author: "CEO & Founder",
     company: "YalaRide",
     rating: 5,
-    tag: "Automotive App"
-  }
-];
-
-const techStack = [
-  {
-    category: "Full Stack Engineering",
-    desc: "Lightning-fast platforms built for modern web standards",
-    items: [
-      { name: "Next.js", level: 95 },
-      { name: "React / React 19", level: 95 },
-      { name: "TypeScript", level: 90 },
-      { name: "Tailwind CSS", level: 98 },
-      { name: "Node.js / Express", level: 85 },
-      { name: "PostgreSQL / Prisma", level: 80 },
-      { name: "Headless Architectures", level: 90 },
-      { name: "WordPress & Elementor", level: 95 }
-    ]
-  },
-  {
-    category: "AI & Automation Engine",
-    desc: "Deploying machine intelligence and syncing CRM pipelines",
-    items: [
-      { name: "OpenAI / Anthropic APIs", level: 90 },
-      { name: "AI Chatbots & Agents", level: 85 },
-      { name: "CRM Integration (HubSpot/Salesforce)", level: 92 },
-      { name: "Workflow Automation (Zapier/Make)", level: 95 },
-      { name: "Automated Lead Routing", level: 95 },
-      { name: "Database Triggers", level: 88 }
-    ]
-  },
-  {
-    category: "Digital Growth & Media",
-    desc: "Driving commercial conversions and capturing search intent",
-    items: [
-      { name: "Technical SEO Auditing", level: 95 },
-      { name: "Commercial Keyword Mapping", level: 90 },
-      { name: "Google Ads Campaigns", level: 92 },
-      { name: "Meta Conversion API", level: 88 },
-      { name: "Google Tag Manager", level: 94 },
-      { name: "GA4 Analytics Architecture", level: 90 }
-    ]
+    tag: "Automotive Logistics"
   }
 ];
 
 const comparisons = [
   {
     feature: "Strategic Scope",
-    usman: "Builds holistic systems integrating code, marketing campaigns, and business automations.",
-    agency: "Builds a website template only; has no marketing or automation expertise."
+    usman: "Steers cross-functional projects, coordinating developers, CRM systems, and automations.",
+    agency: "Writes code or edits basic page templates with no operational or scheduling scope."
   },
   {
-    feature: "Technical Quality",
-    usman: "Custom Next.js & React frameworks with sub-second page loads and clean schemas.",
-    agency: "Bloated themes with poor performance scores and fragile plugin reliance."
+    feature: "Delivery Quality",
+    usman: "Ensures sub-second speed audits, robust CRM data flows, and thorough QA checks.",
+    agency: "Installs heavy plugin themes with slow loads, fragile databases, and high bounce rates."
   },
   {
-    feature: "Business Alignment",
-    usman: "Focuses strictly on Lead Conversion Rates, Cost Per Acquisition, and Operational Leverage.",
-    agency: "Focuses on vanity metrics, generic templates, and standard deliverables."
+    feature: "Operational Leverage",
+    usman: "Saves manual back-office hours using custom AI prompt scripts and Zapier integrations.",
+    agency: "No automation or workflow scaling strategy; relies on manual manual actions."
   },
   {
-    feature: "AI Integrations",
-    usman: "Native deployment of LLM pipelines and automated CRM routers to bypass manual actions.",
-    agency: "Limited or no AI execution; relies on third-party basic iframe code."
+    feature: "Accountability",
+    usman: "Provides detailed sprints, clear KPI indicators, transparent communications, and NDAs.",
+    agency: "Fails to meet schedules, lacks structured project tracking, and has poor updates."
   }
 ];
 
@@ -564,6 +530,7 @@ function IhawaTravelPreview() {
 // Helper Subcomponents
 // ----------------------------------------------------
 
+
 // Count-up counter utilizing framer motion hook
 function Counter({ value, duration = 2.5 }: { value: string; duration?: number }) {
   const ref = useRef(null);
@@ -654,7 +621,7 @@ function InteractiveBackground() {
   );
 }
 
-// Interactive 3D Perspective Browser Visual (tilts dynamically based on cursor coordinates)
+// Portrait Visual Frame (tilts dynamically based on cursor coordinates, with rotating circles and floating badges)
 function HeroVisual() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -673,7 +640,6 @@ function HeroVisual() {
   };
 
   const handleMouseLeave = () => {
-    // Reset spring to center
     animate(x, 0, { type: "spring", stiffness: 200, damping: 25 });
     animate(y, 0, { type: "spring", stiffness: 200, damping: 25 });
   };
@@ -685,80 +651,85 @@ function HeroVisual() {
       className="relative flex h-[400px] w-full items-center justify-center overflow-visible md:h-[500px] cursor-pointer"
       style={{ perspective: 1200 }}
     >
-      {/* 3D tilted container wrapper */}
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full max-w-[440px] h-full flex items-center justify-center transition-all duration-100 ease-out"
       >
-        {/* Core AI orb */}
+        {/* Core background glows */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-violet-600/5 blur-[80px] pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[260px] w-[260px] rounded-full bg-blue-500/5 blur-[80px] pointer-events-none" />
 
-        {/* Rotating concentric rings */}
-        <div className="absolute h-[320px] w-[320px] rounded-full border border-dashed border-white/5 opacity-50 animate-spin-slow" />
-        <div className="absolute h-[240px] w-[240px] rounded-full border border-dashed border-violet-500/10 opacity-60 animate-spin-reverse" />
-        <div className="absolute h-[160px] w-[160px] rounded-full border border-blue-500/10 opacity-40 animate-spin-slow" style={{ animationDuration: "15s" }} />
+        {/* Concentric rotating design rings */}
+        <div className="absolute h-[330px] w-[330px] rounded-full border border-dashed border-white/5 opacity-50 animate-spin-slow" />
+        <div className="absolute h-[250px] w-[250px] rounded-full border border-dashed border-violet-500/10 opacity-60 animate-spin-reverse" />
 
-        {/* Central Glowing Nodes */}
-        <div className="absolute flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/10 to-blue-500/10 p-[1px] shadow-[0_0_50px_rgba(139,92,246,0.2)]">
-          <div className="flex h-full w-full items-center justify-center rounded-full bg-[#020205] text-white">
-            <Brain className="h-8 w-8 text-violet-400 animate-pulse" />
+        {/* Usman Portrait Image Card inside a glowing visual frame */}
+        <div
+          className="absolute flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-500 to-blue-500 p-[1.5px] shadow-[0_20px_50px_rgba(139,92,246,0.15)] overflow-hidden"
+          style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
+        >
+          <div className="relative h-full w-full rounded-[22px] overflow-hidden bg-[#020205]">
+            <img 
+              src="/usman-portrait.jpg" 
+              alt="Usman Farooqi" 
+              className="h-full w-full object-cover object-center scale-102 hover:scale-108 transition-all duration-500"
+            />
           </div>
         </div>
 
-        {/* Floating tech badges with coordinate displacement */}
+        {/* Floating tech badges */}
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-          className="absolute top-[18%] left-[10%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0a1b]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(50px)" }}
+          className="absolute top-[14%] left-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0a1b]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
+          style={{ transform: "translateZ(70px)" }}
         >
           <span className="flex h-2 w-2 rounded-full bg-violet-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-violet-200">Next.js App</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-violet-200">Project Manager</span>
         </motion.div>
 
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 7, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-          className="absolute bottom-[22%] right-[5%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#050b18]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(60px)" }}
+          className="absolute bottom-[18%] right-[2%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#050b18]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
+          style={{ transform: "translateZ(80px)" }}
         >
           <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">AI Automation</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">WordPress builds</span>
         </motion.div>
 
         <motion.div
           animate={{ y: [0, -7, 0] }}
           transition={{ duration: 5, ease: "easeInOut", repeat: Infinity, delay: 1 }}
-          className="absolute top-[46%] right-[3%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#081216]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(40px)" }}
+          className="absolute top-[44%] right-[-5%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#081216]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
+          style={{ transform: "translateZ(60px)" }}
         >
           <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">SEO Roadmap</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">AI-assisted Dev</span>
         </motion.div>
 
         <motion.div
           animate={{ y: [0, 12, 0] }}
           transition={{ duration: 8, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-          className="absolute bottom-[14%] left-[6%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#160613]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
-          style={{ transform: "translateZ(70px)" }}
+          className="absolute bottom-[8%] left-[0%] flex items-center gap-2 rounded-2xl border border-white/10 bg-[#160613]/80 px-4 py-2 shadow-2xl backdrop-blur-md"
+          style={{ transform: "translateZ(90px)" }}
         >
           <span className="flex h-2 w-2 rounded-full bg-pink-400 animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-pink-200">HubSpot / CRM</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-pink-200">Digital Ops / CRM</span>
         </motion.div>
 
-        {/* Analytics card visualization mockup */}
+        {/* Small stats float element */}
         <motion.div
-          className="absolute top-[65%] right-[20%] w-[150px] bg-[#020205]/95 border border-white/10 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex flex-col gap-1.5"
-          style={{ transform: "translateZ(30px)" }}
+          className="absolute top-[68%] right-[15%] w-[150px] bg-[#020205]/95 border border-white/10 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex flex-col gap-1"
+          style={{ transform: "translateZ(50px)" }}
         >
           <div className="flex items-center justify-between text-[9px] text-slate-500 uppercase tracking-wider font-bold">
-            <span>Inbound Leads</span>
-            <span className="text-emerald-400">+220%</span>
+            <span>Sprint Status</span>
+            <span className="text-emerald-400">100% QA</span>
           </div>
-          <div className="text-base font-extrabold text-white">4.8x Conversion</div>
+          <div className="text-xs font-extrabold text-white">32+ Projects Released</div>
           <div className="w-full bg-white/5 h-1 rounded overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-full w-[78%]" />
+            <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-full w-full" />
           </div>
         </motion.div>
       </motion.div>
@@ -776,7 +747,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Growth System", details: "" });
+  const [formState, setFormState] = useState({ name: "", email: "", projectType: "Web Project", details: "" });
 
   // Scroll event listener for Navbar state
   useEffect(() => {
@@ -791,7 +762,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Testimonials Carousel Auto Rotation Hook (Rotates every 5 seconds, suspends on mouse hover)
+  // Testimonials Carousel Auto Rotation Hook (Rotates every 6 seconds)
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -844,11 +815,10 @@ export default function Home() {
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
-      setFormState({ name: "", email: "", projectType: "Growth System", details: "" });
+      setFormState({ name: "", email: "", projectType: "Web Project", details: "" });
     }, 4500);
   };
 
-  // Helper mapping projects to their custom visual preview elements
   const renderProjectPreview = (id: string) => {
     switch (id) {
       case "ann": return <AmericaNeedsNursesPreview />;
@@ -865,7 +835,7 @@ export default function Home() {
   return (
     <div className="relative isolate min-h-screen bg-[#020205] text-slate-100 overflow-x-hidden bg-grid-pattern">
       
-      {/* Background spotlights & ambient glow elements */}
+      {/* Background spotlights & parallax layers */}
       <InteractiveBackground />
       
       {/* ----------------------------------------------------
@@ -889,8 +859,8 @@ export default function Home() {
               <span className="text-sm font-bold tracking-wider text-white group-hover:text-violet-400 transition-colors">
                 Usman Farooqi
               </span>
-              <span className="text-[10px] tracking-[0.25em] uppercase text-slate-400 group-hover:text-slate-200 transition-colors">
-                Growth Specialist
+              <span className="text-[9px] tracking-[0.2em] uppercase text-slate-400 group-hover:text-slate-200 transition-colors">
+                Digital Operations Lead
               </span>
             </div>
           </a>
@@ -1007,12 +977,12 @@ export default function Home() {
             {/* Glowing Accent Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-950/20 px-4.5 py-1.5 text-xs font-semibold tracking-wider text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
               <Sparkles className="h-3.5 w-3.5 animate-pulse text-violet-400" />
-              <span>FULL STACK DEVELOPER • AI & DIGITAL GROWTH</span>
+              <span>PROJECT MANAGER • WEB DEVELOPMENT & DIGITAL OPERATIONS LEAD</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.08] lg:max-w-[640px]">
-              Strategic systems that turn technology into{" "}
+              Strategic execution that turns technology into{" "}
               <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-blue-400 bg-clip-text text-transparent text-glow-purple">
                 business growth.
               </span>
@@ -1020,18 +990,18 @@ export default function Home() {
 
             {/* Sub-Headline description */}
             <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-[560px]">
-              Hi, I am <strong className="text-white font-semibold">Usman Farooqi</strong>. I bridge complex engineering with revenue marketing, constructing custom Next.js platforms, intelligent AI automations, and ROI campaigns to scale companies.
+              Hi, I am <strong className="text-white font-semibold">Usman Farooqi</strong>. I bridge web development with digital and sales operations, leading teams to build high-performance sites (WordPress & custom), automate workflows, and scale client delivery using AI-assisted efficiency.
             </p>
 
             {/* Target capabilities checklist */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[480px]">
               {[
-                "Full Stack Development",
-                "AI Agent Integrations",
-                "Technical SEO Roads",
-                "Google Ads Management",
-                "CRM Flow Automations",
-                "Lead Generation Architecture"
+                "Project Management & Sprints",
+                "WordPress CMS Development",
+                "AI-assisted Operations",
+                "CRM Schema & Pipelines",
+                "Team Hiring & Vetting",
+                "Client Relationship Success"
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2 text-xs font-medium text-slate-400">
                   <Check className="h-4 w-4 text-violet-400 shrink-0" />
@@ -1058,7 +1028,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right 3D Visual Block */}
+          {/* Right Portrait Block */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -1101,16 +1071,16 @@ export default function Home() {
                 <span>About Me</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                An engineer focused on the ultimate business outcome:{" "}
+                An operations lead focused on the ultimate outcome:{" "}
                 <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                  Revenue Growth.
+                  Execution & Delivery.
                 </span>
               </h2>
               <p className="text-slate-300 leading-relaxed text-base">
-                I do not just deliver lines of code. I deliver complete digital pipelines. By blending full-stack software development with lead conversion strategies (SEO, Google Ads, CRM architecture), I enable brands to unlock massive automation efficiencies and scale lead traffic.
+                I do not just deliver lines of code. I manage and deliver cohesive digital operations. By blending web project management, team leadership, CRM pipelines, and AI-assisted workflows, I help agencies scale operations and build stable websites that convert interest into revenue.
               </p>
               <p className="text-slate-400 leading-relaxed text-sm">
-                Whether creating bespoke web platforms from scratch or designing automated workflows to qualify driver intakes for ride companies, my systems have one core mission: to optimize user conversions and eliminate manual back-office tasks.
+                Whether coordinating developers to build custom platforms or designing automated workflows to qualify driver intakes for ride companies, my systems have one core mission: to optimize delivery, remove back-office overhead, and align tech to business goals.
               </p>
 
               {/* Approach Badges */}
@@ -1121,7 +1091,7 @@ export default function Home() {
                     <Zap className="h-4 w-4 text-violet-400" /> Focus Point
                   </h4>
                   <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                    Business KPIs, Google Ads ROAS efficiency, custom LLM routing, and CRM synchronization.
+                    Business KPIs, resource scheduling, custom LLM tool integration, and CRM system mapping.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-white/5 bg-[#050b18]/60 p-5 shadow-lg relative overflow-hidden group hover:border-blue-500/20 transition-all duration-300">
@@ -1130,7 +1100,7 @@ export default function Home() {
                     <Layers className="h-4 w-4 text-blue-400" /> Growth Philosophy
                   </h4>
                   <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                    Seamless integration. Building strategic digital systems rather than throwing isolated features.
+                    Execution alignment. Directing projects from concept to launch with clear goals, team coordination, and client updates.
                   </p>
                 </div>
               </div>
@@ -1146,8 +1116,8 @@ export default function Home() {
             >
               {[
                 { label: "AI systems built", count: "45+", color: "from-violet-500/20 to-purple-500/5", border: "hover:border-violet-500/30 shadow-violet-500/[0.02]" },
-                { label: "Completed platforms", count: "32+", color: "from-blue-500/20 to-indigo-500/5", border: "hover:border-blue-500/30 shadow-blue-500/[0.02]" },
-                { label: "Ads Campaigns", count: "120+", color: "from-pink-500/20 to-rose-500/5", border: "hover:border-pink-500/30 shadow-pink-500/[0.02]" },
+                { label: "Managed web projects", count: "32+", color: "from-blue-500/20 to-indigo-500/5", border: "hover:border-blue-500/30 shadow-blue-500/[0.02]" },
+                { label: "Operations Campaigns", count: "120+", color: "from-pink-500/20 to-rose-500/5", border: "hover:border-pink-500/30 shadow-pink-500/[0.02]" },
                 { label: "Satisfied Partners", count: "99%", color: "from-emerald-500/20 to-teal-500/5", border: "hover:border-emerald-500/30 shadow-emerald-500/[0.02]" }
               ].map((stat, i) => (
                 <div
@@ -1178,14 +1148,14 @@ export default function Home() {
               <span>Core Expertise</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              The full-stack capability engine.
+              Strategic operations capability.
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               We coordinate engineering and media marketing disciplines into a single growth force to power your acquisition.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {expertiseAreas.map((item, index) => {
               const IconComp = item.icon;
               return (
@@ -1281,17 +1251,16 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-violet-400">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              <span>Featured Projects</span>
+              <span>Coordinated Projects</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Validated digital transformations.
             </h2>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Analyze the functional interfaces and direct commercial results constructed across core business operations.
+              Analyze the functional interfaces and direct commercial results constructed under my coordination.
             </p>
           </div>
 
-          {/* Grid layout containing all projects */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projectsData.map((project, idx) => (
               <motion.article
@@ -1338,7 +1307,7 @@ export default function Home() {
                     onClick={() => setSelectedProject(project)}
                     className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-violet-500/20 py-2.5 text-[10px] font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-all mt-4"
                   >
-                    View Interactive Case Study <ArrowUpRight className="h-3 w-3 text-violet-400" />
+                    View Operational Case Study <ArrowUpRight className="h-3 w-3 text-violet-400" />
                   </a>
                 </div>
               </motion.article>
@@ -1362,7 +1331,7 @@ export default function Home() {
                 <span>Deep Dive Case Studies</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Validated Commercial Solutions.
+                Delivery and outcome logs.
               </h2>
               <p className="text-slate-400 text-sm leading-relaxed">
                 Click on the systems below to analyze the challenge diagnostics, custom engineering roadmap, and final impact details.
@@ -1428,7 +1397,7 @@ export default function Home() {
                     <div className="relative">
                       <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500/25 border border-rose-500" />
                       <h4 className="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
-                        <span>01. The Challenge Bottleneck</span>
+                        <span>01. Project Bottleneck</span>
                       </h4>
                       <p className="text-sm leading-relaxed text-slate-300 mt-2">
                         {selectedProject.challenge}
@@ -1439,7 +1408,7 @@ export default function Home() {
                     <div className="relative">
                       <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500/25 border border-blue-500" />
                       <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1.5">
-                        <span>02. Custom Growth Engineering</span>
+                        <span>02. Management & Dev Coordination</span>
                       </h4>
                       <p className="text-sm leading-relaxed text-slate-300 mt-2">
                         {selectedProject.solution}
@@ -1450,7 +1419,7 @@ export default function Home() {
                     <div className="relative">
                       <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500/25 border border-emerald-500" />
                       <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                        <span>03. Business Impact Outcomes</span>
+                        <span>03. Final Outcome & Metrics</span>
                       </h4>
                       <div className="mt-2 bg-gradient-to-r from-emerald-500/10 to-transparent rounded-2xl border border-emerald-500/20 p-4.5">
                         <p className="text-sm leading-relaxed text-slate-200 font-medium">
@@ -1531,19 +1500,19 @@ export default function Home() {
             <div className="lg:col-span-5 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                <span>Technology Stack</span>
+                <span>Skills & Tools</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 Modern tools mapped to scale.
               </h2>
               <p className="text-slate-300 leading-relaxed text-sm">
-                I configure structured, low-latency framework architectures designed to prevent database bottleneck issues, optimize SEO organic rankings, and scale transaction capabilities.
+                I configure structured task pipelines and templates to ensure quality releases, low latency, and consistent tracking.
               </p>
               
               <div className="pt-4 flex flex-wrap gap-3">
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Clean Schema Mapping</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">API Speed Optimization</span>
-                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Conversion Event Tracking</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">Sprint Planning</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">WordPress builds</span>
+                <span className="rounded-full bg-white/5 border border-white/5 px-4 py-1.5 text-xs text-slate-300">CRM Automation</span>
               </div>
             </div>
 
@@ -1697,10 +1666,10 @@ export default function Home() {
               <span>Comparison</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              A partnership focused on scale.
+              A partnership focused on delivery.
             </h2>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Why leading startups and growing companies choose custom growth integrations over basic visual deliverables.
+              Why leading startups and growing companies choose coordinated operations over basic visual placeholders.
             </p>
           </div>
 
@@ -1709,8 +1678,8 @@ export default function Home() {
               <thead className="bg-[#0c0a1a]/40 text-slate-400 font-bold uppercase tracking-wider">
                 <tr>
                   <th scope="col" className="px-6 py-5">Value Anchor</th>
-                  <th scope="col" className="px-6 py-5 text-violet-300 bg-violet-500/[0.02]">Usman Farooqi (Growth Partner)</th>
-                  <th scope="col" className="px-6 py-5">Traditional Agency / Contractor</th>
+                  <th scope="col" className="px-6 py-5 text-violet-300 bg-violet-500/[0.02]">Usman Farooqi (Operations Lead)</th>
+                  <th scope="col" className="px-6 py-5">Traditional Contractor / Freelancer</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5 text-slate-300 font-medium">
@@ -1748,7 +1717,6 @@ export default function Home() {
           </div>
 
           <div className="relative max-w-4xl mx-auto">
-            {/* Auto-rotating layout wrapper */}
             <div className="glass-panel glass-panel-glow rounded-3xl p-8 sm:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 h-40 w-40 bg-blue-600/5 blur-3xl pointer-events-none" />
               <span className="absolute top-4 left-6 text-8xl font-serif text-white/5 select-none pointer-events-none">“</span>
@@ -1845,10 +1813,10 @@ export default function Home() {
                   <span>Growth Strategy Call</span>
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Let's construct your revenue engine.
+                  Let's construct your project roadmap.
                 </h2>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  Have a platform project, CRM automation flow, or campaign budget you want to optimize? Book a consultation. I will audit your setup and map out growth options.
+                  Have a web development project, CRM setup, or operations drag you want to clear? Book a consultation. I will audit your parameters and map out delivery paths.
                 </p>
 
                 <div className="space-y-4 pt-4 border-t border-white/5">
@@ -1871,7 +1839,7 @@ export default function Home() {
                     <div>
                       <span className="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Contract Security</span>
                       <span className="text-sm font-semibold text-slate-300">
-                        Detailed NDA & Clear KPI Target Anchors
+                        Detailed NDA & Clear Delivery Anchors
                       </span>
                     </div>
                   </div>
@@ -1927,11 +1895,11 @@ export default function Home() {
                             onChange={(e) => setFormState({ ...formState, projectType: e.target.value })}
                             className="w-full rounded-xl border border-white/10 bg-[#020205]/60 px-4 py-3 text-xs text-slate-300 focus:border-violet-500/50 focus:outline-none focus:ring-1 focus:ring-violet-500/30 transition-all"
                           >
-                            <option value="Growth System">Complete Growth System (Dev + CRM + Ads)</option>
-                            <option value="Full Stack App">Bespoke Full Stack App / Next.js Development</option>
-                            <option value="AI Automation">AI Agent Integration & Process Automation</option>
-                            <option value="SEO & PPC">SEO Optimization & Google Ads Performance</option>
-                            <option value="CRM Build">HubSpot / CRM Pipeline Integration</option>
+                            <option value="Web Project">WordPress / Web Development Project</option>
+                            <option value="Project Management">Full Project Delivery & Sprint Coordination</option>
+                            <option value="AI & Automation">AI Integration & Process Automation Flow</option>
+                            <option value="CRM Build">HubSpot / Salesforce Pipeline Config</option>
+                            <option value="Team Scale">Team Structuring & Hiring Support</option>
                           </select>
                         </div>
 
