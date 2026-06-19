@@ -58,10 +58,10 @@ function refactorFooter() {
                   <Mail className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-violet-400 transition-colors" />
                   <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors truncate">usmanfar2002@gmail.com</span>
                 </a>
-                <a href="tel:+923024422053" className="group flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-3 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full">
-                  <Phone className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" />
-                  <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">+92 302 4422053</span>
-                </a>
+              <div className="group flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-3 w-full">
+                <Phone className="h-4 w-4 shrink-0 text-slate-400 transition-colors" />
+                <span className="text-sm font-semibold text-slate-300 transition-colors">Available Upon Request</span>
+              </div>
                 <div className="group flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-3 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 w-full">
                   <Compass className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-emerald-400 transition-colors" />
                   <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Lahore, Pakistan</span>
